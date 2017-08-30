@@ -1,4 +1,4 @@
-# TP_Final
+# Técnicas de Programação - Trabalho Final
 
 ## Desenvolvedores:
 Aluno | Username | Matrícula
