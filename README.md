@@ -1,12 +1,12 @@
 # Técnicas de Programação - Trabalho Final
 Snake Multiplayer
 
-#TODO
+# TODO
 Pessoa	|	Atribuicao
---------|-------------
-José	|	Controler
+--------|------------
+José	  |	Controler
 Augusto	|	Game Engine
-Fernando|	Game View
+Fernando  |	Game View
 Danilo	|	Controler
 
 ## Objetivo
