@@ -1,9 +1,12 @@
 package Source.GameView
 
+//TODO- fazer matriz das posicoes
+
 import com.badlogic.gdx.{Gdx, Input, Screen}
 import com.badlogic.gdx.graphics.{Color, GL20, OrthographicCamera, Texture}
 import com.badlogic.gdx.graphics.g2d.{Sprite, SpriteBatch}
 import Source.GameEngine.{Bean, BeanPosition, Movement, Player}
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType
 
@@ -25,16 +28,18 @@ class GameScreen extends Screen {
 
   //Variaveis dos players e beans
   var player1: Player = new Player(40, 40)
+  player1.mycolor = new Color(1,1,1,1)
   var player2: Player = new Player(40, height - 40)
+  player2.mycolor = new Color(1,0,1,1)
   var bean: Bean = new Bean(width, height)
 
-  /**
-    * FAZ ALGO
+  /**import com.badlogic.gdx.graphics.Color
+    * Desenha um quadrado do player
     * @param p
     */
   private def drawSquare(p: Player) = {
     shapeRenderer.begin(ShapeType.Filled)
-    shapeRenderer.setColor(1, 1, 1, 1)             //setando cor branca para os quadrados
+    shapeRenderer.setColor(p.mycolor)             //setando cor branca para os quadrados
     shapeRenderer.rect(p.posX, p.posY, 10, 10)        //10 eh o lado do quadrado
     shapeRenderer.end()
   }
@@ -68,6 +73,8 @@ class GameScreen extends Screen {
 
     //Spawna um novo bean
     new BeanPosition(player1, player2, bean, width, height)
+
+    Thread.sleep(500)
 
     batch.begin() //comecar a desenhar a textura
     drawSquare(player1)

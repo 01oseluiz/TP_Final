@@ -10,4 +10,6 @@ import com.badlogic.gdx.graphics.Color
 class Player (x: Int, y: Int){
   var posX = x
   var posY = y
+
+  var mycolor:Color = _
 }

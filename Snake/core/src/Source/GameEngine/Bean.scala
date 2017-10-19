@@ -10,6 +10,6 @@ class Bean (width: Int,height: Int) {
   var y = new scala.util.Random
   var posX, posY : Int =_
 
-    posX = x.nextInt(width+1)
-    posY = y.nextInt(height+1)
+    posX = x.nextInt(width)
+    posY = y.nextInt(height)
 }
