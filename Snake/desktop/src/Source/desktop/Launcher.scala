@@ -1,6 +1,6 @@
 package Source.desktop
 
-import Source.GameEngine.GameEngine
+import Source.GameView.ScreenDefault
 import com.badlogic.gdx.backends.lwjgl.{LwjglApplication, LwjglApplicationConfiguration}
 
 /**
@@ -9,7 +9,7 @@ import com.badlogic.gdx.backends.lwjgl.{LwjglApplication, LwjglApplicationConfig
 object Launcher {
   def main(arg: Array[String]): Unit = {
     val config = new LwjglApplicationConfiguration
-    new LwjglApplication(new GameEngine, config)
+    new LwjglApplication(new ScreenDefault, config)
     //TODO- mydar para ir direto a view
 
     config.width = 640

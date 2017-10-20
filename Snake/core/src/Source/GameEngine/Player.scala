@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.Color
   * @param y posicao Y do jogador
   */
 class Player (x: Int, y: Int){
-  var posX = x
-  var posY = y
-
-  var mycolor:Color = _
+  var posX : Int= x
+  var posY : Int = y
+  var myColor:Color = _
+  var Keys:List[Int] = List.empty
 }

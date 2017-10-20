@@ -2,11 +2,12 @@ package Source.GameView
 
 //TODO- fazer matriz das posicoes
 
-import com.badlogic.gdx.{Gdx, Input, Screen}
-import com.badlogic.gdx.graphics.{Color, GL20, OrthographicCamera, Texture}
-import com.badlogic.gdx.graphics.g2d.{Sprite, SpriteBatch}
-import Source.GameEngine.{Bean, BeanPosition, Movement, Player}
-import com.badlogic.gdx.graphics.Color
+import Source.GameEngine.{Bean, Player}
+import Source.GameController._
+
+import com.badlogic.gdx.{Gdx,Screen}
+import com.badlogic.gdx.graphics.{GL20, OrthographicCamera}
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType
 
@@ -15,39 +16,29 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType
   */
 class GameScreen extends Screen {
 
+  private val gameEngine = Controller.getGameEngine
   private var batch: SpriteBatch = _ // o lugar a ser desenhada a textura/imagem (papel)
 
   //Variaveis para a camera
-  var width = Gdx.graphics.getWidth
-  var height = Gdx.graphics.getHeight
+  var width:Int = Gdx.graphics.getWidth
+  var height:Int = Gdx.graphics.getHeight
   val camera = new OrthographicCamera(width, height)
   camera.position.set(width/2, height/2, 0)
   camera.update()
   val shapeRenderer = new ShapeRenderer
   shapeRenderer.setProjectionMatrix(camera.combined)
 
-  //Variaveis dos players e beans
-  var player1: Player = new Player(40, 40)
-  player1.mycolor = new Color(1,1,1,1)
-  var player2: Player = new Player(40, height - 40)
-  player2.mycolor = new Color(1,0,1,1)
-  var bean: Bean = new Bean(width, height)
-
-  /**import com.badlogic.gdx.graphics.Color
-    * Desenha um quadrado do player
-    * @param p
-    */
-  private def drawSquare(p: Player) = {
+  private def drawSquare(p: Player):Unit = {
     shapeRenderer.begin(ShapeType.Filled)
-    shapeRenderer.setColor(p.mycolor)             //setando cor branca para os quadrados
+    shapeRenderer.setColor(p.myColor)             //setando cor branca para os quadrados
     shapeRenderer.rect(p.posX, p.posY, 10, 10)        //10 eh o lado do quadrado
     shapeRenderer.end()
   }
 
 
-  private def drawBean(b: Bean) = {
+  private def drawBean(b: Bean):Unit = {
     shapeRenderer.begin(ShapeType.Filled)
-    shapeRenderer.setColor(1,0,0,1)             //setando cor branca para os quadrados
+    shapeRenderer.setColor(b.myColor)             //setando cor branca para os quadrados
     shapeRenderer.rect(b.posX, b.posY, 10, 10)        //10 eh o lado do quadrado
     shapeRenderer.end()
   }
@@ -60,6 +51,14 @@ class GameScreen extends Screen {
     batch = new SpriteBatch //lugar a ser desenhado como um papel
   }
 
+  //Todo-refazer com função lambda
+  def getMovement(Keys:List[Int]): Int = {
+    if (Gdx.input.isKeyPressed(Keys.head)) Keys.head
+    else if (Gdx.input.isKeyPressed(Keys(1))) Keys(1)
+    else if (Gdx.input.isKeyPressed(Keys(2))) Keys(2)
+    else if (Gdx.input.isKeyPressed(Keys(3))) Keys(3)
+    else -1
+  }
   /**
     * Renderiza constantemente. A mesma coisa que a update
     */
@@ -67,19 +66,20 @@ class GameScreen extends Screen {
     Gdx.gl.glClearColor(0, 0, 0, 1) //setando a tela com uma cor
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT) //limpando a tela com a cor
 
-    //Realiza a movimentacao dos players
-    new Movement(player1, 1)
-    new Movement(player2, 2)
+    val kP1 = getMovement(gameEngine.player1.Keys)
+    val kP2 = getMovement(gameEngine.player2.Keys)
 
-    //Spawna um novo bean
-    new BeanPosition(player1, player2, bean, width, height)
+    if(kP1 != -1) Controller.MovementSnake(gameEngine.player1, kP1)
+    if(kP2 != -1) Controller.MovementSnake(gameEngine.player2, kP2)
 
-    Thread.sleep(500)
+    Controller.MovementBean()
+
+    Thread.sleep(20)
 
     batch.begin() //comecar a desenhar a textura
-    drawSquare(player1)
-    drawSquare(player2)
-    drawBean(bean)
+    drawSquare(gameEngine.player1)
+    drawSquare(gameEngine.player2)
+    drawBean(gameEngine.bean)
 
     batch.end() //terminou de desenhar a textura
   }

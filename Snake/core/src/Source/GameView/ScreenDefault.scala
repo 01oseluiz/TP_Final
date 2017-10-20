@@ -1,10 +1,9 @@
-package Source.GameEngine
+package Source.GameView
 
 import com.badlogic.gdx.Game
-import Source.GameView.GameScreen
 
 
-class GameEngine extends Game {
+class ScreenDefault extends Game {
 
   /**
     * Executado assim que o app eh iniciado
