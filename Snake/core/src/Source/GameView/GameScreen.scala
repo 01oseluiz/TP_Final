@@ -31,7 +31,7 @@ class GameScreen extends Screen {
   private def drawSquare(p: Player):Unit = {
     shapeRenderer.begin(ShapeType.Filled)
     shapeRenderer.setColor(p.myColor)             //setando cor branca para os quadrados
-    shapeRenderer.rect(p.posX, p.posY, 10, 10)        //10 eh o lado do quadrado
+    p.myPositions.foreach(i=> shapeRenderer.rect(i.P_x, i.P_y, p.mySize, p.mySize)) //10 eh o lado do quadrado
     shapeRenderer.end()
   }
 
@@ -39,7 +39,7 @@ class GameScreen extends Screen {
   private def drawBean(b: Bean):Unit = {
     shapeRenderer.begin(ShapeType.Filled)
     shapeRenderer.setColor(b.myColor)             //setando cor branca para os quadrados
-    shapeRenderer.rect(b.posX, b.posY, 10, 10)        //10 eh o lado do quadrado
+    shapeRenderer.rect(b.myPositions.head.P_x, b.myPositions.head.P_y, b.mySize, b.mySize)        //10 eh o lado do quadrado
     shapeRenderer.end()
   }
 
@@ -66,15 +66,12 @@ class GameScreen extends Screen {
     Gdx.gl.glClearColor(0, 0, 0, 1) //setando a tela com uma cor
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT) //limpando a tela com a cor
 
-    val kP1 = getMovement(gameEngine.player1.Keys)
-    val kP2 = getMovement(gameEngine.player2.Keys)
-
-    if(kP1 != -1) Controller.MovementSnake(gameEngine.player1, kP1)
-    if(kP2 != -1) Controller.MovementSnake(gameEngine.player2, kP2)
+    Controller.MovementSnake(gameEngine.player1, getMovement(gameEngine.player1.Keys))
+    Controller.MovementSnake(gameEngine.player2, getMovement(gameEngine.player2.Keys))
 
     Controller.MovementBean()
 
-    Thread.sleep(20)
+    Thread.sleep(40)
 
     batch.begin() //comecar a desenhar a textura
     drawSquare(gameEngine.player1)
