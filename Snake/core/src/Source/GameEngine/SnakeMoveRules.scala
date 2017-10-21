@@ -1,6 +1,6 @@
 package Source.GameEngine
 
-class SnakeMoveRules {
+trait SnakeMoveRules {
 
   def MovementSnake(player: Player, key:Int): Unit = {
     val space: Int = 10

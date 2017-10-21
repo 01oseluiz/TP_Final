@@ -3,7 +3,7 @@ package Source.GameEngine
 import com.badlogic.gdx.{Gdx, Input}
 import com.badlogic.gdx.graphics.Color
 
-class Engine extends SnakeMoveRules {
+class Engine extends SnakeMoveRules with BeanMoveRules {
   var width: Int = Gdx.graphics.getWidth
   var height: Int = Gdx.graphics.getHeight
 
@@ -31,22 +31,5 @@ class Engine extends SnakeMoveRules {
   def setSize(x: Int, y: Int): Unit = {
     width = x
     height = y
-  }
-
-  def BeanPosition(): Unit = {
-    val x = new scala.util.Random
-    val y = new scala.util.Random
-
-    if ((bean.myPositions.head.P_x - 10 <= player1.myPositions.head.P_x && player1.myPositions.head.P_x <= bean.myPositions.head.P_x + 10)
-      && (bean.myPositions.head.P_y - 10 <= player1.myPositions.head.P_y && player1.myPositions.head.P_y <= bean.myPositions.head.P_y + 10)) {
-      bean.myPositions.head.P_x = x.nextInt(width)
-      bean.myPositions.head.P_y = y.nextInt(height)
-      player1.addPosition(player1.myPositions.head.P_x,player1.myPositions.head.P_y)
-    }else if ((bean.myPositions.head.P_x - 10 <= player2.myPositions.head.P_x && player2.myPositions.head.P_x <= bean.myPositions.head.P_x + 10)
-    && (bean.myPositions.head.P_y - 10 <= player2.myPositions.head.P_y && player2.myPositions.head.P_y <= bean.myPositions.head.P_y + 10)){
-      bean.myPositions.head.P_x = x.nextInt(width)
-      bean.myPositions.head.P_y = y.nextInt(height)
-      player2.addPosition(player2.myPositions.head.P_x,player2.myPositions.head.P_y)
-    }
   }
 }

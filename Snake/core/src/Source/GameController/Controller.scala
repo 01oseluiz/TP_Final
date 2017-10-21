@@ -11,5 +11,7 @@ object Controller {
 
   def MovementSnake(player:Player, key: Int): Unit = GAME_ENGINE.MovementSnake(player,key)
 
-  def MovementBean(): Unit = GAME_ENGINE.BeanPosition()
+  def MovementBean(): Unit =
+    GAME_ENGINE.BeanPosition(GAME_ENGINE.player1, GAME_ENGINE.bean)
+    GAME_ENGINE.BeanPosition(GAME_ENGINE.player2, GAME_ENGINE.bean)
 }
