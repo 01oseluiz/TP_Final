@@ -2,10 +2,9 @@ package Source.GameView
 
 //TODO- fazer matriz das posicoes
 
-import Source.GameEngine.{Bean, Player}
+import Source.GameEngine.{Bean, KillerThings, Player}
 import Source.GameController._
-
-import com.badlogic.gdx.{Gdx,Screen}
+import com.badlogic.gdx.{Gdx, Screen}
 import com.badlogic.gdx.graphics.{GL20, OrthographicCamera}
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
@@ -30,16 +29,22 @@ class GameScreen extends Screen {
 
   private def drawSquare(p: Player):Unit = {
     shapeRenderer.begin(ShapeType.Filled)
-    shapeRenderer.setColor(p.myColor)             //setando cor branca para os quadrados
-    p.myPositions.foreach(i=> shapeRenderer.rect(i.P_x, i.P_y, p.mySize, p.mySize)) //10 eh o lado do quadrado
+    shapeRenderer.setColor(p.myColor)
+    p.myPositions.foreach(i=> shapeRenderer.rect(i.P_x, i.P_y, p.mySize, p.mySize))
     shapeRenderer.end()
   }
 
+  private def drawKillers(k: KillerThings): Unit ={
+    shapeRenderer.begin(ShapeType.Filled)
+    shapeRenderer.setColor(k.myColor)
+    k.myPositions.foreach(i=> shapeRenderer.rect(i.P_x, i.P_y, k.mySize, k.mySize))
+    shapeRenderer.end()
+  }
 
   private def drawBean(b: Bean):Unit = {
     shapeRenderer.begin(ShapeType.Filled)
-    shapeRenderer.setColor(b.myColor)             //setando cor branca para os quadrados
-    shapeRenderer.rect(b.myPositions.head.P_x, b.myPositions.head.P_y, b.mySize, b.mySize)        //10 eh o lado do quadrado
+    shapeRenderer.setColor(b.myColor)
+    shapeRenderer.rect(b.myPositions.head.P_x, b.myPositions.head.P_y, b.mySize, b.mySize)
     shapeRenderer.end()
   }
 
@@ -71,11 +76,14 @@ class GameScreen extends Screen {
 
     Controller.MovementBean()
 
+    Controller.calc_Collisions()
+
     Thread.sleep(40)
 
     batch.begin() //comecar a desenhar a textura
     drawSquare(gameEngine.player1)
     drawSquare(gameEngine.player2)
+    drawKillers(gameEngine.wall)
     drawBean(gameEngine.bean)
 
     batch.end() //terminou de desenhar a textura

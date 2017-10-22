@@ -15,8 +15,7 @@ class Player (x: Int, y: Int){
   var Keys:List[Int] = List.empty
   var mySize:Int = 10
 
-  final val STOPPED = -1
-  var movementSense:Int = STOPPED
+  var movementSense:Int = _
 
   def addPosition(x:Int, y:Int):Unit = myPositions :+= new Position(x,y)
 }

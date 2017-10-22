@@ -3,7 +3,7 @@ package Source.GameEngine
 import com.badlogic.gdx.{Gdx, Input}
 import com.badlogic.gdx.graphics.Color
 
-class Engine extends SnakeMoveRules with BeanMoveRules {
+class Engine extends SnakeMoveRules with BeanMoveRules with DeathRules {
   var width: Int = Gdx.graphics.getWidth
   var height: Int = Gdx.graphics.getHeight
 
@@ -27,6 +27,14 @@ class Engine extends SnakeMoveRules with BeanMoveRules {
   //Define as entradas de teclado de cada cobra
   player1.Keys = List(Input.Keys.UP, Input.Keys.DOWN, Input.Keys.LEFT, Input.Keys.RIGHT)
   player2.Keys = List(Input.Keys.W, Input.Keys.S, Input.Keys.A, Input.Keys.D)
+
+  //Variaveis de obejetos mortais
+  var wall:KillerThings = new KillerThings(0,0)
+  wall.myColor = new Color(0.5f,0.5f,0.5f,1)
+  for(i<-10 until width by wall.mySize) wall.addPosition(i,0)
+  for(i<-10 until width by wall.mySize) wall.addPosition(i,height-10)
+  for(i<-10 until height by wall.mySize) wall.addPosition(0,i)
+  for(i<-10 until height by wall.mySize) wall.addPosition(width-10,i)
 
   def setSize(x: Int, y: Int): Unit = {
     width = x
