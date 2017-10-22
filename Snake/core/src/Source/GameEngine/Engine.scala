@@ -36,8 +36,19 @@ class Engine extends SnakeMoveRules with BeanMoveRules with DeathRules {
   for(i<-10 until height by wall.mySize) wall.addPosition(0,i)
   for(i<-10 until height by wall.mySize) wall.addPosition(width-10,i)
 
-  def setSize(x: Int, y: Int): Unit = {
-    width = x
-    height = y
+  def isEmptyPosition(position: Position, size:Int): Boolean ={
+    var isEmptyPosition:Boolean = false
+
+    player1.myPositions.foreach{x=>
+        if(x.positionIsEqual(position, player1.mySize, size)) isEmptyPosition = true
+    }
+    player2.myPositions.foreach{x=>
+      if(x.positionIsEqual(position, player2.mySize, size)) isEmptyPosition = true
+    }
+    wall.myPositions.foreach{x=>
+      if(x.positionIsEqual(position, wall.mySize, size)) isEmptyPosition = true
+    }
+
+    isEmptyPosition
   }
 }

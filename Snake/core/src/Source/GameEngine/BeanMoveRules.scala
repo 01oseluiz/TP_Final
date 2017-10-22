@@ -7,16 +7,20 @@ import com.badlogic.gdx.Gdx
 //(Sem acessar a classe engine)
 
 trait BeanMoveRules {
-  def BeanPosition(player: Player, bean: Bean): Unit = {
+  def BeanPosition(player: Player, bean: Bean, gE:Engine): Unit = {
     val width: Int = Gdx.graphics.getWidth
     val height: Int = Gdx.graphics.getHeight
     val x = new scala.util.Random
     val y = new scala.util.Random
 
     if (bean.myPositions.head.positionIsEqual(player.myPositions.head, bean.mySize, player.mySize)) {
-      bean.myPositions.head.P_x = x.nextInt(width)
-      bean.myPositions.head.P_y = y.nextInt(height)
-      player.addPosition(player.myPositions.head.P_x,player.myPositions.head.P_y)
+
+      do {
+        bean.myPositions.head.P_x = x.nextInt(width)
+        bean.myPositions.head.P_y = y.nextInt(height)
+      }while (gE.isEmptyPosition(bean.myPositions.head, bean.mySize))
+
+      player.addPosition(player.myPositions(1).P_x,player.myPositions(1).P_y)
     }
   }
 }

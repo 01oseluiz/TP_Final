@@ -1,12 +1,13 @@
 package Source.GameEngine
 
 import com.badlogic.gdx.graphics.Color
+import scala.collection.mutable.ListBuffer
 
 /**
   * Classe para atribuir as posicoes a bean
   */
 class Bean (x: Int,y: Int) {
-  var myPositions:List[Position] = List(new Position(x,y))
+  var myPositions:ListBuffer[Position] = ListBuffer(new Position(x,y))
   var myColor:Color = _
   var mySize:Int = 10
 

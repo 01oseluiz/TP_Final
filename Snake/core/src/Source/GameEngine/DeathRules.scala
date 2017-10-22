@@ -14,6 +14,12 @@ trait DeathRules {
     player2.myPositions.foreach{x =>
       if(x.positionIsEqual(player1.myPositions.head, player2.mySize, player1.mySize)) isCrashed = true
     }
+
+    player1.myPositions.foreach{x=>
+      if(x != player1.myPositions.head && x.positionIsEqual(player1.myPositions.head, player1.mySize, player1.mySize))
+        isCrashed = true
+    }
+
     isCrashed
   }
 
