@@ -36,4 +36,39 @@ object Controller {
       sys.exit(0)
     }
   }
+
+  /**
+    * Calcula a proxima interação do jogo:
+    * - entrada de teclado
+    * - movimentação da cobra
+    * - movimentação e captura de comida
+    * - verificação de mortes
+    */
+  def nextInteraction(): Unit ={
+    //Verifica a entrada de keys de cada player
+    MovementSnake(GAME_ENGINE.player1, GAME_VIEW.getMovement(GAME_ENGINE.player1.Keys))
+    MovementSnake(GAME_ENGINE.player2, GAME_VIEW.getMovement(GAME_ENGINE.player2.Keys))
+
+    //Solicita a verificação de colisão bean X players
+    MovementBean()
+
+    //Solicita a verificação de colisao players X killerThings
+    calc_Collisions()
+
+    Thread.sleep(30)
+
+    //Desenha por completo o player1, player2, wall, bean
+    GAME_ENGINE.player1.myPositions.foreach{x=>
+      GAME_VIEW.drawSquare(x,GAME_ENGINE.player1.myColor,GAME_ENGINE.player1.mySize,GAME_ENGINE.player1.mySize)
+    }
+    GAME_ENGINE.player2.myPositions.foreach{x=>
+      GAME_VIEW.drawSquare(x,GAME_ENGINE.player2.myColor,GAME_ENGINE.player2.mySize,GAME_ENGINE.player2.mySize)
+    }
+    GAME_ENGINE.wall.myPositions.foreach{x=>
+      GAME_VIEW.drawSquare(x,GAME_ENGINE.wall.myColor,GAME_ENGINE.wall.mySize,GAME_ENGINE.wall.mySize)
+    }
+    GAME_ENGINE.bean.myPositions.foreach{x=>
+      GAME_VIEW.drawSquare(x,GAME_ENGINE.bean.myColor,GAME_ENGINE.bean.mySize,GAME_ENGINE.bean.mySize)
+    }
+  }
 }
