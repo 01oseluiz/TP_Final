@@ -1,12 +1,11 @@
 package Source.GameView
 
-//TODO- fazer matriz das posicoes
-
-import Source.GameEngine.{Bean, KillerThings, Player}
+import Source.GameEngine.Position
 import Source.GameController._
 import com.badlogic.gdx.{Gdx, Screen}
 import com.badlogic.gdx.graphics.{GL20, OrthographicCamera}
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType
 
@@ -27,43 +26,48 @@ class GameScreen extends Screen {
   val shapeRenderer = new ShapeRenderer
   shapeRenderer.setProjectionMatrix(camera.combined)
 
-  private def drawSquare(p: Player):Unit = {
+  /**
+    * Desenha um quadrado, de tamanho, posições e cor quaisquer
+    * @param p
+    * @param c
+    * @param size_x
+    * @param size_y
+    */
+  private def drawSquare(p: Position, c:Color, size_x:Int, size_y:Int):Unit = {
     shapeRenderer.begin(ShapeType.Filled)
-    shapeRenderer.setColor(p.myColor)
-    p.myPositions.foreach(i=> shapeRenderer.rect(i.P_x, i.P_y, p.mySize, p.mySize))
-    shapeRenderer.end()
-  }
-
-  private def drawKillers(k: KillerThings): Unit ={
-    shapeRenderer.begin(ShapeType.Filled)
-    shapeRenderer.setColor(k.myColor)
-    k.myPositions.foreach(i=> shapeRenderer.rect(i.P_x, i.P_y, k.mySize, k.mySize))
-    shapeRenderer.end()
-  }
-
-  private def drawBean(b: Bean):Unit = {
-    shapeRenderer.begin(ShapeType.Filled)
-    shapeRenderer.setColor(b.myColor)
-    shapeRenderer.rect(b.myPositions.head.P_x, b.myPositions.head.P_y, b.mySize, b.mySize)
+    if(p.P_color==null)shapeRenderer.setColor(c)
+    else shapeRenderer.setColor(p.P_color)
+    shapeRenderer.rect(p.P_x, p.P_y, size_x, size_y)
     shapeRenderer.end()
   }
 
 
   /**
-    * Funciona como a create. Eh a primeira coisa executada ao ser chamada
+    * Funciona como a create. É a primeira coisa executada ao ser chamada
     */
   def show(): Unit = {
     batch = new SpriteBatch //lugar a ser desenhado como um papel
   }
 
-  //Todo-refazer com função lambda
+  /**
+    * Verifica se dada uma lista de keys alguma foi precionada
+    * @param Keys
+    * @return pressedKey
+    */
+  //TODO-verificar a entrada de teclado em paralelo (Esta tendo delay)
   def getMovement(Keys:List[Int]): Int = {
-    if (Gdx.input.isKeyPressed(Keys.head)) Keys.head
-    else if (Gdx.input.isKeyPressed(Keys(1))) Keys(1)
-    else if (Gdx.input.isKeyPressed(Keys(2))) Keys(2)
-    else if (Gdx.input.isKeyPressed(Keys(3))) Keys(3)
-    else -1
+    var pressedKey:Int = -1
+    var continue:Boolean = true
+
+    Keys.takeWhile(_=> continue).foreach{x=>
+      if(Gdx.input.isKeyPressed(x)){
+        pressedKey=x
+        continue = false
+      }
+    }
+    pressedKey
   }
+
   /**
     * Renderiza constantemente. A mesma coisa que a update
     */
@@ -71,21 +75,32 @@ class GameScreen extends Screen {
     Gdx.gl.glClearColor(0, 0, 0, 1) //setando a tela com uma cor
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT) //limpando a tela com a cor
 
+    //Verifica a entrada de keys de cada player
     Controller.MovementSnake(gameEngine.player1, getMovement(gameEngine.player1.Keys))
     Controller.MovementSnake(gameEngine.player2, getMovement(gameEngine.player2.Keys))
 
+    //Solicita a verificação de colisão bean X players
     Controller.MovementBean()
 
+    //Solicita a verificação de colisao players X killerThings
     Controller.calc_Collisions()
 
-    Thread.sleep(40)
+    Thread.sleep(30)
 
     batch.begin() //comecar a desenhar a textura
-    drawSquare(gameEngine.player1)
-    drawSquare(gameEngine.player2)
-    drawKillers(gameEngine.wall)
-    drawBean(gameEngine.bean)
-
+    //Desenha por completo o player1, player2, wall, bean
+    gameEngine.player1.myPositions.foreach{x=>
+      drawSquare(x,gameEngine.player1.myColor,gameEngine.player1.mySize,gameEngine.player1.mySize)
+    }
+    gameEngine.player2.myPositions.foreach{x=>
+      drawSquare(x,gameEngine.player2.myColor,gameEngine.player2.mySize,gameEngine.player2.mySize)
+    }
+    gameEngine.wall.myPositions.foreach{x=>
+      drawSquare(x,gameEngine.wall.myColor,gameEngine.wall.mySize,gameEngine.wall.mySize)
+    }
+    gameEngine.bean.myPositions.foreach{x=>
+      drawSquare(x,gameEngine.bean.myColor,gameEngine.bean.mySize,gameEngine.bean.mySize)
+    }
     batch.end() //terminou de desenhar a textura
   }
 

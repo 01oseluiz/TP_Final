@@ -23,6 +23,12 @@ trait DeathRules {
     isCrashed
   }
 
+  /**
+    * Verifica se o player colidiu com a parede
+    * @param player
+    * @param wall
+    * @return
+    */
   def wallCollisions(player: Player, wall:KillerThings): Boolean ={
     var isCrashed:Boolean = false
     wall.myPositions.foreach{x=>

@@ -11,11 +11,18 @@ object Controller {
 
   def MovementSnake(player:Player, key: Int): Unit = GAME_ENGINE.MovementSnake(player,key)
 
+  /**
+    * Verifica se o player pegou a comida
+    * e gera uma nova em algum lugar vazio
+    */
   def MovementBean(): Unit = {
-    GAME_ENGINE.BeanPosition(GAME_ENGINE.player1, GAME_ENGINE.bean, GAME_ENGINE)
-    GAME_ENGINE.BeanPosition(GAME_ENGINE.player2, GAME_ENGINE.bean, GAME_ENGINE)
+    GAME_ENGINE.BeanPosition(GAME_ENGINE.player1, GAME_ENGINE.bean, (x,y)=>GAME_ENGINE.isEmptyPosition(x,y))
+    GAME_ENGINE.BeanPosition(GAME_ENGINE.player2, GAME_ENGINE.bean, (x,y)=>GAME_ENGINE.isEmptyPosition(x,y))
   }
 
+  /**
+    * Verifica se houve algum tipo de colisao
+    */
   def calc_Collisions(): Unit ={
     //TODO-alterar o exit para um gameover
     if(GAME_ENGINE.snakeCollisions(GAME_ENGINE.player1, GAME_ENGINE.player2) ||
@@ -28,8 +35,5 @@ object Controller {
       println("!!GAME-OVER!!\nPlayer 1 Win!")
       sys.exit(0)
     }
-  }
-
-  def nextInteraction(): Unit ={
   }
 }

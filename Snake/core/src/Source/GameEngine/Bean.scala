@@ -11,5 +11,10 @@ class Bean (x: Int,y: Int) {
   var myColor:Color = _
   var mySize:Int = 10
 
+  /**
+    * Adiciona mais um segmento de bean ao jogo
+    * @param x
+    * @param y
+    */
   def addPosition(x:Int, y:Int):Unit = myPositions :+= new Position(x,y)
 }

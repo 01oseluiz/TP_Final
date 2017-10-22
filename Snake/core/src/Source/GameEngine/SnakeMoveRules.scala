@@ -2,6 +2,11 @@ package Source.GameEngine
 
 trait SnakeMoveRules {
 
+  /**
+    * realiza a movimentação da cobra (cabeca) conforme entrada de teclado
+    * @param player
+    * @param key
+    */
   def MovementSnake(player: Player, key:Int): Unit = {
     val space: Int = 10
     val position_AUX:Position = new Position(player.myPositions.head.P_x,player.myPositions.head.P_y)
@@ -36,6 +41,11 @@ trait SnakeMoveRules {
     player.movementSense = key
   }
 
+  /**
+    * Realiza a movimentação do corpo da cobra conforme a cabeça
+    * @param player
+    * @param oldHeadPosition
+    */
   def MovementSnakeBody(player: Player, oldHeadPosition:Position): Unit ={
     for(i<- player.myPositions.size-1 until 1 by -1){
       player.myPositions(i) = player.myPositions(i-1)

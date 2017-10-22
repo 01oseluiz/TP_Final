@@ -1,12 +1,15 @@
 package Source.GameEngine
 
+import com.badlogic.gdx.graphics.Color
+
 class Position(x:Int, y:Int) {
   var P_x:Int = x
   var P_y :Int= y
 
+  var P_color:Color = _
+
   /**
-    * Verifica se uma das quatro quinas de uma posição
-    * esta contida em um objeto
+    * Verifica se uma das quatro quinas de uma posição esta contida em um objeto
     * @param position
     * @param size_this
     * @param size_p
