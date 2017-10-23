@@ -16,17 +16,20 @@ Danilo	|	Controler
 ## Primeira versão
 #### Game View (LibGDX)
 - [ ] Menu inicial
-- [ ] Entrada multi-teclado
-- [ ] Mapa do jogo
+- [ ] Verificação mult-thread de entradas
+- [ ] Tela de game-over
+- [x] Entrada multi-teclado
+- [x] Mapa do jogo
 
 #### Game Engine
-- [ ] Movimentação
-- [ ] Comida
-- [ ] Dois players
+- [ ] Dados Statisticos ao fim de jogo
+- [x] Movimentação
+- [x] Comida
+- [x] Dois players
 
 #### Controller
-- [ ] Tratamento das entradas
-- [ ] Saida para View
+- [x] Tratamento das entradas
+- [x] Saida para View
 
 ********************************************************
 ## Segunda Versão
