@@ -3,7 +3,7 @@ package Source.GameEngine
 import com.badlogic.gdx.{Gdx, Input}
 import com.badlogic.gdx.graphics.Color
 
-class Engine extends SnakeMoveRules with BeanMoveRules with DeathRules {
+class Engine extends BeanMoveRules with DeathRules {
   //Dimensões do jogo
   var width: Int = Gdx.graphics.getWidth
   var height: Int = Gdx.graphics.getHeight
@@ -59,5 +59,9 @@ class Engine extends SnakeMoveRules with BeanMoveRules with DeathRules {
     }
 
     isEmptyPosition
+  }
+
+  def MovementSnake(player: Player, key:Int, snakeMoveRules: SnakeMoveRules): Unit ={
+    snakeMoveRules.MovementSnake(player,key)
   }
 }

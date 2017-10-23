@@ -2,7 +2,7 @@ package Source.GameView
 
 import Source.GameEngine.Position
 import Source.GameController._
-import com.badlogic.gdx.{Gdx, Screen}
+import com.badlogic.gdx.{Gdx, Graphics, Screen}
 import com.badlogic.gdx.graphics.{GL20, OrthographicCamera}
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.Color
@@ -58,7 +58,7 @@ class GameScreen extends Screen {
     var continue:Boolean = true
 
     Keys.takeWhile(_=> continue).foreach{x=>
-      if(Gdx.input.isKeyPressed(x)){
+      if(Gdx.input.isKeyJustPressed(x)){
         pressedKey=x
         continue = false
       }

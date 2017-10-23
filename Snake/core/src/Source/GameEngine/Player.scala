@@ -15,7 +15,7 @@ class Player (x: Int, y: Int){
   var Keys:List[Int] = List.empty
   var mySize:Int = 10
 
-  var movementSense:Int = _
+  var movementSense:Int = -1
 
   /**
     * adiciona mais um segnmento a cobra

@@ -11,34 +11,39 @@ trait SnakeMoveRules {
     val space: Int = 10
     val position_AUX:Position = new Position(player.myPositions.head.P_x,player.myPositions.head.P_y)
 
-    if (key == player.Keys(0) && player.movementSense != player.Keys(1))
-      player.myPositions.head.P_y += space
-    else if (key == player.Keys(1) && player.movementSense != player.Keys(0))
-      player.myPositions.head.P_y -= space
-    else if (key == player.Keys(2) && player.movementSense != player.Keys(3))
-      player.myPositions.head.P_x -= space
-    else if (key == player.Keys(3) && player.movementSense != player.Keys(2))
-      player.myPositions.head.P_x += space
-    else{
-      if (player.movementSense == player.Keys(0)) {
+    if(player.movementSense != -1 || player.movementSense == -1 && key != player.Keys(2)) {
+      if (key == player.Keys(0) && player.movementSense != player.Keys(1)) {
         player.myPositions.head.P_y += space
-        MovementSnakeBody(player,position_AUX)
-      } else if (player.movementSense == player.Keys(1)) {
-        player.myPositions.head.P_y -= space
-        MovementSnakeBody(player,position_AUX)
-      } else if (player.movementSense == player.Keys(2)) {
-        player.myPositions.head.P_x -= space
-        MovementSnakeBody(player,position_AUX)
-      } else if (player.movementSense == player.Keys(3)) {
-        player.myPositions.head.P_x += space
-        MovementSnakeBody(player,position_AUX)
       }
+      else if (key == player.Keys(1) && player.movementSense != player.Keys(0)) {
+        player.myPositions.head.P_y -= space
+      }
+      else if (key == player.Keys(2) && player.movementSense != player.Keys(3)) {
+        player.myPositions.head.P_x -= space
+      }
+      else if (key == player.Keys(3) && player.movementSense != player.Keys(2)) {
+        player.myPositions.head.P_x += space
+      }
+      else {
+        if (player.movementSense == player.Keys(0)) {
+          player.myPositions.head.P_y += space
+          MovementSnakeBody(player, position_AUX)
+        } else if (player.movementSense == player.Keys(1)) {
+          player.myPositions.head.P_y -= space
+          MovementSnakeBody(player, position_AUX)
+        } else if (player.movementSense == player.Keys(2)) {
+          player.myPositions.head.P_x -= space
+          MovementSnakeBody(player, position_AUX)
+        } else if (player.movementSense == player.Keys(3)) {
+          player.myPositions.head.P_x += space
+          MovementSnakeBody(player, position_AUX)
+        }
 
-      return
+        return
+      }
+      player.movementSense = key
+      MovementSnakeBody(player, position_AUX)
     }
-    MovementSnakeBody(player,position_AUX)
-
-    player.movementSense = key
   }
 
   /**

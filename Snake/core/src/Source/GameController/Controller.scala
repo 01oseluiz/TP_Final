@@ -9,7 +9,13 @@ object Controller {
 
   def getGameEngine:Engine = GAME_ENGINE
 
-  def MovementSnake(player:Player, key: Int): Unit = GAME_ENGINE.MovementSnake(player,key)
+  /**
+    * Movimenta a cobra segundo a entrada e regra escolhida para movimentação
+    * @param player
+    * @param key
+    * @param ob
+    */
+  def MovementSnake(player:Player, key: Int, ob: SnakeMoveRules): Unit = GAME_ENGINE.MovementSnake(player,key,ob)
 
   /**
     * Verifica se o player pegou a comida
@@ -46,8 +52,8 @@ object Controller {
     */
   def nextInteraction(): Unit ={
     //Verifica a entrada de keys de cada player
-    MovementSnake(GAME_ENGINE.player1, GAME_VIEW.getMovement(GAME_ENGINE.player1.Keys))
-    MovementSnake(GAME_ENGINE.player2, GAME_VIEW.getMovement(GAME_ENGINE.player2.Keys))
+    MovementSnake(GAME_ENGINE.player1, GAME_VIEW.getMovement(GAME_ENGINE.player1.Keys), new SnakeMoveRulesHard)
+    MovementSnake(GAME_ENGINE.player2, GAME_VIEW.getMovement(GAME_ENGINE.player2.Keys), new SnakeMoveRules{})
 
     //Solicita a verificação de colisão bean X players
     MovementBean()
