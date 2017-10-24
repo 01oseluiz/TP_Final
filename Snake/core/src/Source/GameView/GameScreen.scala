@@ -2,9 +2,8 @@ package Source.GameView
 
 import Source.GameEngine.Position
 import Source.GameController._
-import com.badlogic.gdx.{Gdx, Graphics, Screen}
+import com.badlogic.gdx.{Gdx, Screen}
 import com.badlogic.gdx.graphics.{GL20, OrthographicCamera}
-import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType
@@ -12,8 +11,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType
 /**
   * Tela de jogo
   */
-class GameScreen extends Screen {
-  private var batch: SpriteBatch = _ // o lugar a ser desenhada a textura/imagem (papel)
+class GameScreen(private var game: ScreenDefault) extends Screen {
+
+  //  var gameOver: Boolean =_
 
   //Variaveis para a camera
   var width:Int = Gdx.graphics.getWidth
@@ -26,10 +26,10 @@ class GameScreen extends Screen {
 
   /**
     * Desenha um quadrado, de tamanho, posições e cor quaisquer
-    * @param p
-    * @param c
-    * @param size_x
-    * @param size_y
+    * @param p posicao a ser desenhada
+    * @param c cor a ser desenhada
+    * @param size_x largura a ser desenhada
+    * @param size_y altura a ser desenhada
     */
   def drawSquare(p: Position, c:Color, size_x:Int, size_y:Int):Unit = {
     shapeRenderer.begin(ShapeType.Filled)
@@ -39,12 +39,14 @@ class GameScreen extends Screen {
     shapeRenderer.end()
   }
 
+  def GameOver: Unit ={
+    println("Chamou a GameOver")
+    game.setScreen(new GameOverScreen(game))
+//    dispose()
+  }
 
-  /**
-    * Funciona como a create. É a primeira coisa executada ao ser chamada
-    */
-  def show(): Unit = {
-    batch = new SpriteBatch //lugar a ser desenhado como um papel
+  def GameScreen (game: ScreenDefault){
+    this.game = game
   }
 
   /**
@@ -73,10 +75,21 @@ class GameScreen extends Screen {
     Gdx.gl.glClearColor(0, 0, 0, 1) //setando a tela com uma cor
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT) //limpando a tela com a cor
 
-    batch.begin() //comecar a desenhar a textura
+    game.batch.begin() //comecar a desenhar a textura
     Controller.nextInteraction()
-    batch.end() //terminou de desenhar a textura
+    game.batch.end() //terminou de desenhar a textura
+
+//    if(gameOver){
+//      println(gameOver)
+//      game.setScreen(new GameOverScreen(game))
+//      dispose()
+//    }
   }
+
+  /**
+    * Funciona como a create. É a primeira coisa executada ao ser chamada
+    */
+  def show(): Unit = {}
 
   def resize(width: Int, height: Int): Unit = {}
 
@@ -90,6 +103,6 @@ class GameScreen extends Screen {
     * Usado para liberar espaco na memoria quando nao se utiliza mais um recurso
     */
   def dispose(): Unit = {
-    batch.dispose()
+    game.batch.dispose()
   }
 }

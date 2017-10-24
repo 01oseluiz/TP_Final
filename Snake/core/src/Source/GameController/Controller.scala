@@ -5,7 +5,9 @@ import Source.GameView._
 
 object Controller {
   private final val GAME_ENGINE:Engine = new Engine
-  private final val GAME_VIEW:GameScreen = new GameScreen
+  private final val GAME_VIEW_MENU: ScreenDefault = new ScreenDefault
+  private final val GAME_VIEW:GameScreen = new GameScreen(GAME_VIEW_MENU)
+  private final val GAME_OVER:GameOverScreen = new GameOverScreen(GAME_VIEW_MENU)
 
   def getGameEngine:Engine = GAME_ENGINE
 
@@ -34,7 +36,9 @@ object Controller {
     if(GAME_ENGINE.snakeCollisions(GAME_ENGINE.player1, GAME_ENGINE.player2) ||
        GAME_ENGINE.wallCollisions(GAME_ENGINE.player1, GAME_ENGINE.wall)){
       println("!!GAME-OVER!!\nPlayer 2 Win!")
-      sys.exit(0)
+//      sys.exit(0)
+//      GAME_VIEW.gameOver = true
+      GAME_VIEW.GameOver
     }
     if(GAME_ENGINE.snakeCollisions(GAME_ENGINE.player2, GAME_ENGINE.player1) ||
        GAME_ENGINE.wallCollisions(GAME_ENGINE.player2, GAME_ENGINE.wall)){

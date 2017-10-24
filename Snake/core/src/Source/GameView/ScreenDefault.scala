@@ -1,15 +1,19 @@
 package Source.GameView
 
 import com.badlogic.gdx.Game
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
 
 
 class ScreenDefault extends Game {
+  //Variavel que serve como plano de desenho (papel)
+  var batch: SpriteBatch = _
 
   /**
     * Executado assim que o app eh iniciado
     */
-  def create(): Unit = {
-    setScreen(new GameScreen) //Mudando de tela
+  override def create(): Unit = {
+    batch = new SpriteBatch()
+    this.screen = new GameScreen(this) //mudando de tela
   }
 
   /**
