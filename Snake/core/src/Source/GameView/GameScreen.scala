@@ -40,13 +40,9 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
   }
 
   def GameOver: Unit ={
-    println("Chamou a GameOver")
+    //println("Chamou a GameOver")
     game.setScreen(new GameOverScreen(game))
 //    dispose()
-  }
-
-  def GameScreen (game: ScreenDefault){
-    this.game = game
   }
 
   /**
@@ -89,7 +85,7 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
   /**
     * Funciona como a create. É a primeira coisa executada ao ser chamada
     */
-  def show(): Unit = {}
+  def show(): Unit = Controller.setGameView(this)
 
   def resize(width: Int, height: Int): Unit = {}
 

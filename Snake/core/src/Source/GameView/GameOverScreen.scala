@@ -1,5 +1,6 @@
 package Source.GameView
 
+import Source.GameController.Controller
 import com.badlogic.gdx.{Gdx, Screen}
 import com.badlogic.gdx.graphics.{GL20, OrthographicCamera}
 
@@ -12,12 +13,7 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
   camera.position.set(width/2, height/2, 0)
   camera.update()
 
-  def GameScreen (game: ScreenDefault){
-    this.game = game
-  }
-
-  def show(): Unit = {
-  }
+  def show(): Unit = Controller.setGameOver(this)
 
   def render(delta: Float): Unit = {
     Gdx.gl.glClearColor(0, 1, 0, 1) //setando a tela com uma cor

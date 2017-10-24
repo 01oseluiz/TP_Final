@@ -13,7 +13,7 @@ class ScreenDefault extends Game {
     */
   override def create(): Unit = {
     batch = new SpriteBatch()
-    this.screen = new GameScreen(this) //mudando de tela
+    setScreen(new GameScreen(this)) //mudando de tela
   }
 
   /**

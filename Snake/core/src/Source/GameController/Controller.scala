@@ -5,10 +5,11 @@ import Source.GameView._
 
 object Controller {
   private final val GAME_ENGINE:Engine = new Engine
-  private final val GAME_VIEW_MENU: ScreenDefault = new ScreenDefault
-  private final val GAME_VIEW:GameScreen = new GameScreen(GAME_VIEW_MENU)
-  private final val GAME_OVER:GameOverScreen = new GameOverScreen(GAME_VIEW_MENU)
+  private final var GAME_VIEW:GameScreen = _
+  private final var GAME_OVER:GameOverScreen = _
 
+  def setGameView(x:GameScreen): Unit = GAME_VIEW = x
+  def setGameOver(x:GameOverScreen): Unit = GAME_OVER = x
   def getGameEngine:Engine = GAME_ENGINE
 
   /**
