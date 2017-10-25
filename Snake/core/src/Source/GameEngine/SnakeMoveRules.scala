@@ -56,5 +56,6 @@ trait SnakeMoveRules {
       player.myPositions(i) = player.myPositions(i-1)
     }
     player.myPositions(1) = oldHeadPosition
+    player.recordRun //acrescenta movimento a estatistica de jogador
   }
 }

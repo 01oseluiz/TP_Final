@@ -23,6 +23,7 @@ trait BeanMoveRules {
       }while (!isEmpty(bean.myPositions.head, bean.mySize))
 
       player.addPosition(player.myPositions(1).P_x,player.myPositions(1).P_y)
+      player.recordEaten
     }
   }
 }
