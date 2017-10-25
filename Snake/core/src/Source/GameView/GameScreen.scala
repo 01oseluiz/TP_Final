@@ -50,7 +50,6 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
     * @param Keys
     * @return pressedKey
     */
-  //TODO-verificar a entrada de teclado em paralelo (Esta tendo delay)
   def getMovement(Keys:List[Int]): Int = {
     var pressedKey:Int = -1
     var continue:Boolean = true

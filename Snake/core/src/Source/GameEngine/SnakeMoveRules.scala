@@ -8,7 +8,7 @@ trait SnakeMoveRules {
     * @param key
     */
   def MovementSnake(player: Player, key:Int): Unit = {
-    val space: Int = 10
+    val space: Int = player.mySize
     val position_AUX:Position = new Position(player.myPositions.head.P_x,player.myPositions.head.P_y)
 
     if(player.movementSense != -1 || player.movementSense == -1 && key != player.Keys(2)) {

@@ -4,13 +4,16 @@ import Source.GameEngine._
 import Source.GameView._
 
 object Controller {
-  private final val GAME_ENGINE:Engine = new Engine
-  private final var GAME_VIEW:GameScreen = _
-  private final var GAME_OVER:GameOverScreen = _
+  val GAME_ENGINE:Engine = new Engine
+  var GAME_VIEW:GameScreen = _
+  var GAME_OVER:GameOverScreen = _
 
   def setGameView(x:GameScreen): Unit = GAME_VIEW = x
   def setGameOver(x:GameOverScreen): Unit = GAME_OVER = x
   def getGameEngine:Engine = GAME_ENGINE
+
+  //Iniciando a verificação de entradas de teclado em paralelo
+  InputMove.start()
 
   /**
     * Movimenta a cobra segundo a entrada e regra escolhida para movimentação
@@ -40,11 +43,13 @@ object Controller {
 //      sys.exit(0)
 //      GAME_VIEW.gameOver = true
       GAME_VIEW.GameOver
+      InputMove.close()
     }
     if(GAME_ENGINE.snakeCollisions(GAME_ENGINE.player2, GAME_ENGINE.player1) ||
        GAME_ENGINE.wallCollisions(GAME_ENGINE.player2, GAME_ENGINE.wall)){
       println("!!GAME-OVER!!\nPlayer 1 Win!")
       sys.exit(0)
+      InputMove.close()
     }
   }
 
@@ -56,17 +61,7 @@ object Controller {
     * - verificação de mortes
     */
   def nextInteraction(): Unit ={
-    //Verifica a entrada de keys de cada player
-    MovementSnake(GAME_ENGINE.player1, GAME_VIEW.getMovement(GAME_ENGINE.player1.Keys), new SnakeMoveRulesHard)
-    MovementSnake(GAME_ENGINE.player2, GAME_VIEW.getMovement(GAME_ENGINE.player2.Keys), new SnakeMoveRules{})
-
-    //Solicita a verificação de colisão bean X players
-    MovementBean()
-
-    //Solicita a verificação de colisao players X killerThings
-    calc_Collisions()
-
-    Thread.sleep(30)
+    //Entrada de teclado sendo verificada em paralelo pela classe InputMove
 
     //Desenha por completo o player1, player2, wall, bean
     GAME_ENGINE.player1.myPositions.foreach{x=>
