@@ -49,17 +49,4 @@ class SnakeMoveRulesHard extends SnakeMoveRules{
     }
     MovementSnakeBody(player, position_AUX)
   }
-
-  /**
-    * Realiza a movimentação do corpo da cobra conforme a cabeça
-    *
-    * @param player
-    * @param oldHeadPosition
-    */
-  override def MovementSnakeBody(player: Player, oldHeadPosition: Position): Unit = {
-    for (i <- player.myPositions.size - 1 until 1 by -1) {
-      player.myPositions(i) = player.myPositions(i - 1)
-    }
-    player.myPositions(1) = oldHeadPosition
-  }
 }
