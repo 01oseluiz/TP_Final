@@ -13,7 +13,11 @@ object Controller {
   def getGameEngine:Engine = GAME_ENGINE
 
   //Iniciando a verificação de entradas de teclado em paralelo
-  InputMove.start()
+  val movePlayer1 = new InputMove(GAME_ENGINE.player1, new SnakeMoveRulesHard)
+  val movePlayer2 = new InputMove(GAME_ENGINE.player2, new SnakeMoveRules{})
+
+  movePlayer1.start()
+  movePlayer2.start()
 
   /**
     * Movimenta a cobra segundo a entrada e regra escolhida para movimentação
@@ -27,9 +31,8 @@ object Controller {
     * Verifica se o player pegou a comida
     * e gera uma nova em algum lugar vazio
     */
-  def MovementBean(): Unit = {
-    GAME_ENGINE.BeanPosition(GAME_ENGINE.player1, GAME_ENGINE.bean, (x,y)=>GAME_ENGINE.isEmptyPosition(x,y))
-    GAME_ENGINE.BeanPosition(GAME_ENGINE.player2, GAME_ENGINE.bean, (x,y)=>GAME_ENGINE.isEmptyPosition(x,y))
+  def MovementBean(player: Player): Unit = {
+    GAME_ENGINE.BeanPosition(player, GAME_ENGINE.bean, (x,y)=>GAME_ENGINE.isEmptyPosition(x,y))
   }
 
   /**
@@ -39,17 +42,17 @@ object Controller {
     //TODO-alterar o exit para um gameover
     if(GAME_ENGINE.snakeCollisions(GAME_ENGINE.player1, GAME_ENGINE.player2) ||
        GAME_ENGINE.wallCollisions(GAME_ENGINE.player1, GAME_ENGINE.wall)){
+      movePlayer1.close()
+      movePlayer2.close()
       println("!!GAME-OVER!!\nPlayer 2 Win!")
-//      sys.exit(0)
-//      GAME_VIEW.gameOver = true
       GAME_VIEW.GameOver
-      InputMove.close()
     }
     if(GAME_ENGINE.snakeCollisions(GAME_ENGINE.player2, GAME_ENGINE.player1) ||
        GAME_ENGINE.wallCollisions(GAME_ENGINE.player2, GAME_ENGINE.wall)){
+      movePlayer1.close()
+      movePlayer2.close()
       println("!!GAME-OVER!!\nPlayer 1 Win!")
       sys.exit(0)
-      InputMove.close()
     }
   }
 

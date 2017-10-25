@@ -2,7 +2,7 @@ package Source.GameView
 
 import Source.GameEngine.Position
 import Source.GameController._
-import com.badlogic.gdx.{Gdx, Screen}
+import com.badlogic.gdx.{Gdx, Input, Screen}
 import com.badlogic.gdx.graphics.{GL20, OrthographicCamera}
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
@@ -51,7 +51,7 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
     * @return pressedKey
     */
   def getMovement(Keys:List[Int]): Int = {
-    var pressedKey:Int = -1
+    var pressedKey:Int = Input.Keys.ANY_KEY
     var continue:Boolean = true
 
     Keys.takeWhile(_=> continue).foreach{x=>

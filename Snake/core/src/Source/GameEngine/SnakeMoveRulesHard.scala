@@ -1,5 +1,7 @@
 package Source.GameEngine
 
+import com.badlogic.gdx.Input
+
 class SnakeMoveRulesHard extends SnakeMoveRules{
   /**
     * realiza a movimentação da cobra (cabeca) conforme entrada de teclado
@@ -11,7 +13,7 @@ class SnakeMoveRulesHard extends SnakeMoveRules{
     val space: Int = 10
     val position_AUX: Position = new Position(player.myPositions.head.P_x, player.myPositions.head.P_y)
 
-    if (player.movementSense == -1 && key == player.Keys(3)) player.movementSense = player.Keys(1)
+    if (player.movementSense == Input.Keys.ANY_KEY && key == player.Keys(3)) player.movementSense = player.Keys(1)
 
     if (key == player.Keys(0) && player.movementSense == player.Keys(0) ||
       (key == player.Keys(0) && player.movementSense == player.Keys(1))) {
