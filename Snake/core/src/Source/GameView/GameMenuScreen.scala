@@ -4,7 +4,7 @@ import Source.GameController.Controller
 import com.badlogic.gdx.{Gdx, Screen}
 import com.badlogic.gdx.graphics.{GL20, OrthographicCamera}
 
-class GameOverScreen(private var game: ScreenDefault) extends Screen {
+class GameMenuScreen(private var game: ScreenDefault) extends Screen {
 
   //Variaveis para a camera
   var width:Int = Gdx.graphics.getWidth
@@ -13,7 +13,7 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
   camera.position.set(width/2, height/2, 0)
   camera.update()
 
-  def show(): Unit = Controller.setGameOver(this)
+  def show(): Unit = {}// Controller.setGameOver(this)
 
   def render(delta: Float): Unit = {
     Gdx.gl.glClearColor(0, 0, 0, 1) //setando a tela com uma cor
@@ -23,7 +23,7 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
 
     game.batch.end() //terminou de desenhar a textura
 
-    game.gameOverHud.stage.draw() //Desesenha a hud
+    game.gameTitle.stage.draw() //Desesenha a hud
   }
 
   def resize(width: Int, height: Int): Unit = {}
@@ -36,6 +36,6 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
 
   def dispose(): Unit = {
     game.batch.dispose()
-    game.gameOverHud.stage.dispose()
+    game.gameTitle.stage.dispose()
   }
 }

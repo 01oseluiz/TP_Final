@@ -52,7 +52,8 @@ object Controller {
       movePlayer1.close()
       movePlayer2.close()
       println("!!GAME-OVER!!\nPlayer 1 Win!")
-      sys.exit(0)
+//      sys.exit(0)
+      GAME_VIEW.GameOver
     }
   }
 

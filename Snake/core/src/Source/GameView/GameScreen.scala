@@ -13,8 +13,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType
   */
 class GameScreen(private var game: ScreenDefault) extends Screen {
 
-  //  var gameOver: Boolean =_
-
   //Variaveis para a camera
   var width:Int = Gdx.graphics.getWidth
   var height:Int = Gdx.graphics.getHeight
@@ -40,9 +38,8 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
   }
 
   def GameOver: Unit ={
-    //println("Chamou a GameOver")
     game.setScreen(new GameOverScreen(game))
-//    dispose()
+    //dispose()
   }
 
   /**
@@ -73,12 +70,6 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
     game.batch.begin() //comecar a desenhar a textura
     Controller.nextInteraction()
     game.batch.end() //terminou de desenhar a textura
-
-//    if(gameOver){
-//      println(gameOver)
-//      game.setScreen(new GameOverScreen(game))
-//      dispose()
-//    }
   }
 
   /**
