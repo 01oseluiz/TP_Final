@@ -11,11 +11,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType
 /**
   * Tela de jogo
   */
-class GameScreen(private var game: ScreenDefault) extends Screen {
+class GameScreen(private var game: ScreenDefault, var width: Int, var height: Int) extends Screen {
 
   //Variaveis para a camera
-  var width:Int = Gdx.graphics.getWidth
-  var height:Int = Gdx.graphics.getHeight
   val camera = new OrthographicCamera(width, height)
   camera.position.set(width/2, height/2, 0)
   camera.update()

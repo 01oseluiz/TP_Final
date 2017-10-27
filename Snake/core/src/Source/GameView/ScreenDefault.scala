@@ -1,16 +1,20 @@
 package Source.GameView
 
 
-import com.badlogic.gdx.Game
+import com.badlogic.gdx.{Game, Gdx}
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 
 
 class ScreenDefault extends Game {
 
-  //Variaveis que servirao para desenho
+  //Variaveis para UI
   var batch: SpriteBatch = _
   var gameOverHud: GameOverHud=_
   var gameTitle: GameMenuHud=_
+
+  //Variaveis para botoes
+  var exitButton: ExitButton =_
+  var playButton: PlayButton =_
 
   /**
     * Executado assim que o app eh iniciado
@@ -19,7 +23,11 @@ class ScreenDefault extends Game {
     batch = new SpriteBatch()
     gameOverHud = new GameOverHud
     gameTitle = new GameMenuHud
-    setScreen(new GameScreen(this)) //mudando de tela
+    exitButton = new ExitButton(Gdx.graphics.getWidth, Gdx.graphics.getHeight)
+    playButton = new PlayButton(Gdx.graphics.getWidth, Gdx.graphics.getHeight)
+
+    //Mudanca de tela
+    setScreen(new GameScreen(this, Gdx.graphics.getWidth, Gdx.graphics.getHeight))
 //    setScreen(new GameMenuScreen(this))
   }
 
