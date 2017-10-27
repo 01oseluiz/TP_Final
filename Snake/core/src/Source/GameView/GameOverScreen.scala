@@ -17,8 +17,8 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
     Controller.setGameOver(this)
 
     //Permite q o botao seja clicado
-    Gdx.input.setInputProcessor(game.exitButton.stage)
     Gdx.input.setInputProcessor(game.playButton.stage)
+    Gdx.input.setInputProcessor(game.exitButton.stage)
   }
 
   def render(delta: Float): Unit = {

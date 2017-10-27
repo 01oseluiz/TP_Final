@@ -1,10 +1,12 @@
 package Source.GameView
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.{BitmapFont, TextureAtlas}
-import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.scenes.scene2d.{InputEvent, Stage}
 import com.badlogic.gdx.scenes.scene2d.ui.{Skin, Table, TextButton}
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 
 
 class ExitButton (var width: Int, var height: Int){
@@ -40,6 +42,9 @@ class ExitButton (var width: Int, var height: Int){
 
   //Criacao do botao em si
   ButtonExit = new TextButton("EXIT", textButtonStyle)
+  ButtonExit.addListener(new ClickListener(){
+    override def clicked(event: InputEvent, x: Float, y: Float): Unit = Gdx.app.exit()
+  })
 
   //OU USANDO TABLE
 //  ButtonExit.pad(20)  //Distancia da borda do botao ao texto
