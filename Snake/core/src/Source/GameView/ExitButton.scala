@@ -18,14 +18,14 @@ class ExitButton (var width: Int, var height: Int){
   private var ButtonExit: TextButton =_
 
   //Variaveis para a UI
-  private var table: Table =_
-  var stage: Stage =_
+//  private var table: Table =_
+//  var stage: Stage =_
 
   //Criando o botao
   atlas = new TextureAtlas("ui/button2.pack")
   skin = new Skin(atlas)
-  table = new Table(skin)
-  stage = new Stage()
+//  table = new Table(skin)
+//  stage = new Stage()
   textButtonStyle = new TextButtonStyle()
 
   //Imagens a serem desenhadas quando o botao eh ou nao apertado
@@ -54,7 +54,7 @@ class ExitButton (var width: Int, var height: Int){
 //  stage.addActor(table)
 
   //OU SEM USAR TABLE
-  ButtonExit.setSize(100,50)  //Desnecessario, pois ja eh o tamanho das imagens
-  ButtonExit.setPosition(width*8/10, height/10)
-  stage.addActor(ButtonExit)
+//  ButtonExit.setSize(100,50)  //Desnecessario, pois ja eh o tamanho das imagens
+//  ButtonExit.setPosition(width*8/10, height/10)
+//  stage.addActor(ButtonExit)
 }

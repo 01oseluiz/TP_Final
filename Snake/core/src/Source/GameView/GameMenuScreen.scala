@@ -13,12 +13,18 @@ class GameMenuScreen(private var game: ScreenDefault) extends Screen {
   camera.position.set(width/2, height/2, 0)
   camera.update()
 
+  /**
+    * Muda a tela para a tela de jogo
+    */
+  def StartGame: Unit ={
+    game.setScreen(new GameScreen(game, width, height))
+  }
+
   def show(): Unit = {
-    // Controller.setGameMenu(this)
+     Controller.setGameMenu(this)
 
     //Permite q os botoes sejam clicados)
-    Gdx.input.setInputProcessor(game.playButton.stage)
-    Gdx.input.setInputProcessor(game.exitButton.stage)
+    Gdx.input.setInputProcessor(game.gameTitle.stage)
   }
 
   def render(delta: Float): Unit = {
@@ -30,8 +36,6 @@ class GameMenuScreen(private var game: ScreenDefault) extends Screen {
     game.batch.end() //terminou de desenhar a textura
 
     game.gameTitle.stage.draw() //Desesenha a hud
-    game.exitButton.stage.draw() //Desenha o botao
-    game.playButton.stage.draw()
   }
 
   def resize(width: Int, height: Int): Unit = {}
@@ -45,7 +49,5 @@ class GameMenuScreen(private var game: ScreenDefault) extends Screen {
   def dispose(): Unit = {
     game.batch.dispose()
     game.gameTitle.stage.dispose()
-    game.exitButton.stage.dispose()
-    game.playButton.stage.dispose()
   }
 }

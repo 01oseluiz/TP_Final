@@ -7,9 +7,11 @@ object Controller {
   val GAME_ENGINE:Engine = new Engine
   var GAME_VIEW:GameScreen = _
   var GAME_OVER:GameOverScreen = _
+  var GAME_MENU:GameMenuScreen=_
 
   def setGameView(x:GameScreen): Unit = GAME_VIEW = x
   def setGameOver(x:GameOverScreen): Unit = GAME_OVER = x
+  def setGameMenu(x:GameMenuScreen): Unit = GAME_MENU = x
   def getGameEngine:Engine = GAME_ENGINE
 
   //Iniciando a verificação de entradas de teclado em paralelo
@@ -80,5 +82,13 @@ object Controller {
     GAME_ENGINE.bean.myPositions.foreach{x=>
       GAME_VIEW.drawSquare(x,GAME_ENGINE.bean.myColor,GAME_ENGINE.bean.mySize,GAME_ENGINE.bean.mySize)
     }
+  }
+
+  def playAgain(): Unit ={
+    GAME_VIEW.PlayAgain
+  }
+
+  def startGame(): Unit ={
+    GAME_MENU.StartGame
   }
 }

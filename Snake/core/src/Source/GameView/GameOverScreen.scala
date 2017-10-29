@@ -17,8 +17,7 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
     Controller.setGameOver(this)
 
     //Permite q o botao seja clicado
-    Gdx.input.setInputProcessor(game.playButton.stage)
-    Gdx.input.setInputProcessor(game.exitButton.stage)
+    Gdx.input.setInputProcessor(game.gameOverHud.stage)
   }
 
   def render(delta: Float): Unit = {
@@ -30,8 +29,6 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
     game.batch.end() //terminou de desenhar a textura
 
     game.gameOverHud.stage.draw() //Desesenha a HUD
-    game.exitButton.stage.draw() //Desenha o botao
-    game.playButton.stage.draw()
   }
 
   def resize(width: Int, height: Int): Unit = {}
@@ -45,7 +42,5 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
   def dispose(): Unit = {
     game.batch.dispose()
     game.gameOverHud.stage.dispose()
-    game.exitButton.stage.dispose()
-    game.playButton.stage.dispose()
   }
 }

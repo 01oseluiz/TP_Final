@@ -35,9 +35,18 @@ class GameScreen(private var game: ScreenDefault, var width: Int, var height: In
     shapeRenderer.end()
   }
 
+  /**
+    * Muda a tela para a tela de gameOver
+    */
   def GameOver: Unit ={
     game.setScreen(new GameOverScreen(game))
-    //dispose()
+  }
+
+  /**
+    * Muda a tela para a tela de jogo
+    */
+  def PlayAgain: Unit ={
+    game.setScreen(new GameScreen(game, width, height))
   }
 
   /**

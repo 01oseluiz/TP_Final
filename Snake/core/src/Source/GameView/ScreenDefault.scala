@@ -11,6 +11,8 @@ class ScreenDefault extends Game {
   var batch: SpriteBatch = _
   var gameOverHud: GameOverHud=_
   var gameTitle: GameMenuHud=_
+  var width: Int =_
+  var height: Int =_
 
   //Variaveis para botoes
   var exitButton: ExitButton =_
@@ -20,14 +22,16 @@ class ScreenDefault extends Game {
     * Executado assim que o app eh iniciado
     */
   override def create(): Unit = {
+    width = Gdx.graphics.getWidth
+    height = Gdx.graphics.getHeight
     batch = new SpriteBatch()
     gameOverHud = new GameOverHud
     gameTitle = new GameMenuHud
-    exitButton = new ExitButton(Gdx.graphics.getWidth, Gdx.graphics.getHeight)
-    playButton = new PlayButton(Gdx.graphics.getWidth, Gdx.graphics.getHeight)
 
     //Mudanca de tela
-    setScreen(new GameScreen(this, Gdx.graphics.getWidth, Gdx.graphics.getHeight))
+    //Usar essa set screen para testar a GameOver
+    setScreen(new GameScreen(this, width, height))
+    //Usar essa para testar a GameMenu
 //    setScreen(new GameMenuScreen(this))
   }
 
