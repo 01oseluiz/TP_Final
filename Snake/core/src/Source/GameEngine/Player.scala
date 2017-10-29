@@ -18,11 +18,14 @@ import scala.collection.mutable.ListBuffer
 class Player (x: Int, y: Int) extends Statistics{
 
   var myName:String = ""
-  var myPositions:ListBuffer[Position] = ListBuffer(new Position(x,y))
   var myColor:Color = _
+  var myLifes:Int = 1
   var Keys:List[Int] = List.empty
   var mySize:Int = 10
   var speed:Long = 30 //speed 0-100
+  var isAlive:Boolean = true
+
+  var myPositions:ListBuffer[Position] = ListBuffer(new Position(x,y,mySize))
 
   var movementSense:Int = Input.Keys.ANY_KEY
 
@@ -31,5 +34,8 @@ class Player (x: Int, y: Int) extends Statistics{
     * @param x
     * @param y
     */
-  def addPosition(x:Int, y:Int):Unit = myPositions :+= new Position(x,y)
+  //TODO- criar uma função para remover posições
+  def addPosition(x:Int, y:Int, size:Int):Unit = myPositions :+= new Position(x,y,size)
+  def makeAlive(): Unit = isAlive = true
+  def kill(): Unit = isAlive = false
 }

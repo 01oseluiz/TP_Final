@@ -24,14 +24,12 @@ class GameScreen(private var game: ScreenDefault, var width: Int, var height: In
     * Desenha um quadrado, de tamanho, posições e cor quaisquer
     * @param p posicao a ser desenhada
     * @param c cor a ser desenhada
-    * @param size_x largura a ser desenhada
-    * @param size_y altura a ser desenhada
     */
-  def drawSquare(p: Position, c:Color, size_x:Int, size_y:Int):Unit = {
+  def drawSquare(p: Position, c:Color):Unit = {
     shapeRenderer.begin(ShapeType.Filled)
     if(p.P_color==null)shapeRenderer.setColor(c)
     else shapeRenderer.setColor(p.P_color)
-    shapeRenderer.rect(p.P_x, p.P_y, size_x, size_y)
+    shapeRenderer.rect(p.P_x, p.P_y, p.size, p.size)
     shapeRenderer.end()
   }
 

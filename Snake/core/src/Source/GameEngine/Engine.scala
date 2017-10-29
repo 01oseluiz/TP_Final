@@ -3,7 +3,7 @@ package Source.GameEngine
 import com.badlogic.gdx.{Gdx, Input}
 import com.badlogic.gdx.graphics.Color
 
-class Engine extends BeanMoveRules with DeathRules {
+class Engine extends Objects with BeanMoveRules with DeathRules {
   //Dimensões do jogo
   var width: Int = Gdx.graphics.getWidth
   var height: Int = Gdx.graphics.getHeight
@@ -15,9 +15,9 @@ class Engine extends BeanMoveRules with DeathRules {
   var bean: Bean = new Bean(width / 2, height / 2)
 
   //Criaçao das cobras iniciais
-  for (i <- 1 to SIZE_INITIAL) {
-    player1.addPosition(100 - i * player1.mySize, 40)
-    player2.addPosition(100 - i * player2.mySize, height - 40)
+  for (i <- 1 until SIZE_INITIAL) {
+    player1.addPosition(100 - i * player1.mySize, 40, player1.mySize)
+    player2.addPosition(100 - i * player2.mySize, height - 40, player2.mySize)
   }
 
   //Adiciona cores aos jogadores
@@ -34,28 +34,28 @@ class Engine extends BeanMoveRules with DeathRules {
   //Variaveis de objetos mortais
   var wall:KillerThings = new KillerThings(0,0)
   wall.myColor = new Color(0.5f,0.5f,0.5f,1)
-  for(i<-10 until width by wall.mySize) wall.addPosition(i,0)
-  for(i<-10 until width by wall.mySize) wall.addPosition(i,height-10)
-  for(i<-10 until height by wall.mySize) wall.addPosition(0,i)
-  for(i<-10 until height by wall.mySize) wall.addPosition(width-10,i)
+  for(i<-10 until width by wall.mySize) wall.addPosition(i,0,         wall.mySize)
+  for(i<-10 until width by wall.mySize) wall.addPosition(i,height-10, wall.mySize)
+  for(i<-10 until height by wall.mySize) wall.addPosition(0,i,        wall.mySize)
+  for(i<-10 until height by wall.mySize) wall.addPosition(width-10,i, wall.mySize)
 
-  /**
-    * verifica se uma dada posição esta vazia ou em contato com algum objeto ja criado
-    * @param position
-    * @param size
-    * @return
-    */
-  def isEmptyPosition(position: Position, size:Int): Boolean ={
+  //Setando todos os objetos como visiveis na tela
+  setAsObject(bean.myPositions)
+  setAsObject(player1.myPositions)
+  setAsObject(player2.myPositions)
+  setAsObject(wall.myPositions)
+
+  override def isEmptyPosition(position: Position, size:Int): Boolean ={
     var isEmptyPosition:Boolean = true
 
     player1.myPositions.takeWhile(_=>isEmptyPosition).foreach{x=>
-        if(x.positionIsEqual(position, player1.mySize, size)) isEmptyPosition = false
+      if(x.positionIsEqual(position)) isEmptyPosition = false
     }
     player2.myPositions.takeWhile(_=>isEmptyPosition).foreach{x=>
-      if(x.positionIsEqual(position, player2.mySize, size)) isEmptyPosition = false
+      if(x.positionIsEqual(position)) isEmptyPosition = false
     }
     wall.myPositions.takeWhile(_=>isEmptyPosition).foreach{x=>
-      if(x.positionIsEqual(position, wall.mySize, size)) isEmptyPosition = false
+      if(x.positionIsEqual(position)) isEmptyPosition = false
     }
 
     isEmptyPosition

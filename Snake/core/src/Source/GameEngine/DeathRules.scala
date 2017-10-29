@@ -12,14 +12,18 @@ trait DeathRules {
     var isCrashed:Boolean = false
 
     player2.myPositions.foreach{x =>
-      if(x.positionIsEqual(player1.myPositions.head, player2.mySize, player1.mySize)) isCrashed = true
+      if(x.positionIsEqual(player1.myPositions.head)){
+        isCrashed = true
+        player1.kill()
+      }
     }
 
     player1.myPositions.foreach{x=>
-      if(x != player1.myPositions.head && x.positionIsEqual(player1.myPositions.head, player1.mySize, player1.mySize))
+      if(x != player1.myPositions.head && x.positionIsEqual(player1.myPositions.head)) {
         isCrashed = true
+        player1.kill()
+      }
     }
-
     isCrashed
   }
 
@@ -32,7 +36,10 @@ trait DeathRules {
   def wallCollisions(player: Player, wall:KillerThings): Boolean ={
     var isCrashed:Boolean = false
     wall.myPositions.foreach{x=>
-      if(x.positionIsEqual(player.myPositions.head, wall.mySize, player.mySize)) isCrashed = true
+      if(x.positionIsEqual(player.myPositions.head)){
+        isCrashed = true
+        player.kill
+      }
     }
     isCrashed
   }

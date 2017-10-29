@@ -15,14 +15,14 @@ trait BeanMoveRules {
     val x = new scala.util.Random
     val y = new scala.util.Random
 
-    if (bean.myPositions.head.positionIsEqual(player.myPositions.head, bean.mySize, player.mySize)) {
+    if (bean.myPositions.head.positionIsEqual(player.myPositions.head)) {
 
       do {
         bean.myPositions.head.P_x = x.nextInt(width)
         bean.myPositions.head.P_y = y.nextInt(height)
       }while (!isEmpty(bean.myPositions.head, bean.mySize))
 
-      player.addPosition(player.myPositions(1).P_x,player.myPositions(1).P_y)
+      player.addPosition(player.myPositions(1).P_x,player.myPositions(1).P_y, player.mySize)
       player.recordEaten
     }
   }
