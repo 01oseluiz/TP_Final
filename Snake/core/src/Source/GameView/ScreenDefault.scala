@@ -30,9 +30,9 @@ class ScreenDefault extends Game {
 
     //Mudanca de tela
     //Usar essa set screen para testar a GameOver
-    setScreen(new GameScreen(this, width, height))
+    //setScreen(new GameScreen(this, width, height))
     //Usar essa para testar a GameMenu
-//    setScreen(new GameMenuScreen(this))
+    setScreen(new GameMenuScreen(this))
   }
 
   /**
