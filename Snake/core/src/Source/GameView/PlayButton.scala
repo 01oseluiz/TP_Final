@@ -31,8 +31,8 @@ class PlayButton (var width: Int, var height: Int){
   textButtonStyle.down = skin.getDrawable("Button2.down")
 
   //Posicao do texto no botao ao ser pressionado
-  textButtonStyle.pressedOffsetX = 1
-  textButtonStyle.pressedOffsetY = -1
+  textButtonStyle.pressedOffsetX = 2
+  textButtonStyle.pressedOffsetY = -2
 
   //Fonte do texto no botao
   textButtonStyle.font = new BitmapFont()
