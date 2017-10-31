@@ -30,34 +30,40 @@ object Controller {
     * Verifica se o player pegou a comida
     * e gera uma nova em algum lugar vazio
     */
-  def MovementBean(player: Player): Unit = {
-    GAME_ENGINE.BeanPosition(player, GAME_ENGINE.bean, (x,y)=>GAME_ENGINE.isEmptyPosition(x,y))
+  def MovementBean(player: Player, key:Int): Unit = {
+    GAME_ENGINE.BeanPosition(player, GAME_ENGINE.bean, key, (x,y)=>GAME_ENGINE.isEmptyPosition(x,y))
   }
 
   /**
-    * Verifica se houve algum tipo de colisao
+    * Verifica se houve algum tipo de colisao e se é o fim de jogo
     */
-  def calc_Collisions(): Unit ={
-    GAME_ENGINE.snakeCollisions(GAME_ENGINE.player1, GAME_ENGINE.player2)
-    GAME_ENGINE.wallCollisions(GAME_ENGINE.player1, GAME_ENGINE.wall)
-
-    GAME_ENGINE.snakeCollisions(GAME_ENGINE.player2, GAME_ENGINE.player1)
-    GAME_ENGINE.wallCollisions(GAME_ENGINE.player2, GAME_ENGINE.wall)
+  def IsEndGame(player: Player, key:Int): Unit ={
+    //TODO-fazer classe EndGameRules para verificar se é fim de jogo
+    if(player == GAME_ENGINE.player1){
+      GAME_ENGINE.snakeCollisions(GAME_ENGINE.player1, GAME_ENGINE.player2)
+      GAME_ENGINE.wallCollisions(GAME_ENGINE.player1, GAME_ENGINE.wall)
+    }else if(player == GAME_ENGINE.player2){
+      GAME_ENGINE.snakeCollisions(GAME_ENGINE.player2, GAME_ENGINE.player1)
+      GAME_ENGINE.wallCollisions(GAME_ENGINE.player2, GAME_ENGINE.wall)
+    }
 
     if(!GAME_ENGINE.player1.isAlive && !GAME_ENGINE.player2.isAlive){
       movePlayer1.close()
       movePlayer2.close()
       println("LOSERS")
+      GAME_ENGINE.FinishGame()
       GAME_VIEW.GameOver
-    }else if(!GAME_ENGINE.player1.isAlive){
+    }else if(!GAME_ENGINE.player1.isAlive && player == GAME_ENGINE.player1){
       movePlayer1.close()
       movePlayer2.close()
       println("PLAYER 1 LOSER")
+      GAME_ENGINE.FinishGame()
       GAME_VIEW.GameOver
-    }else if(!GAME_ENGINE.player2.isAlive){
+    }else if(!GAME_ENGINE.player2.isAlive && player == GAME_ENGINE.player2){
       movePlayer1.close()
       movePlayer2.close()
       println("PLAYER 2 LOSER")
+      GAME_ENGINE.FinishGame()
       GAME_VIEW.GameOver
     }
 
@@ -92,19 +98,18 @@ object Controller {
   }
 
   def playAgain(): Unit ={
-    GAME_ENGINE = new Engine
     startGetMove()
     GAME_VIEW.PlayAgain
   }
 
   def startGame(): Unit ={
-    GAME_ENGINE = new Engine
     startGetMove()
     GAME_MENU.StartGame
   }
 
   private def startGetMove(): Unit ={
-    movePlayer1 = new InputMove(GAME_ENGINE.player1, new SnakeMoveRulesHard)
+    GAME_ENGINE = new Engine
+    movePlayer1 = new InputMove(GAME_ENGINE.player1, new SnakeMoveRules{})
     movePlayer2 = new InputMove(GAME_ENGINE.player2, new SnakeMoveRules{})
     movePlayer1.start()
     movePlayer2.start()

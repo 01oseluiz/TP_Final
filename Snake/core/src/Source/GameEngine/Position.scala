@@ -6,7 +6,6 @@ class Position(x:Int, y:Int, sizeP:Int) {
   var P_x:Int = x
   var P_y :Int= y
   var size:Int = sizeP
-
   var P_color:Color = _
 
   /**

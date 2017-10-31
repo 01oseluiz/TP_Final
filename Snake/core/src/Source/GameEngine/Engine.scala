@@ -1,5 +1,12 @@
 package Source.GameEngine
 
+//TODO-retirar mods feitos
+/*
+- Modo psicodelico
+- Varias Beans
+- Beans com açoes diferentes
+ */
+
 import com.badlogic.gdx.{Gdx, Input}
 import com.badlogic.gdx.graphics.Color
 
@@ -14,10 +21,14 @@ class Engine extends Objects with BeanMoveRules with DeathRules {
   var player2: Player = new Player(100, height - 40)
   var bean: Bean = new Bean(width / 2, height / 2)
 
+  bean.myPositions.head.P_color = new Color(1,0,0,1)
+
   //Criaçao das cobras iniciais
   for (i <- 1 until SIZE_INITIAL) {
-    player1.addPosition(100 - i * player1.mySize, 40, player1.mySize)
-    player2.addPosition(100 - i * player2.mySize, height - 40, player2.mySize)
+    player1.addPosition(100 - i * player1.mySize, 40)
+    player2.addPosition(100 - i * player2.mySize, height - 40)
+    //Criação de varios beans
+    bean.addPosition(width/2 + i*12, height/2)
   }
 
   //Adiciona cores aos jogadores
@@ -34,10 +45,40 @@ class Engine extends Objects with BeanMoveRules with DeathRules {
   //Variaveis de objetos mortais
   var wall:KillerThings = new KillerThings(0,0)
   wall.myColor = new Color(0.5f,0.5f,0.5f,1)
-  for(i<-10 until width by wall.mySize) wall.addPosition(i,0,         wall.mySize)
-  for(i<-10 until width by wall.mySize) wall.addPosition(i,height-10, wall.mySize)
-  for(i<-10 until height by wall.mySize) wall.addPosition(0,i,        wall.mySize)
-  for(i<-10 until height by wall.mySize) wall.addPosition(width-10,i, wall.mySize)
+  for(i<-10 until width by wall.mySize) wall.addPosition(i,0)
+  for(i<-10 until width by wall.mySize) wall.addPosition(i,height-10)
+  for(i<-10 until height by wall.mySize) wall.addPosition(0,i)
+  for(i<-10 until height by wall.mySize) wall.addPosition(width-10,i)
+
+  //-----------------------------PSICODELIC MODE-------------------------------
+  var psicodelicThread = new Thread(){
+    override def run(): Unit = {
+      var cColor =0
+      while(true) {
+        cColor+=1
+
+        if(cColor==1){
+          wall.myColor = new Color(1,0,0,1)
+          player1.myColor = new Color(0,0,1,1)
+          player2.myColor = new Color(0,0,1,1)
+        }
+        else if(cColor==2){
+          wall.myColor = new Color(0,1,0,1)
+          player1.myColor = new Color(0,1,0,1)
+          player2.myColor = new Color(0,1,0,1)
+        }
+        else if(cColor==3){
+          wall.myColor = new Color(0,0,1,1)
+          player1.myColor = new Color(1,0,0,1)
+          player2.myColor = new Color(1,0,0,1)
+          cColor=0
+        }
+        Thread.sleep(50)
+      }
+    }
+  }
+  psicodelicThread.start()
+//----------------------------------------------------------------------------
 
   //Setando todos os objetos como visiveis na tela
   setAsObject(bean.myPositions)
@@ -63,5 +104,14 @@ class Engine extends Objects with BeanMoveRules with DeathRules {
 
   def MovementSnake(player: Player, key:Int, snakeMoveRules: SnakeMoveRules): Unit ={
     snakeMoveRules.MovementSnake(player,key)
+  }
+
+  /**
+    * função para se finalizar algo da engine ou suas superclasses, se necessário
+    */
+  def FinishGame(): Unit ={
+    //TODO-se for manter o MOD psicodelico alterar o stop para outra coisa
+    psicodelicThread.stop()
+    Thread.sleep(1500)
   }
 }

@@ -3,10 +3,11 @@ package Source.GameController
 import java.util.Calendar
 
 import Source.GameEngine.{Player, SnakeMoveRules}
+import Source.GameView.GetInputs
 import com.badlogic.gdx.Input
 
 class InputMove(private val player: Player, snakeMoveRules: SnakeMoveRules) extends Thread{
-  private val delay:Long = 110 - player.speed
+  private var delay:Long = _
   private var timeNowkey:Long = _
   private var timeNowMove:Long = _
   private var STOPED:Boolean = false
@@ -14,6 +15,7 @@ class InputMove(private val player: Player, snakeMoveRules: SnakeMoveRules) exte
   def close() : Unit = STOPED = true
 
   override def run(): Unit = {
+    val inputs = new GetInputs
     var key = Input.Keys.ANY_KEY
     var key_AUX = Input.Keys.ANY_KEY
 
@@ -21,8 +23,9 @@ class InputMove(private val player: Player, snakeMoveRules: SnakeMoveRules) exte
     timeNowMove = Calendar.getInstance().getTimeInMillis
 
     while(!STOPED) {
+      delay = 110 - player.speed
 
-      key_AUX = Controller.GAME_VIEW.getMovement(player.Keys)
+      key_AUX = inputs.getMovement(player.Keys)
       if (key_AUX != Input.Keys.ANY_KEY){
         key = key_AUX
       }
@@ -30,14 +33,14 @@ class InputMove(private val player: Player, snakeMoveRules: SnakeMoveRules) exte
       if ((Calendar.getInstance().getTimeInMillis - timeNowMove) >= delay) {
         //Movimenta a cobra
         Controller.MovementSnake(player, key, snakeMoveRules)
-        key = Input.Keys.ANY_KEY
 
         //Solicita a verificação de colisão bean X players
-        Controller.MovementBean(player)
+        Controller.MovementBean(player, key)
 
-        //Solicita a verificação de colisao players X killerThings
-        Controller.calc_Collisions()
+        //Solicita a verificação de final de jogo
+        Controller.IsEndGame(player, key)
 
+        key = Input.Keys.ANY_KEY
         timeNowMove = Calendar.getInstance().getTimeInMillis
       }
     }

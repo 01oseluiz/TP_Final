@@ -13,5 +13,19 @@ class KillerThings(x:Int, y:Int){
     * @param x
     * @param y
     */
+  def addPosition(x:Int, y:Int):Unit = myPositions :+= new Position(x,y,mySize)
+
+  /**
+    * adiciona mais um segmento de objetos que matam
+    * @param x
+    * @param y
+    * @param size
+    */
   def addPosition(x:Int, y:Int, size:Int):Unit = myPositions :+= new Position(x,y,size)
+
+  /**
+    * remove uma dada posição dos objetos que matam
+    * @param position
+    */
+  def remPosition(position: Position):Unit = myPositions -= position
 }

@@ -13,8 +13,6 @@ import scala.collection.mutable.ListBuffer
   * @param y posicao Y do jogador
   */
 
-//TODO - adicionar nos atributos dos players: Velocidade da cobra, nome, posição inicial e tamanho minimo*/
-//TODO - Padronizar a key -1 como sendo nonInput
 class Player (x: Int, y: Int) extends Statistics{
 
   var myName:String = ""
@@ -22,20 +20,41 @@ class Player (x: Int, y: Int) extends Statistics{
   var myLifes:Int = 1
   var Keys:List[Int] = List.empty
   var mySize:Int = 10
-  var speed:Long = 30 //speed 0-100
+  var speed:Long = 30
+  //speed 0-100
   var isAlive:Boolean = true
 
   var myPositions:ListBuffer[Position] = ListBuffer(new Position(x,y,mySize))
 
   var movementSense:Int = Input.Keys.ANY_KEY
 
+  //TODO-todos tem essas funções da pra generalizar?
+  def setSizeObject(size:Int): Unit ={
+    myPositions.foreach(x=> x.size = size)
+    mySize = size
+  }
+
   /**
     * adiciona mais um segnmento a cobra
     * @param x
     * @param y
     */
-  //TODO- criar uma função para remover posições
+  def addPosition(x:Int, y:Int):Unit = myPositions :+= new Position(x,y,mySize)
+
+  /**
+    * adiciona mais um segmento a cobra
+    * @param x
+    * @param y
+    * @param size
+    */
   def addPosition(x:Int, y:Int, size:Int):Unit = myPositions :+= new Position(x,y,size)
+
+  /**
+    * remove uma dada posição da cobra
+    * @param position
+    */
+  def remPosition(position: Position):Unit = myPositions -= position
+
   def makeAlive(): Unit = isAlive = true
   def kill(): Unit = isAlive = false
 }

@@ -2,7 +2,7 @@ package Source.GameView
 
 import Source.GameEngine.Position
 import Source.GameController._
-import com.badlogic.gdx.{Gdx, Input, Screen}
+import com.badlogic.gdx.{Gdx, Screen}
 import com.badlogic.gdx.graphics.{GL20, OrthographicCamera}
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
@@ -27,9 +27,12 @@ class GameScreen(private var game: ScreenDefault, var width: Int, var height: In
     */
   def drawSquare(p: Position, c:Color):Unit = {
     shapeRenderer.begin(ShapeType.Filled)
+
     if(p.P_color==null)shapeRenderer.setColor(c)
     else shapeRenderer.setColor(p.P_color)
+
     shapeRenderer.rect(p.P_x, p.P_y, p.size, p.size)
+
     shapeRenderer.end()
   }
 
@@ -45,24 +48,6 @@ class GameScreen(private var game: ScreenDefault, var width: Int, var height: In
     */
   def PlayAgain: Unit ={
     game.setScreen(new GameScreen(game, width, height))
-  }
-
-  /**
-    * Verifica se dada uma lista de keys alguma foi precionada
-    * @param Keys
-    * @return pressedKey
-    */
-  def getMovement(Keys:List[Int]): Int = {
-    var pressedKey:Int = Input.Keys.ANY_KEY
-    var continue:Boolean = true
-
-    Keys.takeWhile(_=> continue).foreach{x=>
-      if(Gdx.input.isKeyJustPressed(x)){
-        pressedKey=x
-        continue = false
-      }
-    }
-    pressedKey
   }
 
   /**

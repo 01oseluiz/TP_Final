@@ -55,9 +55,11 @@ trait SnakeMoveRules {
     */
   def MovementSnakeBody(player: Player, oldHeadPosition:Position): Unit ={
     for(i<- player.myPositions.size-1 until 1 by -1){
-      player.myPositions(i) = player.myPositions(i-1)
+      player.myPositions(i).P_y = player.myPositions(i-1).P_y
+      player.myPositions(i).P_x = player.myPositions(i-1).P_x
     }
-    player.myPositions(1) = oldHeadPosition
+    player.myPositions(1).P_x = oldHeadPosition.P_x
+    player.myPositions(1).P_y = oldHeadPosition.P_y
     player.recordRun //acrescenta movimento a estatistica de jogador
   }
 }

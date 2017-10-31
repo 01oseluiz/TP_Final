@@ -9,6 +9,7 @@ trait Objects{
   //verificar como adicionar a lista uma lista que se modificara conforme a original
   //semelhante a ponteiros
   def setAsObject(obj:ListBuffer[Position]): Unit = objects :+= obj
+  def remObject(obj:ListBuffer[Position]): Unit = objects -= obj
 
   def setSizeObject(obj:ListBuffer[Position],size:Int): Unit ={
     obj.foreach(x=> x.size=size)
@@ -26,6 +27,4 @@ trait Objects{
     }
     isEmptyPosition
   }
-
-  //Todo- fazer um removedor de objetos
 }
