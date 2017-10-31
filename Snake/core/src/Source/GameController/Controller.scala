@@ -36,6 +36,8 @@ object Controller {
 
   /**
     * Verifica se houve algum tipo de colisao e se é o fim de jogo
+    * @param player player atual
+    * @param key tecla pressionada
     */
   def IsEndGame(player: Player, key:Int): Unit ={
     //TODO-fazer classe EndGameRules para verificar se é fim de jogo
@@ -48,8 +50,8 @@ object Controller {
     }
 
     if(!GAME_ENGINE.player1.isAlive && !GAME_ENGINE.player2.isAlive){
-      movePlayer1.close()
       movePlayer2.close()
+      movePlayer1.close()
       println("LOSERS")
       GAME_ENGINE.FinishGame()
       GAME_VIEW.GameOver
@@ -113,5 +115,23 @@ object Controller {
     movePlayer2 = new InputMove(GAME_ENGINE.player2, new SnakeMoveRules{})
     movePlayer1.start()
     movePlayer2.start()
+  }
+
+  def getStatistics(): Unit ={
+    var name = GAME_ENGINE.player1.myName
+    var player = 1
+    var eatenBeans = GAME_ENGINE.player1.getEatenBeans
+    var pixelRan = GAME_ENGINE.player1.getPixelRan
+    var time = GAME_ENGINE.player1.getTime
+
+    //CHAMAR FUNÇÃO DA GAMEOVER
+
+    name = GAME_ENGINE.player2.myName
+    player = 2
+    eatenBeans = GAME_ENGINE.player2.getEatenBeans
+    pixelRan = GAME_ENGINE.player2.getPixelRan
+    time = GAME_ENGINE.player2.getTime
+
+    //CHAMAR FUNÇÃO DA GAMEOVER
   }
 }
