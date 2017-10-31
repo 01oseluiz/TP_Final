@@ -14,10 +14,6 @@ class ScreenDefault extends Game {
   var width: Int =_
   var height: Int =_
 
-  //Variaveis para botoes
-  var exitButton: ExitButton =_
-  var playButton: PlayButton =_
-
   /**
     * Executado assim que o app eh iniciado
     */
@@ -25,14 +21,12 @@ class ScreenDefault extends Game {
     width = Gdx.graphics.getWidth
     height = Gdx.graphics.getHeight
     batch = new SpriteBatch()
-    gameOverHud = new GameOverHud
+    gameOverHud = new GameOverHud(width, height)
     gameTitle = new GameMenuHud
 
     //Mudanca de tela
-    //Usar essa set screen para testar a GameOver
-    //setScreen(new GameScreen(this, width, height))
-    //Usar essa para testar a GameMenu
     setScreen(new GameMenuScreen(this))
+    dispose()
   }
 
   /**

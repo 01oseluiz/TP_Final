@@ -17,13 +17,14 @@ class GameMenuScreen(private var game: ScreenDefault) extends Screen {
     * Muda a tela para a tela de jogo
     */
   def StartGame: Unit ={
-    game.setScreen(new GameScreen(game, width, height))
+    game.setScreen(new GameScreen(game))
+    dispose()
   }
 
   def show(): Unit = {
      Controller.setGameMenu(this)
 
-    //Permite q os botoes sejam clicados)
+    //Permite q os botoes sejam clicados
     Gdx.input.setInputProcessor(game.gameTitle.stage)
   }
 
@@ -49,5 +50,6 @@ class GameMenuScreen(private var game: ScreenDefault) extends Screen {
   def dispose(): Unit = {
     game.batch.dispose()
     game.gameTitle.stage.dispose()
+    game.gameTitle.font.dispose()
   }
 }

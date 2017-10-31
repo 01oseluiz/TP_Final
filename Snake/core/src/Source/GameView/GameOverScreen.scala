@@ -13,6 +13,14 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
   camera.position.set(width/2, height/2, 0)
   camera.update()
 
+  /**
+    * Muda a tela para a tela de jogo
+    */
+  def PlayAgain: Unit ={
+    game.setScreen(new GameScreen(game))
+    dispose()
+    }
+
   def show(): Unit = {
     Controller.setGameOver(this)
 
@@ -24,6 +32,7 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
     Gdx.gl.glClearColor(0, 0, 0, 1) //setando a tela com uma cor
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT) //limpando a tela com a cor
 
+//    game.batch.setProjectionMatrix(game.gameOverHud.stage.getCamera.combined)
     game.batch.begin() //comecar a desenhar a textura
 
     game.batch.end() //terminou de desenhar a textura
@@ -40,7 +49,8 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
   def hide(): Unit = {}
 
   def dispose(): Unit = {
-    game.batch.dispose()
+//    game.batch.dispose()
     game.gameOverHud.stage.dispose()
+    game.gameOverHud.font.dispose()
   }
 }

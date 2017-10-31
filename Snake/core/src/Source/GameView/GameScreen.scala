@@ -11,9 +11,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType
 /**
   * Tela de jogo
   */
-class GameScreen(private var game: ScreenDefault, var width: Int, var height: Int) extends Screen {
-
+class GameScreen(private var game: ScreenDefault) extends Screen {
   //Variaveis para a camera
+  var width:Int = Gdx.graphics.getWidth
+  var height:Int = Gdx.graphics.getHeight
   val camera = new OrthographicCamera(width, height)
   camera.position.set(width/2, height/2, 0)
   camera.update()
@@ -41,14 +42,16 @@ class GameScreen(private var game: ScreenDefault, var width: Int, var height: In
     */
   def GameOver: Unit ={
     game.setScreen(new GameOverScreen(game))
+//    dispose()
   }
 
-  /**
-    * Muda a tela para a tela de jogo
-    */
-  def PlayAgain: Unit ={
-    game.setScreen(new GameScreen(game, width, height))
-  }
+//  /**
+//    * Muda a tela para a tela de jogo
+//    */
+//  def PlayAgain: Unit ={
+//    game.setScreen(new GameScreen(game))
+////    dispose()
+//  }
 
   /**
     * Renderiza constantemente. A mesma coisa que a update

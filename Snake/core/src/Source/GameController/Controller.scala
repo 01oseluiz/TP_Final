@@ -101,7 +101,7 @@ object Controller {
 
   def playAgain(): Unit ={
     startGetMove()
-    GAME_VIEW.PlayAgain
+    GAME_OVER.PlayAgain
   }
 
   def startGame(): Unit ={
