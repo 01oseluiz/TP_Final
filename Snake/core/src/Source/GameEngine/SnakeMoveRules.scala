@@ -9,7 +9,7 @@ trait SnakeMoveRules {
     * @param player
     * @param key
     */
-  def MovementSnake(player: Player, key:Int): Unit = {
+  def MovementSnake(player: Sprite, key:Int): Unit = {
     val space: Int = player.mySize
     val position_AUX:Position = new Position(player.myPositions.head.P_x,player.myPositions.head.P_y, player.mySize)
 
@@ -53,7 +53,7 @@ trait SnakeMoveRules {
     * @param player
     * @param oldHeadPosition
     */
-  def MovementSnakeBody(player: Player, oldHeadPosition:Position): Unit ={
+  def MovementSnakeBody(player: Sprite, oldHeadPosition:Position): Unit ={
     for(i<- player.myPositions.size-1 until 1 by -1){
       player.myPositions(i).P_y = player.myPositions(i-1).P_y
       player.myPositions(i).P_x = player.myPositions(i-1).P_x

@@ -8,7 +8,7 @@ trait DeathRules {
     * @param player2
     * @return
     */
-  def snakeCollisions(player1: Player, player2: Player): Boolean = {
+  def snakeCollisions(player1: Sprite, player2: Sprite): Boolean = {
     var isCrashed:Boolean = false
 
     player2.myPositions.foreach{x =>
@@ -33,7 +33,7 @@ trait DeathRules {
     * @param wall
     * @return
     */
-  def wallCollisions(player: Player, wall:KillerThings): Boolean ={
+  def wallCollisions(player: Sprite, wall:Sprite): Boolean ={
     var isCrashed:Boolean = false
     wall.myPositions.foreach{x=>
       if(x.positionIsEqual(player.myPositions.head)){

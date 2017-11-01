@@ -14,7 +14,7 @@ trait BeanMoveRules {
     * @param bean
     * @param isEmpty (função que verifica se o espaço escolhido esta vazio)
     */
-  def BeanPosition(player: Player, bean: Bean, key:Int, isEmpty: (Position, Int)=>Boolean): Unit = {
+  def BeanPosition(player: Sprite, bean: Sprite, key:Int, isEmpty: (Position, Int)=>Boolean): Unit = {
     val width: Int = Gdx.graphics.getWidth
     val height: Int = Gdx.graphics.getHeight
     val x = new scala.util.Random

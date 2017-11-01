@@ -9,7 +9,7 @@ class SnakeMoveRulesHard extends SnakeMoveRules{
     * @param player
     * @param key
     */
-  override def MovementSnake(player: Player, key: Int): Unit = {
+  override def MovementSnake(player: Sprite, key: Int): Unit = {
     val space: Int = 10
     val position_AUX: Position = new Position(player.myPositions.head.P_x, player.myPositions.head.P_y, player.mySize)
 
