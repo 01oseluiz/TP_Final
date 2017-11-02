@@ -18,7 +18,8 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
     */
   def PlayAgain: Unit ={
     game.setScreen(new GameScreen(game))
-    dispose()
+    //TODO - RESOLVER ESSE BUG DE NAO PODER DAR 2 PLAY AGAIN
+    //dispose()
     }
 
   def show(): Unit = {
@@ -49,7 +50,7 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
   def hide(): Unit = {}
 
   def dispose(): Unit = {
-//    game.batch.dispose()
+    game.batch.dispose()
     game.gameOverHud.stage.dispose()
     game.gameOverHud.font.dispose()
   }

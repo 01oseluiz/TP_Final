@@ -1,6 +1,7 @@
 package Source.GameView
 
 
+import Source.GameController.Controller
 import com.badlogic.gdx.{Game, Gdx}
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 
@@ -25,6 +26,7 @@ class ScreenDefault extends Game {
     gameTitle = new GameMenuHud
 
     //Mudanca de tela
+    Controller.setGameDefault(this)
     setScreen(new GameMenuScreen(this))
     dispose()
   }

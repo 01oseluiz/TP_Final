@@ -20,17 +20,9 @@ class GameOverHud (var width: Int, var height: Int){
 
   //Variaveis para mostras estatisticas
   var i: Int = 0
-//  var time = tempo a ser recebido da controller
-//  var timeLabel = new Label("Time" + time,  new Label.LabelStyle(new BitmapFont(), Color.WHITE))
- var totalPlayers:Int = 2 //numero total de players a serem
+  var time : Double =_  //tempo a ser recebido da controller
+  var totalPlayers:Int = 2 //numero total de players a serem
   val playerLabel = new Array[Label](totalPlayers)
-
-  //  var winnerName = nome do vencedor recebido da controller
-  //  var winnerRan = quantidade de pixeis percorridos recebido da controller
-  //  var winnerEaten = quantidade de beans comidas recebida da controller
-  //  var playerWinner = numero do player recebido da controller
-  //  var playerWinnerLabel = new Label("Player " + playerWinner + ": " + winnerName + ". Beans eated: " + winnerEaten + ". Ran: " + winnerRan, new Label.LabelStyle(new BitmapFont(), Color.GOLD))
-
 
 //  var name = nome recebido da controller
 //  var ran = quantidade de pixeis percorridos recebido da controller
@@ -46,8 +38,9 @@ class GameOverHud (var width: Int, var height: Int){
     * @param player numero do player recebido da controller
     * @param winner venceu ou nao
     */
-  def playerStatisticsShow (name: String, ran: Int, eaten: Int, player: Int, winner: Boolean): Unit = {
-    val PlayerLabel = new Array[Label](2)
+  def playerStatisticsShow (name: String, ran: Int, eaten: Int, player: Int, winner: Boolean, playerTime: Double): Unit = {
+    val PlayerLabel = new Array[Label](totalPlayers)
+    this.time = playerTime
 
     if (winner) {
       PlayerLabel(player-1) = new Label( name + "\nPlayer " + player + "\nBeans eated: " + eaten + "\nRan: " + ran, new Label.LabelStyle(new BitmapFont(), Color.GOLD))
@@ -59,9 +52,11 @@ class GameOverHud (var width: Int, var height: Int){
     }
   }
 
-  playerStatisticsShow("Jose", 20, 4, 1, true)
-  playerStatisticsShow("Pedro", 30, 5, 2, false)
+  playerStatisticsShow("Pedro", 20, 3, 2, false, 0.005)
+  playerStatisticsShow("Joao", 30, 5, 1, true, 0.005)
 
+  //TODO - Deveria chamar a funcao da controller
+  //  Controller.getStatistics()
 
   //Variaveis para os botoes
   private var atlas: TextureAtlas =_

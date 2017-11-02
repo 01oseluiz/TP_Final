@@ -9,10 +9,12 @@ object Controller {
   var GAME_VIEW:GameScreen = _
   var GAME_OVER:GameOverScreen = _
   var GAME_MENU:GameMenuScreen=_
+  var GAME_DEFAULT:ScreenDefault=_
 
   def setGameView(x:GameScreen): Unit = GAME_VIEW = x
   def setGameOver(x:GameOverScreen): Unit = GAME_OVER = x
   def setGameMenu(x:GameMenuScreen): Unit = GAME_MENU = x
+  def setGameDefault(x:ScreenDefault): Unit = GAME_DEFAULT = x
   def getGameEngine:GameEngine = GAME_ENGINE
   def getEngine:Engine = ENGINE
 
@@ -72,15 +74,21 @@ object Controller {
     var eatenBeans = GAME_ENGINE.player1.getEatenBeans
     var pixelRan = GAME_ENGINE.player1.getPixelRan
     var time = GAME_ENGINE.player1.getTime
+    var winner = true
 
-    //CHAMAR FUNÇÃO DA GAMEOVER
+    //CHAMAR FUNÇÃO DA GAMEOVERHUD
+    //Mudar para pegar o vencedor
+    GAME_DEFAULT.gameOverHud.playerStatisticsShow(name, pixelRan, eatenBeans, player, winner, time)
 
     name = GAME_ENGINE.player2.myName
     player = 2
     eatenBeans = GAME_ENGINE.player2.getEatenBeans
     pixelRan = GAME_ENGINE.player2.getPixelRan
     time = GAME_ENGINE.player2.getTime
+    winner = false
 
-    //CHAMAR FUNÇÃO DA GAMEOVER
+    //CHAMAR FUNÇÃO DA GAMEOVERHUD
+    //Mudar para pegar o vencedor real
+    GAME_DEFAULT.gameOverHud.playerStatisticsShow(name, pixelRan, eatenBeans, player, winner, time)
   }
 }
