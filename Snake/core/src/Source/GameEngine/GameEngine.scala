@@ -1,12 +1,5 @@
 package Source.GameEngine
 
-//TODO-retirar mods feitos
-/*
-- Modo psicodelico
-- Varias Beans
-- Beans com açoes diferentes
- */
-
 import com.badlogic.gdx.{Gdx, Input}
 import com.badlogic.gdx.graphics.Color
 
@@ -21,12 +14,14 @@ class GameEngine extends BeanMoveRules with DeathRules {
   var player2 = new Sprite(100, height - 40)
   var bean = new Sprite(width / 2, height / 2)
 
+  //Setando nome dos players
+  player1.myName = "PLAYER-1"
+  player2.myName = "PLAYER-2"
+
   //Criaçao das cobras iniciais
   for (i <- 1 until SIZE_INITIAL) {
     player1.addPosition(100 - i * player1.mySize, 40)
     player2.addPosition(100 - i * player2.mySize, height - 40)
-    //Criação de varios beans
-    bean.addPosition(width/2 + i*12, height/2)
   }
 
   //Adiciona cores aos jogadores
@@ -54,42 +49,10 @@ class GameEngine extends BeanMoveRules with DeathRules {
   bean.setAsBean()
   wall.setAsKillerThing()
 
-  //-----------------------------PSICODELIC MODE-------------------------------
-  var psicodelicThread = new Thread(){
-    override def run(): Unit = {
-      var cColor =0
-      while(true) {
-        cColor+=1
-
-        if(cColor==1){
-          wall.myColor = new Color(1,0,0,1)
-          player1.myColor = new Color(0,0,1,1)
-          player2.myColor = new Color(0,0,1,1)
-        }
-        else if(cColor==2){
-          wall.myColor = new Color(0,1,0,1)
-          player1.myColor = new Color(0,1,0,1)
-          player2.myColor = new Color(0,1,0,1)
-        }
-        else if(cColor==3){
-          wall.myColor = new Color(0,0,1,1)
-          player1.myColor = new Color(1,0,0,1)
-          player2.myColor = new Color(1,0,0,1)
-          cColor=0
-        }
-        Thread.sleep(50)
-      }
-    }
-  }
-  psicodelicThread.start()
-//----------------------------------------------------------------------------
-
   /**
     * função para se finalizar algo da engine ou suas superclasses, se necessário
     */
   def FinishGame(): Unit ={
-    //TODO-se for manter o MOD psicodelico alterar o stop para outra coisa
-    psicodelicThread.stop()
     Thread.sleep(1500)
   }
 }

@@ -4,7 +4,7 @@ import Source.GameEngine._
 import Source.GameView._
 
 object Controller {
-  private var ENGINE:Engine = new Engine
+  private val ENGINE:Engine = new Engine
   private var GAME_ENGINE:GameEngine = _
   var GAME_VIEW:GameScreen = _
   var GAME_OVER:GameOverScreen = _
@@ -74,7 +74,7 @@ object Controller {
     var eatenBeans = GAME_ENGINE.player1.getEatenBeans
     var pixelRan = GAME_ENGINE.player1.getPixelRan
     var time = GAME_ENGINE.player1.getTime
-    var winner = true
+    var winner = GAME_ENGINE.player1.isAlive
 
     //CHAMAR FUNÇÃO DA GAMEOVERHUD
     //Mudar para pegar o vencedor
@@ -85,7 +85,7 @@ object Controller {
     eatenBeans = GAME_ENGINE.player2.getEatenBeans
     pixelRan = GAME_ENGINE.player2.getPixelRan
     time = GAME_ENGINE.player2.getTime
-    winner = false
+    winner = GAME_ENGINE.player2.isAlive
 
     //CHAMAR FUNÇÃO DA GAMEOVERHUD
     //Mudar para pegar o vencedor real

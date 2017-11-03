@@ -21,8 +21,7 @@ class GameOverHud (var width: Int, var height: Int){
   //Variaveis para mostras estatisticas
   var i: Int = 0
   var time : Double =_  //tempo a ser recebido da controller
-  var totalPlayers:Int = 2 //numero total de players a serem
-  val playerLabel = new Array[Label](totalPlayers)
+  var totalPlayers:Int = 2 //numero total de players a serem exibidos
 
 //  var name = nome recebido da controller
 //  var ran = quantidade de pixeis percorridos recebido da controller
@@ -39,24 +38,19 @@ class GameOverHud (var width: Int, var height: Int){
     * @param winner venceu ou nao
     */
   def playerStatisticsShow (name: String, ran: Int, eaten: Int, player: Int, winner: Boolean, playerTime: Double): Unit = {
-    val PlayerLabel = new Array[Label](totalPlayers)
+    var playerLabel:Label = null
     this.time = playerTime
 
     if (winner) {
-      PlayerLabel(player-1) = new Label( name + "\nPlayer " + player + "\nBeans eated: " + eaten + "\nRan: " + ran, new Label.LabelStyle(new BitmapFont(), Color.GOLD))
-      this.playerLabel(player-1) =  PlayerLabel(player-1)
+      playerLabel = new Label( name + "\nPlayer " + player + "\nBeans eated: " + eaten + "\nRan: " + ran, new Label.LabelStyle(new BitmapFont(), Color.GOLD))
     }
     else {
-      PlayerLabel(player-1) = new Label( name + "\nPlayer " + player + "\nBeans eated: " + eaten + "\nRan: " + ran, new Label.LabelStyle(new BitmapFont(), Color.GREEN))
-      this.playerLabel(player-1) =  PlayerLabel(player-1)
+      playerLabel = new Label( name + "\nPlayer " + player + "\nBeans eated: " + eaten + "\nRan: " + ran, new Label.LabelStyle(new BitmapFont(), Color.GREEN))
     }
+
+    playerLabel.setPosition(width/6 + (player-1)*width/totalPlayers, height/2 )
+    stage.addActor(playerLabel)
   }
-
-  playerStatisticsShow("Pedro", 20, 3, 2, false, 0.005)
-  playerStatisticsShow("Joao", 30, 5, 1, true, 0.005)
-
-  //TODO - Deveria chamar a funcao da controller
-  //  Controller.getStatistics()
 
   //Variaveis para os botoes
   private var atlas: TextureAtlas =_
@@ -92,6 +86,20 @@ class GameOverHud (var width: Int, var height: Int){
     override def clicked(event: InputEvent, x: Float, y: Float): Unit = Controller.playAgain()
   })
 
+  def setGameOverScreenHud(): Unit ={
+    this.stage.clear()
+
+    Controller.getStatistics()
+
+    gameOverLabel.setPosition(width/2 - gameOverLabel.getWidth/2, height - gameOverLabel.getHeight)
+    stage.addActor(gameOverLabel)
+
+    PlayButton.setPosition(PlayButton.getWidth/4, height/10)
+    stage.addActor(PlayButton)
+    ButtonExit.setPosition(width - ButtonExit.getWidth*5/4, height/10)
+    stage.addActor(ButtonExit)
+  }
+
   //Posicionando a HUD e os botoes
 
   //USANDO TABLE
@@ -121,17 +129,4 @@ class GameOverHud (var width: Int, var height: Int){
 //  stage.addActor(table)
 
   //SEM USAR TABLE
-  gameOverLabel.setPosition(width/2 - gameOverLabel.getWidth/2, height - gameOverLabel.getHeight)
-  stage.addActor(gameOverLabel)
-
-  while(i<totalPlayers){
-    playerLabel(i).setPosition(width/6 + i*width/totalPlayers, height/2 )
-    stage.addActor(playerLabel(i))
-    i+= 1
-  }
-
-  PlayButton.setPosition(PlayButton.getWidth/4, height/10)
-  stage.addActor(PlayButton)
-  ButtonExit.setPosition(width - ButtonExit.getWidth*5/4, height/10)
-  stage.addActor(ButtonExit)
 }

@@ -5,13 +5,12 @@ import Source.GameController.Controller
 import scala.collection.mutable.ListBuffer
 
 class Engine extends ObjectsVisible{
-  //TODO-criar funções setAsBean AsWall, AsSnake, AsKiller ....
   var GAME_ENGINE:GameEngine = _
 
   var PLAYERS :ListBuffer[Sprite] = ListBuffer.empty
   var BEANS :ListBuffer[Sprite] = ListBuffer.empty
   var KILLER_THINGS :ListBuffer[Sprite] = ListBuffer.empty
-  
+
   def addPlayer(player:Sprite):Unit = PLAYERS += player
   def addBean(bean:Sprite):Unit = BEANS += bean
   def addKilerThing(killerthing:Sprite):Unit = KILLER_THINGS += killerthing
