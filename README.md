@@ -1,4 +1,4 @@
-# Técnicas de Programação - Trabalho Final
+x# Técnicas de Programação - Trabalho Final
 Snake Multiplayer
 
 ## Objetivo
@@ -15,14 +15,14 @@ Danilo	|	Controler
 ********************************************************
 ## Primeira versão
 #### Game View (LibGDX)
-- [ ] Menu inicial
-- [ ] Verificação mult-thread de entradas
-- [ ] Tela de game-over
+- [x] Menu inicial
+- [x] Verificação mult-thread de entradas
+- [x] Tela de game-over
 - [x] Entrada multi-teclado
 - [x] Mapa do jogo
 
 #### Game Engine
-- [ ] Dados Statisticos ao fim de jogo
+- [x] Dados Statisticos ao fim de jogo
 - [x] Movimentação
 - [x] Comida
 - [x] Dois players
