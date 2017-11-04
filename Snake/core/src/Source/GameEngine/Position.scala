@@ -22,5 +22,4 @@ class Position(x:Int, y:Int, sizeP:Int) {
     list_x_this.toSet.intersect(list_x_p.toSet).nonEmpty &&
     list_y_this.toSet.intersect(list_y_p.toSet).nonEmpty
   }
-
 }
