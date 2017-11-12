@@ -8,23 +8,19 @@ trait DeathRules {
     * @param player2
     * @return
     */
-  def snakeCollisions(player1: Sprite, player2: Sprite): Boolean = {
-    var isCrashed:Boolean = false
+  def snakeCollisions(player1: Sprite, player2: Sprite): Unit = {
 
     player2.myPositions.foreach{x =>
       if(x.positionIsEqual(player1.myPositions.head)){
-        isCrashed = true
         player1.kill()
       }
     }
 
     player1.myPositions.foreach{x=>
       if(x != player1.myPositions.head && x.positionIsEqual(player1.myPositions.head)) {
-        isCrashed = true
         player1.kill()
       }
     }
-    isCrashed
   }
 
   /**
@@ -33,14 +29,11 @@ trait DeathRules {
     * @param wall
     * @return
     */
-  def wallCollisions(player: Sprite, wall:Sprite): Boolean ={
-    var isCrashed:Boolean = false
+  def wallCollisions(player: Sprite, wall:Sprite): Unit ={
     wall.myPositions.foreach{x=>
       if(x.positionIsEqual(player.myPositions.head)){
-        isCrashed = true
         player.kill
       }
     }
-    isCrashed
   }
 }

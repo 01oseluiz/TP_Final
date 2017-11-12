@@ -3,6 +3,7 @@ package Source.GameController
 import Source.GameEngine._
 import Source.GameView._
 
+
 object Controller {
   private val ENGINE:Engine = new Engine
   private var GAME_ENGINE:GameEngine = _
@@ -31,6 +32,9 @@ object Controller {
     */
   def nextInteraction(): Unit ={
     //Entrada de teclado sendo verificada em paralelo pela classe InputMove
+
+    //Calcula a movimentação de objetos dinamicos
+    GAME_ENGINE.dynamicsRender()
 
     //Desenha por completo todos os objetos (player1, player2, wall, bean)
     ENGINE.objects.foreach{objs=>

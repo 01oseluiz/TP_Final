@@ -34,13 +34,20 @@ class InputMove(private val player: Sprite, snakeMoveRules: SnakeMoveRules) exte
 
       if ((Calendar.getInstance().getTimeInMillis - timeNowMove) >= delay) {
         //Movimenta a cobra
-        ENGINE.MovementSnake(player, key, snakeMoveRules)
+        ENGINE.movementSnake(player, key, snakeMoveRules)
 
         //Solicita a verificação de colisão bean X players
-        ENGINE.MovementBean(player, key)
+        ENGINE.movementBean(player, key)
 
         //Solicita a verificação de final de jogo
-        ENGINE.IsEndGame(player, key)
+        ENGINE.isEndGame(player, key)
+
+        //Solicita a verificação de colisão com objetos bonus
+        ENGINE.movementBonusObjects(player, key)
+
+        //Solicita a verificação de atualização de objetos dinamicos
+        ENGINE.dynamicsUpdate(player, key)
+
 
         key = Input.Keys.ANY_KEY
         timeNowMove = Calendar.getInstance().getTimeInMillis

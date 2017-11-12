@@ -10,10 +10,15 @@ class Engine extends ObjectsVisible{
   var PLAYERS :ListBuffer[Sprite] = ListBuffer.empty
   var BEANS :ListBuffer[Sprite] = ListBuffer.empty
   var KILLER_THINGS :ListBuffer[Sprite] = ListBuffer.empty
+  var DYNAMIC_THINGS :ListBuffer[Sprite] = ListBuffer.empty
+  var BONUS_OBJECT :ListBuffer[Sprite] = ListBuffer.empty
 
+  // Adiciona um sprite a lista de objetos
   def addPlayer(player:Sprite):Unit = PLAYERS += player
   def addBean(bean:Sprite):Unit = BEANS += bean
-  def addKilerThing(killerthing:Sprite):Unit = KILLER_THINGS += killerthing
+  def addKillerThing(killerthing:Sprite):Unit = KILLER_THINGS += killerthing
+  def addDynamicThing(dynamic:Sprite):Unit = DYNAMIC_THINGS += dynamic
+  def addBonus(bonus:Sprite):Unit = BONUS_OBJECT += bonus
 
   /**
     * Retornar uma nova instancia da GameEngine para novo jogo
@@ -38,18 +43,24 @@ class Engine extends ObjectsVisible{
   
   /**
     * Movimenta a cobra segundo a entrada e regra escolhida para movimentação
-    * @param player
+    * @param current_Player
     * @param key
     * @param snakeMoveRules
     */
-  def MovementSnake(player:Sprite, key: Int, snakeMoveRules: SnakeMoveRules): Unit = snakeMoveRules.MovementSnake(player,key)
+  def movementSnake(current_Player:Sprite, key: Int, snakeMoveRules: SnakeMoveRules): Unit = {
+    snakeMoveRules.MovementSnake(current_Player,key)
+  }
 
-  /**
-    * Verifica se o player pegou a comida
-    * e gera uma nova em algum lugar vazio
-    */
-  def MovementBean(player: Sprite, key:Int): Unit = {
-    GAME_ENGINE.BeanPosition(player, GAME_ENGINE.bean, key, (x,y)=>this.isEmptyPosition(x,y))
+  def movementBean(current_Player: Sprite, key:Int): Unit = {
+    GAME_ENGINE.BeanPosition(current_Player, BEANS, key, (x,y)=>this.isEmptyPosition(x,y))
+  }
+
+  def movementBonusObjects(current_Player: Sprite, key:Int): Unit = {
+    GAME_ENGINE.movementBonusObjects(current_Player, key, BONUS_OBJECT, (x,y)=>this.isEmptyPosition(x,y))
+  }
+
+  def dynamicsUpdate(current_Player: Sprite, key:Int):Unit = {
+    GAME_ENGINE.dynamicsUpdate(current_Player, key, objects, DYNAMIC_THINGS, (x,y)=>this.isEmptyPosition(x,y))
   }
   
   /**
@@ -57,7 +68,7 @@ class Engine extends ObjectsVisible{
     * @param player player atual
     * @param key tecla pressionada
     */
-  def IsEndGame(player: Sprite, key:Int): Unit ={
+  def isEndGame(player: Sprite, key:Int): Unit ={
     //TODO-fazer classe EndGameRules para verificar se é fim de jogo
     if(player == PLAYERS(0)){
       GAME_ENGINE.snakeCollisions(PLAYERS(0), PLAYERS(1))

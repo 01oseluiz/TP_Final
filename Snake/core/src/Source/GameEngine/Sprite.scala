@@ -7,9 +7,9 @@ import com.badlogic.gdx.graphics.Color
 
 import scala.collection.mutable.ListBuffer
 
-class Sprite (x: Int, y: Int) extends Statistics{
+class Sprite (x: Int, y: Int, name:String = "") extends Statistics{
   private val ENGINE = Controller.getEngine
-  var myName:String = ""
+  var myName:String = name
   var myColor:Color = _
   var myLifes:Int = 1
   var Keys:List[Int] = List.empty
@@ -27,7 +27,9 @@ class Sprite (x: Int, y: Int) extends Statistics{
   //seta o tipo do sprite
   def setAsPlayer():Unit = ENGINE.addPlayer(this)
   def setAsBean():Unit = ENGINE.addBean(this)
-  def setAsKillerThing():Unit = ENGINE.addKilerThing(this)
+  def setAsKillerThing():Unit = ENGINE.addKillerThing(this)
+  def setAsDynamic():Unit = ENGINE.addDynamicThing(this)
+  def setAsBonus():Unit = ENGINE.addBonus(this)
 
   def setSizeObject(size:Int): Unit ={
     myPositions.foreach(x=> x.size = size)

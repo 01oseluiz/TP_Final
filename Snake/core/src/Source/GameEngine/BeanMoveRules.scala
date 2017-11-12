@@ -5,21 +5,22 @@ import java.util.Calendar
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 
-trait BeanMoveRules {
-  var time = Calendar.getInstance().getTimeInMillis
+import scala.collection.mutable.ListBuffer
 
+trait BeanMoveRules {
   /**
     * Verifica se o player pegou a comida e gera uma nova em uma posição vazia
     *
     * @param player
-    * @param bean
+    * @param listBeans
     * @param isEmpty (função que verifica se o espaço escolhido esta vazio)
     */
-  def BeanPosition(player: Sprite, bean: Sprite, key: Int, isEmpty: (Position, Int) => Boolean): Unit = {
+  def BeanPosition(player: Sprite, listBeans: ListBuffer[Sprite], key: Int, isEmpty: (Position, Int) => Boolean): Unit = {
     val width: Int = Gdx.graphics.getWidth
     val height: Int = Gdx.graphics.getHeight
     val x = new scala.util.Random
     val y = new scala.util.Random
+    val bean = listBeans.head
 
     if (bean.myPositions.head.positionIsEqual(player.myPositions.head)) {
       do {
