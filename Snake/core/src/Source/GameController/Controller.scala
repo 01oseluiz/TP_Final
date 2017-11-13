@@ -3,6 +3,33 @@ package Source.GameController
 import Source.GameEngine._
 import Source.GameView._
 
+/*
+TODO - em geral
+Problema de processamento:
+  *Com a Empty:
+    -Menu: 3% - 6MB
+    -Game: 60%: 70% - 380MB
+    -End:  2% - 380MB
+  *Sem a Empty:
+    -Menu: 3% - 6MB
+    -Game: 60%: 70% - 380MB
+    -End:  2% - 380MB
+
+Problema de memoria:
+  *Programa sem Engines e inputs: 52MB
+  *Com Engine: 55MB
+  *Com Engine + GameEngine (direto): 66MB
+  *Com Engine + GameEngine (pela Engine): 64MB
+  *Com Engine + GameEngine (pela Engine) + inputs (sem start): 64MB
+  *Com Engine + GameEngine (pela Engine) + inputs (com 1 start): 350MB - 30%CPU
+  *Com Engine + GameEngine (pela Engine) + inputs (com 2 start): 355MB - 50%CPU
+  *Com Engine + GameEngine (pela Engine) + 2 inputs (sem funções no while): 65MB - 50%CPU
+  *
+  * OBS:Apos analise foi identificado que a função Calendar.getInstance().getTimeInMillis  aloca algo com 300MB
+  *
+  * OBS2: com isKeyJustPressed: 355MB - 50%:60% CPU
+  *       com isKeyPressed: 115Mb - 40% CPU
+ */
 
 object Controller {
   private val ENGINE:Engine = new Engine
@@ -68,6 +95,8 @@ object Controller {
   }
 
   def stopGetMove(): Unit ={
+    Thread.sleep(80) // Garante que as Threads teram terminado de fazer as verificações
+                     // Possibilitando computar um possível empate
     movePlayer1.close()
     movePlayer2.close()
   }

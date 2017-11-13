@@ -13,7 +13,7 @@ class GetInputs {
     var continue:Boolean = true
 
     Keys.takeWhile(_=> continue).foreach{x=>
-      if(Gdx.input.isKeyJustPressed(x)){
+      if(Gdx.input.isKeyPressed(x)){
         pressedKey=x
         continue = false
       }

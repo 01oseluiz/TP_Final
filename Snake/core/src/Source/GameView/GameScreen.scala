@@ -83,5 +83,6 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
     */
   def dispose(): Unit = {
     game.batch.dispose()
+    shapeRenderer.dispose()
   }
 }

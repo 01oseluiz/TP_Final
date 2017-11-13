@@ -81,6 +81,5 @@ class GameEngine extends BeanMoveRules with DeathRules with DynamicMoveRules wit
     * função para se finalizar algo da engine ou suas patern classes, se necessário
     */
   def FinishGame(): Unit ={
-    Thread.sleep(1500)
   }
 }

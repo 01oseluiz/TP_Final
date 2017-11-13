@@ -16,9 +16,16 @@ class Engine extends ObjectsVisible{
   // Adiciona um sprite a lista de objetos
   def addPlayer(player:Sprite):Unit = PLAYERS += player
   def addBean(bean:Sprite):Unit = BEANS += bean
-  def addKillerThing(killerthing:Sprite):Unit = KILLER_THINGS += killerthing
+  def addKillerThing(killerThing:Sprite):Unit = KILLER_THINGS += killerThing
   def addDynamicThing(dynamic:Sprite):Unit = DYNAMIC_THINGS += dynamic
   def addBonus(bonus:Sprite):Unit = BONUS_OBJECT += bonus
+
+  // Retira um sprite da lista de objetos
+  def remPlayer(player:Sprite):Unit = PLAYERS -= player
+  def remBean(bean:Sprite):Unit = BEANS -= bean
+  def remKillerThing(killerThing:Sprite):Unit = KILLER_THINGS -= killerThing
+  def remDynamicThing(dynamic:Sprite):Unit = DYNAMIC_THINGS -= dynamic
+  def remBonus(bonus:Sprite):Unit = BONUS_OBJECT -= bonus
 
   /**
     * Retornar uma nova instancia da GameEngine para novo jogo
@@ -38,7 +45,9 @@ class Engine extends ObjectsVisible{
     objects.clear()
     PLAYERS.clear()
     BEANS.clear()
+    BONUS_OBJECT.clear()
     KILLER_THINGS.clear()
+    DYNAMIC_THINGS.clear()
   }
   
   /**
@@ -68,14 +77,13 @@ class Engine extends ObjectsVisible{
     * @param player player atual
     * @param key tecla pressionada
     */
-  def isEndGame(player: Sprite, key:Int): Unit ={
-    //TODO-fazer classe EndGameRules para verificar se é fim de jogo
+  def isEndGame(player: Sprite, key:Int):Unit ={
     if(player == PLAYERS(0)){
       GAME_ENGINE.snakeCollisions(PLAYERS(0), PLAYERS(1))
-      GAME_ENGINE.wallCollisions(PLAYERS(0), GAME_ENGINE.wall)
+      GAME_ENGINE.killerThingsCollisions(PLAYERS(0), KILLER_THINGS)
     }else if(player == PLAYERS(1)){
       GAME_ENGINE.snakeCollisions(PLAYERS(1), PLAYERS(0))
-      GAME_ENGINE.wallCollisions(PLAYERS(1), GAME_ENGINE.wall)
+      GAME_ENGINE.killerThingsCollisions(PLAYERS(1), KILLER_THINGS)
     }
 
     if(!PLAYERS(0).isAlive && !PLAYERS(1).isAlive){
@@ -88,6 +96,5 @@ class Engine extends ObjectsVisible{
       Controller.gameOver()
       GAME_ENGINE.FinishGame()
     }
-
   }
 }

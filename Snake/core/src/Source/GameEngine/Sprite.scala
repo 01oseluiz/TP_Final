@@ -24,12 +24,22 @@ class Sprite (x: Int, y: Int, name:String = "") extends Statistics{
   //Seta como objeto visivel por default
   Controller.getEngine.setAsVisible(this)
 
+  //Imposibilida sua visão na screen
+  def setAsInvisible():Unit = Controller.getEngine.setAsInvisible(this)
+
   //seta o tipo do sprite
   def setAsPlayer():Unit = ENGINE.addPlayer(this)
   def setAsBean():Unit = ENGINE.addBean(this)
   def setAsKillerThing():Unit = ENGINE.addKillerThing(this)
   def setAsDynamic():Unit = ENGINE.addDynamicThing(this)
   def setAsBonus():Unit = ENGINE.addBonus(this)
+
+  //remove as definições de tipo setadas
+  def remAsPlayer():Unit = ENGINE.remPlayer(this)
+  def remAsBean():Unit = ENGINE.remBean(this)
+  def remAsKillerThing():Unit = ENGINE.remKillerThing(this)
+  def remAsDynamic():Unit = ENGINE.remDynamicThing(this)
+  def remAsBonus():Unit = ENGINE.remBonus(this)
 
   def setSizeObject(size:Int): Unit ={
     myPositions.foreach(x=> x.size = size)

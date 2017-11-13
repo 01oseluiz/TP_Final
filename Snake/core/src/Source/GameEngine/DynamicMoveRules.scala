@@ -18,8 +18,8 @@ trait DynamicMoveRules {
     //Verifica se passou pela ponta do teleporte_1
     G_Engine.teleportHead_1.myPositions.takeWhile { x =>
       if (x.positionIsEqual(current_Player.myPositions.head)) {
-        current_Player.myPositions.head.P_x = G_Engine.width - x.P_x - 10
-        current_Player.myPositions.head.P_y = G_Engine.height - x.P_y - 10
+        current_Player.myPositions.head.P_x = G_Engine.width - x.P_x - 11
+        current_Player.myPositions.head.P_y = G_Engine.height - x.P_y - 11
         teleported = true
       }
       !x.positionIsEqual(current_Player.myPositions.head)
@@ -29,8 +29,8 @@ trait DynamicMoveRules {
     if (!teleported)
       G_Engine.teleportTail_1.myPositions.takeWhile { x =>
         if (x.positionIsEqual(current_Player.myPositions.head)) {
-          current_Player.myPositions.head.P_x = -(10 + x.P_x - G_Engine.width)
-          current_Player.myPositions.head.P_y = -(10 + x.P_y - G_Engine.height)
+          current_Player.myPositions.head.P_x = -(9 + x.P_x - G_Engine.width)
+          current_Player.myPositions.head.P_y = -(9 + x.P_y - G_Engine.height)
           teleported = true
         }
 
@@ -41,8 +41,8 @@ trait DynamicMoveRules {
     if (!teleported)
       G_Engine.teleportHead_2.myPositions.takeWhile { x =>
         if (x.positionIsEqual(current_Player.myPositions.head)) {
-          current_Player.myPositions.head.P_x = -(10 + x.P_x - G_Engine.width)
-          current_Player.myPositions.head.P_y = G_Engine.height - x.P_y - 10
+          current_Player.myPositions.head.P_x = -(11 + x.P_x - G_Engine.width)
+          current_Player.myPositions.head.P_y = G_Engine.height - x.P_y - 9
           teleported = true
         }
         !x.positionIsEqual(current_Player.myPositions.head)
@@ -52,8 +52,8 @@ trait DynamicMoveRules {
     if (!teleported)
       G_Engine.teleportTail_2.myPositions.takeWhile { x =>
         if (x.positionIsEqual(current_Player.myPositions.head)) {
-          current_Player.myPositions.head.P_x = G_Engine.width - x.P_x - 10
-          current_Player.myPositions.head.P_y = -(10 + x.P_y - G_Engine.height)
+          current_Player.myPositions.head.P_x = G_Engine.width - x.P_x - 9
+          current_Player.myPositions.head.P_y = -(11 + x.P_y - G_Engine.height)
         }
 
         !x.positionIsEqual(current_Player.myPositions.head)

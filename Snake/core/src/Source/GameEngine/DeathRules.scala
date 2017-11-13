@@ -1,5 +1,7 @@
 package Source.GameEngine
 
+import scala.collection.mutable.ListBuffer
+
 trait DeathRules {
 
   /**
@@ -26,10 +28,11 @@ trait DeathRules {
   /**
     * Verifica se o player colidiu com a parede
     * @param player
-    * @param wall
+    * @param listKillerThings
     * @return
     */
-  def wallCollisions(player: Sprite, wall:Sprite): Unit ={
+  def killerThingsCollisions(player: Sprite, listKillerThings:ListBuffer[Sprite]): Unit ={
+    val wall = listKillerThings.head
     wall.myPositions.foreach{x=>
       if(x.positionIsEqual(player.myPositions.head)){
         player.kill

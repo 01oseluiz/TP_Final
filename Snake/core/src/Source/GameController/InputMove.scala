@@ -1,7 +1,5 @@
 package Source.GameController
 
-import java.util.Calendar
-
 import Source.GameEngine.{SnakeMoveRules, Sprite}
 import Source.GameView.GetInputs
 import com.badlogic.gdx.Input
@@ -21,8 +19,8 @@ class InputMove(private val player: Sprite, snakeMoveRules: SnakeMoveRules) exte
     var key = Input.Keys.ANY_KEY
     var key_AUX = Input.Keys.ANY_KEY
 
-    timeNowkey = Calendar.getInstance().getTimeInMillis
-    timeNowMove = Calendar.getInstance().getTimeInMillis
+    timeNowkey = System.currentTimeMillis()
+    timeNowMove = System.currentTimeMillis()
 
     while(!STOPED) {
       delay = 110 - player.speed
@@ -32,7 +30,7 @@ class InputMove(private val player: Sprite, snakeMoveRules: SnakeMoveRules) exte
         key = key_AUX
       }
 
-      if ((Calendar.getInstance().getTimeInMillis - timeNowMove) >= delay) {
+      if ((System.currentTimeMillis() - timeNowMove) >= delay) {
         //Movimenta a cobra
         ENGINE.movementSnake(player, key, snakeMoveRules)
 
@@ -50,7 +48,7 @@ class InputMove(private val player: Sprite, snakeMoveRules: SnakeMoveRules) exte
 
 
         key = Input.Keys.ANY_KEY
-        timeNowMove = Calendar.getInstance().getTimeInMillis
+        timeNowMove = System.currentTimeMillis()
       }
     }
   }
