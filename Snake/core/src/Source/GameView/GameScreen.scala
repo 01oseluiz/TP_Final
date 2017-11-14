@@ -57,6 +57,7 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
     * Renderiza constantemente. A mesma coisa que a update
     */
   def render(delta: Float): Unit = {
+    //TODO - FAZER A CONTROLLER ESCOLHER A COR/IMAGEM DE FUNDO
     Gdx.gl.glClearColor(0, 0, 0, 1) //setando a tela com uma cor
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT) //limpando a tela com a cor
 

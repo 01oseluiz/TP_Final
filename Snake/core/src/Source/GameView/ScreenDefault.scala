@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 
 class ScreenDefault extends Game {
 
+  //TODO - CRIAR UM UNICO STAGE PARA SER USADO NAS HUDS E NO PAUSEMENU (talvez  um viewport)
+
   //Variaveis para UI
   var batch: SpriteBatch = _
   var gameOverHud: GameOverHud=_

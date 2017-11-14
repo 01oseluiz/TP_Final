@@ -46,6 +46,15 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
     game.gameOverHud.stage.draw() //Desesenha a HUD
   }
 
+  /**
+    * Muda a tela para a tela de jogo
+    */
+  def BackToMenu: Unit ={
+    //TODO - RESOLVER DISPOSE
+    game.setScreen(new GameMenuScreen(game))
+//    dispose()
+  }
+
   def resize(width: Int, height: Int): Unit = {}
 
   def pause(): Unit = {}

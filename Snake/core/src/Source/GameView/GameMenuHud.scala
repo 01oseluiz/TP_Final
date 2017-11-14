@@ -20,7 +20,7 @@ class GameMenuHud {
 
   //Variaveis para os botoes
   private var atlas: TextureAtlas =_
-  private var skin: Skin =_
+  var skin: Skin =_
   private var textButtonStyle: TextButtonStyle =_
   private var ButtonExit, PlayButton: TextButton =_
 

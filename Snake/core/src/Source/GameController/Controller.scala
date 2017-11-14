@@ -86,6 +86,12 @@ object Controller {
     GAME_VIEW.GameOver
   }
 
+  def backToMenu(): Unit ={
+    //Ver se eh necessario
+    startGetMove()
+    GAME_OVER.BackToMenu
+  }
+
   private def startGetMove(): Unit ={
     GAME_ENGINE = ENGINE.getNewGameEngine
     movePlayer1 = new InputMove(GAME_ENGINE.player1, new SnakeMoveRules{})

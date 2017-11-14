@@ -4,7 +4,7 @@ import Source.GameController.Controller
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.{InputEvent, Stage}
-import com.badlogic.gdx.scenes.scene2d.ui.{Label, Skin, Table, TextButton}
+import com.badlogic.gdx.scenes.scene2d.ui._
 import com.badlogic.gdx.graphics.g2d.{BitmapFont, TextureAtlas}
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
@@ -56,7 +56,7 @@ class GameOverHud (var width: Int, var height: Int){
   private var atlas: TextureAtlas =_
   private var skin: Skin =_
   private var textButtonStyle: TextButtonStyle =_
-  private var ButtonExit, PlayButton: TextButton =_
+  private var ButtonMenu, PlayButton: TextButton =_
 
   //Criando os botoes
   atlas = new TextureAtlas("ui/button2.pack")
@@ -76,9 +76,9 @@ class GameOverHud (var width: Int, var height: Int){
   textButtonStyle.fontColor = Color.BLACK
 
   //Criacao dos botoes em si
-  ButtonExit = new TextButton("EXIT", textButtonStyle)
-  ButtonExit.addListener(new ClickListener(){
-    override def clicked(event: InputEvent, x: Float, y: Float): Unit = Gdx.app.exit()
+  ButtonMenu = new TextButton("BACK TO MENU", textButtonStyle)
+  ButtonMenu.addListener(new ClickListener(){
+    override def clicked(event: InputEvent, x: Float, y: Float): Unit = Controller.backToMenu() /*Gdx.app.exit()*/
   })
 
   PlayButton = new TextButton("PLAY AGAIN", textButtonStyle)
@@ -91,13 +91,18 @@ class GameOverHud (var width: Int, var height: Int){
 
     Controller.getStatistics()
 
+    //POSICIONANDO SEM USAR TABLE
     gameOverLabel.setPosition(width/2 - gameOverLabel.getWidth/2, height - gameOverLabel.getHeight)
     stage.addActor(gameOverLabel)
 
     PlayButton.setPosition(PlayButton.getWidth/4, height/10)
     stage.addActor(PlayButton)
-    ButtonExit.setPosition(width - ButtonExit.getWidth*5/4, height/10)
-    stage.addActor(ButtonExit)
+    ButtonMenu.setPosition(width - ButtonMenu.getWidth*5/4, height/10)
+    stage.addActor(ButtonMenu)
+
+    //TODO - ADICIONAR UM DEFAULT AO WINDOWSTYLE
+//    var PauseMenu = new Window("PAUSE", skin)
+//    stage.addActor(PauseMenu)
   }
 
   //Posicionando a HUD e os botoes
@@ -125,8 +130,6 @@ class GameOverHud (var width: Int, var height: Int){
 ////  table.add().width(table.getWidth/4)
 ////  table.add().width(table.getWidth/4)
 ////  table.row()
-//  table.add(ButtonExit).bottom().right()
+//  table.add(ButtonMenu).bottom().right()
 //  stage.addActor(table)
-
-  //SEM USAR TABLE
 }
