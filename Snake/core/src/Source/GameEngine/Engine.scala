@@ -61,15 +61,15 @@ class Engine extends ObjectsVisible{
   }
 
   def movementBean(current_Player: Sprite, key:Int): Unit = {
-    GAME_ENGINE.BeanPosition(current_Player, BEANS, key, (x,y)=>this.isEmptyPosition(x,y))
+    GAME_ENGINE.BeanPosition(current_Player, BEANS, key, (x)=>this.isEmptyPosition(x))
   }
 
   def movementBonusObjects(current_Player: Sprite, key:Int): Unit = {
-    GAME_ENGINE.movementBonusObjects(current_Player, key, BONUS_OBJECT, (x,y)=>this.isEmptyPosition(x,y))
+    GAME_ENGINE.movementBonusObjects(current_Player, key, BONUS_OBJECT, (x)=>this.isEmptyPosition(x))
   }
 
   def dynamicsUpdate(current_Player: Sprite, key:Int):Unit = {
-    GAME_ENGINE.dynamicsUpdate(current_Player, key, objects, DYNAMIC_THINGS, (x,y)=>this.isEmptyPosition(x,y))
+    GAME_ENGINE.dynamicsUpdate(current_Player, key, objects, DYNAMIC_THINGS, (x)=>this.isEmptyPosition(x))
   }
   
   /**

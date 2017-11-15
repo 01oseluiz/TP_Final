@@ -3,8 +3,7 @@ package Source.GameController
 import Source.GameEngine._
 import Source.GameView._
 
-/*
-TODO - em geral
+/*-----------------------------PROBLEMAS E ANÁLISES----------------------------
 Problema de processamento:
   *Com a Empty:
     -Menu: 3% - 6MB
@@ -24,11 +23,17 @@ Problema de memoria:
   *Com Engine + GameEngine (pela Engine) + inputs (com 1 start): 350MB - 30%CPU
   *Com Engine + GameEngine (pela Engine) + inputs (com 2 start): 355MB - 50%CPU
   *Com Engine + GameEngine (pela Engine) + 2 inputs (sem funções no while): 65MB - 50%CPU
-  *
-  * OBS:Apos analise foi identificado que a função Calendar.getInstance().getTimeInMillis  aloca algo com 300MB
-  *
-  * OBS2: com isKeyJustPressed: 355MB - 50%:60% CPU
-  *       com isKeyPressed: 115Mb - 40% CPU
+
+
+OBS:Apos analise foi identificado que a função Calendar.getInstance().getTimeInMillis  aloca algo com 300MB se executado sem sleep
+
+OBS2: com isKeyJustPressed: 355MB - 50%:60% CPU
+       com isKeyPressed: 115Mb - 40% CPU
+
+OBS3: a render gasta cerca de 17 miliseg. para completar seu ciclo sem engenharia de jogo
+      a engenharia de jogo gasta cerca de 5 miliseg. para completar seu ciclo de computação
+      somando os 2 player e o tempo de render temos 27 miliseg. para cada notify de input
+      contra 5 a 9 miliseg. utilizando multi-Thread, cerca de 60% a 80% a menos que sem utilizar Thread
  */
 
 object Controller {
@@ -57,6 +62,7 @@ object Controller {
     * - movimentação e captura de comida
     * - verificação de mortes
     */
+
   def nextInteraction(): Unit ={
     //Entrada de teclado sendo verificada em paralelo pela classe InputMove
 
@@ -86,11 +92,7 @@ object Controller {
     GAME_VIEW.GameOver
   }
 
-  def backToMenu(): Unit ={
-    //Ver se eh necessario
-    startGetMove()
-    GAME_OVER.BackToMenu
-  }
+  def backToMenu(): Unit = GAME_OVER.BackToMenu
 
   private def startGetMove(): Unit ={
     GAME_ENGINE = ENGINE.getNewGameEngine
@@ -102,7 +104,7 @@ object Controller {
 
   def stopGetMove(): Unit ={
     Thread.sleep(80) // Garante que as Threads teram terminado de fazer as verificações
-                     // Possibilitando computar um possível empate
+    // Possibilitando computar um possível empate
     movePlayer1.close()
     movePlayer2.close()
   }

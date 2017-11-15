@@ -15,7 +15,7 @@ trait BeanMoveRules {
     * @param listBeans
     * @param isEmpty (função que verifica se o espaço escolhido esta vazio)
     */
-  def BeanPosition(player: Sprite, listBeans: ListBuffer[Sprite], key: Int, isEmpty: (Position, Int) => Boolean): Unit = {
+  def BeanPosition(player: Sprite, listBeans: ListBuffer[Sprite], key: Int, isEmpty: (Position) => Boolean): Unit = {
     val width: Int = Gdx.graphics.getWidth
     val height: Int = Gdx.graphics.getHeight
     val x = new scala.util.Random
@@ -26,7 +26,7 @@ trait BeanMoveRules {
       do {
         bean.myPositions.head.P_x = x.nextInt(width)
         bean.myPositions.head.P_y = y.nextInt(height)
-      } while (!isEmpty(bean.myPositions.head, bean.mySize))
+      } while (!isEmpty(bean.myPositions.head))
 
       player.addPosition(player.myPositions(1).P_x, player.myPositions(1).P_y, player.mySize)
       player.recordEaten

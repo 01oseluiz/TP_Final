@@ -19,6 +19,8 @@ class GameEngine extends BeanMoveRules with DeathRules with DynamicMoveRules wit
   var teleportTail_1 = new Sprite(width-20, height-20)
   var teleportHead_2 = new Sprite(10,height-20)
   var teleportTail_2 = new Sprite(width-20, 10)
+  var parallelBarLeft = new Sprite((width-150)/2, height/2)
+  var parallelBarRight = new Sprite((width+150)/2, height/2)
 
   //Criaçao das cobras iniciais
   for (i <- 1 until SIZE_INITIAL) {
@@ -34,6 +36,12 @@ class GameEngine extends BeanMoveRules with DeathRules with DynamicMoveRules wit
   player2.myColor = new Color(0, 0, 0.27f, 1)
   player2.myPositions.head.P_color = new Color(0,0,0.53f,1)
 
+  bean.setSizeObject(100)
+
+  //Cria as Barras parallelas
+  parallelBarLeft.myColor = new Color(0.8f, 0.8f, 0.8f, 1)
+  parallelBarRight.myColor = new Color(0.8f, 0.8f, 0.8f, 1)
+
   //Cria as quatro pontas de teleporte
   teleportHead_1.myColor = new Color(1,0,1,1)
   teleportTail_1.myColor = new Color(1,0,1,1)
@@ -41,17 +49,17 @@ class GameEngine extends BeanMoveRules with DeathRules with DynamicMoveRules wit
   teleportTail_2.myColor = new Color(1,1,0,1)
 
   //inferior esquerda
-  for(i<- 2 to 6) teleportHead_1.addPosition(11, i*11)
-  for(i<- 2 to 6) teleportHead_1.addPosition(i*11, 11)
+  for(i<- 2 to 12) teleportHead_1.addPosition(11, i*11)
+  for(i<- 2 to 12) teleportHead_1.addPosition(i*11, 11)
   //superior esquerda
-  for(i<- 3 to 7) teleportHead_2.addPosition(11, height - i*11)
-  for(i<- 2 to 6) teleportHead_2.addPosition(i*11, height - 21)
+  for(i<- 3 to 13) teleportHead_2.addPosition(11, height - i*11)
+  for(i<- 2 to 12) teleportHead_2.addPosition(i*11, height - 21)
   //inferior direita
-  for(i<- 3 to 7) teleportTail_2.addPosition(width - i*11, 11)
-  for(i<- 2 to 6) teleportTail_2.addPosition(width - 21, i*11)
+  for(i<- 3 to 13) teleportTail_2.addPosition(width - i*11, 11)
+  for(i<- 2 to 12) teleportTail_2.addPosition(width - 21, i*11)
   //superior direita
-  for(i<- 3 to 7) teleportTail_1.addPosition(width - 21, height - i*11)
-  for(i<- 3 to 7) teleportTail_1.addPosition(width - i*11, height - 21)
+  for(i<- 3 to 13) teleportTail_1.addPosition(width - 21, height - i*11)
+  for(i<- 3 to 13) teleportTail_1.addPosition(width - i*11, height - 21)
 
 
   //Cria os objetos mortais (parede)
@@ -75,6 +83,8 @@ class GameEngine extends BeanMoveRules with DeathRules with DynamicMoveRules wit
   teleportTail_1.setAsDynamic()
   teleportHead_2.setAsDynamic()
   teleportTail_2.setAsDynamic()
+  parallelBarLeft.setAsKillerThing()
+  parallelBarRight.setAsKillerThing()
 
 
   /**

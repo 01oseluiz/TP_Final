@@ -8,7 +8,7 @@ trait ObjectsVisible{
   def setAsVisible(obj:Sprite): Unit = objects :+= obj
   def setAsInvisible(obj:Sprite): Unit = objects -= obj
 
-  def isEmptyPosition(position: Position, size:Int):Boolean = {
+  def isEmptyPosition(position: Position):Boolean = {
     var isEmptyPosition:Boolean = true
     objects.foreach{obj=>
       obj.myPositions.takeWhile(_=>isEmptyPosition).foreach{x=>

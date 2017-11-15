@@ -14,15 +14,15 @@ class InputMove(private val player: Sprite, snakeMoveRules: SnakeMoveRules) exte
   def close() : Unit = STOPED = true
 
   override def run(): Unit = {
-    
+
     val inputs = new GetInputs
     var key = Input.Keys.ANY_KEY
     var key_AUX = Input.Keys.ANY_KEY
 
-    timeNowkey = System.currentTimeMillis()
     timeNowMove = System.currentTimeMillis()
 
     while(!STOPED) {
+      Thread.sleep(1)
       delay = 110 - player.speed
 
       key_AUX = inputs.getMovement(player.Keys)
@@ -31,7 +31,7 @@ class InputMove(private val player: Sprite, snakeMoveRules: SnakeMoveRules) exte
       }
 
       if ((System.currentTimeMillis() - timeNowMove) >= delay) {
-        //Movimenta a cobra
+       //Movimenta a cobra
         ENGINE.movementSnake(player, key, snakeMoveRules)
 
         //Solicita a verificação de colisão bean X players
