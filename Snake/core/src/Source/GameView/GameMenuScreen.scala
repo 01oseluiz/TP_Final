@@ -17,9 +17,8 @@ class GameMenuScreen(private var game: ScreenDefault) extends Screen {
     * Muda a tela para a tela de jogo
     */
   def StartGame: Unit ={
-    //TODO - RESOLVER DISPOSE
     game.setScreen(new GameScreen(game))
-//    dispose()
+    Gdx.input.setInputProcessor(null)
   }
 
   def show(): Unit = {

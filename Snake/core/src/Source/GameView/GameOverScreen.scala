@@ -20,6 +20,7 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
     */
   def PlayAgain: Unit ={
     game.setScreen(new GameScreen(game))
+    Gdx.input.setInputProcessor(null)
     }
 
   def show(): Unit = {
@@ -50,9 +51,7 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
     * Muda a tela para a tela de jogo
     */
   def BackToMenu: Unit ={
-    //TODO - RESOLVER DISPOSE
     game.setScreen(new GameMenuScreen(game))
-//    dispose()
   }
 
   def resize(width: Int, height: Int): Unit = {}

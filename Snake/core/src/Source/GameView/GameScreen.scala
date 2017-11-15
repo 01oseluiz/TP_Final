@@ -42,16 +42,7 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
     */
   def GameOver: Unit ={
     game.setScreen(new GameOverScreen(game))
-//    dispose()
   }
-
-//  /**
-//    * Muda a tela para a tela de jogo
-//    */
-//  def PlayAgain: Unit ={
-//    game.setScreen(new GameScreen(game))
-////    dispose()
-//  }
 
   /**
     * Renderiza constantemente. A mesma coisa que a update

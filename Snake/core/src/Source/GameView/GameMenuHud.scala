@@ -4,9 +4,10 @@ import Source.GameController.Controller
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.{InputEvent, Stage}
-import com.badlogic.gdx.scenes.scene2d.ui.{Label, Skin, Table, TextButton}
+import com.badlogic.gdx.scenes.scene2d.ui._
 import com.badlogic.gdx.graphics.g2d.{BitmapFont, TextureAtlas}
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
+import com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 
 class GameMenuHud {
@@ -16,7 +17,7 @@ class GameMenuHud {
   font = new BitmapFont(Gdx.files.internal("fonts/Fonte.fnt"), false)
   var stage = new Stage
   var gameTitle = new Label("Snake", new Label.LabelStyle(font, Color.GOLD))
-  var table = new Table()
+  var table :Table=_
 
   //Variaveis para os botoes
   private var atlas: TextureAtlas =_
@@ -27,6 +28,7 @@ class GameMenuHud {
   //Criando os botoes
   atlas = new TextureAtlas("ui/button2.pack")
   skin = new Skin(atlas)
+  table = new Table(skin)
   textButtonStyle = new TextButtonStyle()
 
   //Imagens a serem desenhadas quando o botao eh ou nao apertado
@@ -52,9 +54,19 @@ class GameMenuHud {
     override def clicked(event: InputEvent, x: Float, y: Float): Unit = Controller.startGame()
   })
 
+//  //TODO - ADICIONAR UM DEFAULT AO WINDOWSTYLE
+//    var PauseMenu = new Window("PAUSE", skin)
+//    var windowStyle = new WindowStyle(font, Color.BLACK,)
+//    stage.addActor(PauseMenu)
+
+//  new List[Skin](skin)
+//  val list = List(skin,("one", "two", "three"))
+//  private var scrollPane = new ScrollPane(list, skin)
+
+
   //Posicionando a HUD e os botoes
   table.top()
-  table.setFillParent(true)
+  table.setFillParent(true)                 //Faz a tabela ter as dimensoes do stage
   table.add(gameTitle).expandX().padTop(10) //Distancia do topo
   table.getCell(gameTitle).spaceBottom(150)  //Distancia das celulas de baixo da tabela
   table.row()                                   //Proxima linha da tablea
