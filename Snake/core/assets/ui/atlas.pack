@@ -1,19 +1,26 @@
 
-button2.png
+atlas.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-Button2.down
+button.up
   rotate: false
-  xy: 0, 50
+  xy: 0, 2
   size: 100, 50
   orig: 100, 50
   offset: 0, 0
   index: -1
-Button2.up
+button.down
   rotate: false
-  xy: 0, 0
+  xy: 101, 2
   size: 100, 50
   orig: 100, 50
+  offset: 0, 0
+  index: -1
+selected
+  rotate: false
+  xy: 0, 0
+  size: 1, 1
+  orig: 1, 1
   offset: 0, 0
   index: -1

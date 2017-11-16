@@ -2,7 +2,7 @@ package Source.GameView
 
 import Source.GameEngine.Position
 import Source.GameController._
-import com.badlogic.gdx.{Gdx, Screen}
+import com.badlogic.gdx.{Gdx, Input, Screen}
 import com.badlogic.gdx.graphics.{GL20, OrthographicCamera}
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
@@ -20,6 +20,11 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
   camera.update()
   val shapeRenderer = new ShapeRenderer
   shapeRenderer.setProjectionMatrix(camera.combined)
+
+  //Variaveis para UI
+  var paused: Boolean = false
+  var isBackgroundSet: Boolean = false
+  var background: Color =_
 
   /**
     * Desenha um quadrado, de tamanho, posições e cor quaisquer
@@ -44,16 +49,35 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
     game.setScreen(new GameOverScreen(game))
   }
 
+  def isPaused: Unit ={
+    if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
+      paused = !paused
+    }
+  }
+
   /**
     * Renderiza constantemente. A mesma coisa que a update
     */
   def render(delta: Float): Unit = {
-    //TODO - FAZER A CONTROLLER ESCOLHER A COR/IMAGEM DE FUNDO
-    Gdx.gl.glClearColor(0, 0, 0, 1) //setando a tela com uma cor
+
+    if(isBackgroundSet){
+      //TODO - PENSAR EM COMO RECEBER O VETOR COM AS CORES
+      Gdx.gl.glClearColor(0, 1, 0, 1) //setando a tela com a cor escolhida pela controller
+    }
+    else{
+      Gdx.gl.glClearColor(0, 0, 0, 1) //setando a tela com uma cor default
+    }
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT) //limpando a tela com a cor
 
-    game.batch.begin() //comecar a desenhar a textura
-    Controller.nextInteraction()
+    isPaused
+    game.batch.begin() //comecar a desenhar a
+    if(paused)
+      {
+        game.pauseHud.stage.draw()
+      }
+    else {
+      Controller.nextInteraction()
+    }
     game.batch.end() //terminou de desenhar a textura
   }
 
@@ -75,6 +99,7 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
     */
   def dispose(): Unit = {
     game.batch.dispose()
+    game.pauseHud.stage.dispose()
     shapeRenderer.dispose()
   }
 }

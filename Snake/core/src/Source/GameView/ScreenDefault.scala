@@ -8,12 +8,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 
 class ScreenDefault extends Game {
 
-  //TODO - CRIAR UM UNICO STAGE PARA SER USADO NAS HUDS E NO PAUSEMENU (talvez  um viewport)
-
   //Variaveis para UI
   var batch: SpriteBatch = _
   var gameOverHud: GameOverHud=_
   var gameTitle: GameMenuHud=_
+  var pauseHud: PauseWindow=_
   var width: Int =_
   var height: Int =_
 
@@ -25,7 +24,8 @@ class ScreenDefault extends Game {
     height = Gdx.graphics.getHeight
     batch = new SpriteBatch()
     gameOverHud = new GameOverHud(width, height)
-    gameTitle = new GameMenuHud
+    gameTitle = new GameMenuHud(width, height)
+    pauseHud = new PauseWindow(width, height)
 
     //Mudanca de tela
     Controller.setGameDefault(this)

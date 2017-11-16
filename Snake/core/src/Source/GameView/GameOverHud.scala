@@ -59,13 +59,13 @@ class GameOverHud (var width: Int, var height: Int){
   private var ButtonMenu, PlayButton: TextButton =_
 
   //Criando os botoes
-  atlas = new TextureAtlas("ui/button2.pack")
+  atlas = new TextureAtlas("ui/atlas.pack")
   skin = new Skin(atlas)
   textButtonStyle = new TextButtonStyle()
 
   //Imagens a serem desenhadas quando o botao eh ou nao apertado
-  textButtonStyle.up = skin.getDrawable("Button2.up")
-  textButtonStyle.down = skin.getDrawable("Button2.down")
+  textButtonStyle.up = skin.getDrawable("button.up")
+  textButtonStyle.down = skin.getDrawable("button.down")
 
   //Posicao do texto no botao ao ser pressionado
   textButtonStyle.pressedOffsetX = 2
@@ -99,10 +99,6 @@ class GameOverHud (var width: Int, var height: Int){
     stage.addActor(PlayButton)
     ButtonMenu.setPosition(width - ButtonMenu.getWidth*5/4, height/10)
     stage.addActor(ButtonMenu)
-
-    //TODO - ADICIONAR UM DEFAULT AO WINDOWSTYLE
-//    var PauseMenu = new Window("PAUSE", skin)
-//    stage.addActor(PauseMenu)
   }
 
   //Posicionando a HUD e os botoes

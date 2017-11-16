@@ -6,11 +6,13 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.{InputEvent, Stage}
 import com.badlogic.gdx.scenes.scene2d.ui._
 import com.badlogic.gdx.graphics.g2d.{BitmapFont, TextureAtlas}
+import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 
-class GameMenuHud {
+class GameMenuHud(var width: Int, var height: Int) {
 
   //Variaveis da HUD
   var font: BitmapFont =_
@@ -26,14 +28,14 @@ class GameMenuHud {
   private var ButtonExit, PlayButton: TextButton =_
 
   //Criando os botoes
-  atlas = new TextureAtlas("ui/button2.pack")
-  skin = new Skin(atlas)
+  atlas = new TextureAtlas("ui/atlas.pack")
+  skin = new Skin(Gdx.files.internal("ui/skin.json"),atlas)
   table = new Table(skin)
   textButtonStyle = new TextButtonStyle()
 
   //Imagens a serem desenhadas quando o botao eh ou nao apertado
-  textButtonStyle.up = skin.getDrawable("Button2.up")
-  textButtonStyle.down = skin.getDrawable("Button2.down")
+  textButtonStyle.up = skin.getDrawable("button.up")
+  textButtonStyle.down = skin.getDrawable("button.down")
 
   //Posicao do texto no botao ao ser pressionado
   textButtonStyle.pressedOffsetX = 2
@@ -54,15 +56,22 @@ class GameMenuHud {
     override def clicked(event: InputEvent, x: Float, y: Float): Unit = Controller.startGame()
   })
 
-//  //TODO - ADICIONAR UM DEFAULT AO WINDOWSTYLE
-//    var PauseMenu = new Window("PAUSE", skin)
-//    var windowStyle = new WindowStyle(font, Color.BLACK,)
-//    stage.addActor(PauseMenu)
-
+  //TODO - ARRUMAR A LISTA E O SCROLL
 //  new List[Skin](skin)
-//  val list = List(skin,("one", "two", "three"))
+
+//    var list = new List[Int](/*skin,*/ new Array(2) = ("one", "two"), new ListStyle(font, Color.BLACK, Color.WHITE, skin.getDrawable("selected")))
+//    list.setPosition(50,50)
+//    var list = new List(new ListStyle(font, Color.BLACK, Color.WHITE, skin.getDrawable("selected")), Array[String]("mod1", "mod2", "mod3"))
+//    private var scrollPane: ScrollPane =_
+//    scrollPane = new ScrollPane(list, new ScrollPaneStyle())
+//    scrollPane.setPosition(80,50)
+
 //  private var scrollPane = new ScrollPane(list, skin)
 
+  var list = new List(skin)
+  val lista = ("mod1", "mod2")
+  var scrollPane = new ScrollPane(list, skin)
+  scrollPane.setPosition(50, 50)
 
   //Posicionando a HUD e os botoes
   table.top()
@@ -74,4 +83,5 @@ class GameMenuHud {
   table.row()
   table.add(ButtonExit)
   stage.addActor(table)
+  stage.addActor(scrollPane)
 }

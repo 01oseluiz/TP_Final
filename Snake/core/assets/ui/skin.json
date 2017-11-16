@@ -1,17 +1,38 @@
-//{
-//  "com.badlogic.gdx.graphics.Color": {
-//    "white":  {"r": 1, "g": 1, "b": 1, "a": 1},
-//    "black":  {"r": 0, "g": 0, "b": 0, "a": 1},
-//    "red":    {"r": 1, "g": 0, "b": 0, "a": 1},
-//    "green":  {"r": 0, "g": 1, "b": 0, "a": 1},
-//    "blue":   {"r": 0, "g": 0, "b": 1, "a": 1}
-//  },
-//
-//  "com.badlogic.gdx.graphics.g2d.BitmapFont":{
-//   "font":  {"file": "fonts/Fonte.fnt"}
-//  },
-//
-//  "com.badlogic.gdx.scenes.ui.Label$LabelStyle": {
-//    "default": {"font": font, "fontColor": black}
-//  }
-//}
+{
+  "com.badlogic.gdx.graphics.Color": {
+    "white":      {"r": 1, "g": 1, "b": 1, "a": 1},
+    "black":      {"r": 0, "g": 0, "b": 0, "a": 1},
+    "red":        {"r": 1, "g": 0, "b": 0, "a": 1},
+    "green":      {"r": 0, "g": 1, "b": 0, "a": 1},
+    "blue":       {"r": 0, "g": 0, "b": 1, "a": 1},
+    "dark_gray":  {"r": 0.4, "g": 0.4, "b": 0.4, "a": 1}
+  },
+
+  "com.badlogic.gdx.graphics.g2d.BitmapFont":{
+    "font":  {"file": "fonts/Fonte.fnt"}
+  },
+
+  "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle":{
+    "default": {"up": "button.up", "down": "button.down", "font": "font", "pressedOffsetX": 1, "pressedOffsetY": -1}
+  },
+
+  "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
+    "default":    {"font": "font", "fontColor": "white"},
+    "blackLabel": {"font": "font", "fontColor": "black"},
+    "greenLabel": {"font": "font", "fontColor": "green"},
+    "redLabel":   {"font": "font", "fontColor": "red"},
+    "blueLabel":  {"font": "font", "fontColor": "blue"}
+  },
+
+  "com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
+    "default": {"titleFont": "font", "titleFontColor": "dark_gray", "background": "selected" }
+  },
+
+  "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
+    "default": {"font": "font", "fontColorUnselected": "white", "fontColorSelected": "black", "selection": "selected"}
+  },
+
+  "com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle": {
+    "default": {"hScrollKnob": "button.up", "vScrollKnob": "button.up"}
+  }
+}
