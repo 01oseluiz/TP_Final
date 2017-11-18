@@ -13,7 +13,11 @@
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle":{
-    "default": {"up": "button.up", "down": "button.down", "font": "font", "pressedOffsetX": 1, "pressedOffsetY": -1}
+    "default": {"up": "Button.up", "down": "Button.down", "font": "font", "pressedOffsetX": 1, "pressedOffsetY": -1}
+  },
+
+  "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
+    "default": {"up": "PlayButton.up", "down": "PlayButton.up", "checked": "PlayButton.up"}
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
@@ -25,7 +29,7 @@
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
-    "default": {"titleFont": "font", "titleFontColor": "dark_gray", "background": "selected" }
+    "default": {"titleFont": "font", "titleFontColor": "dark_gray", "background": "Button.up" }
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
@@ -33,6 +37,6 @@
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle": {
-    "default": {"hScrollKnob": "button.up", "vScrollKnob": "button.up"}
+    "default": {"hScrollKnob": "Button.up", "vScrollKnob": "Button.up"}
   }
 }

@@ -3,23 +3,32 @@ atlas.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-button.up
+PlayButton.up
   rotate: false
-  xy: 0, 2
-  size: 100, 50
-  orig: 100, 50
+  xy: 1, 12
+  size: 58, 51
+  orig: 58, 51
   offset: 0, 0
   index: -1
-button.down
+Button.down
   rotate: false
-  xy: 101, 2
-  size: 100, 50
-  orig: 100, 50
+  xy: 1, 1
+  size: 9, 9
+  split: 2, 2, 2, 2
+  orig: 9, 9
+  offset: 0, 0
+  index: -1
+Button.up
+  rotate: false
+  xy: 12, 1
+  size: 9, 9
+  split: 1, 2, 1, 2
+  orig: 9, 9
   offset: 0, 0
   index: -1
 selected
   rotate: false
-  xy: 0, 0
+  xy: 61, 62
   size: 1, 1
   orig: 1, 1
   offset: 0, 0

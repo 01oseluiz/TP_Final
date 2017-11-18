@@ -24,7 +24,6 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
   //Variaveis para UI
   var paused: Boolean = false
   var isBackgroundSet: Boolean = false
-  var background: Color =_
 
   /**
     * Desenha um quadrado, de tamanho, posições e cor quaisquer
@@ -49,9 +48,13 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
     game.setScreen(new GameOverScreen(game))
   }
 
+  /**
+    * Funcao simples que diz se o jogo foi pausado ou nao
+    */
   def isPaused: Unit ={
     if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
       paused = !paused
+      //TODO - FAZER A MOVIMENTACAO PARAR
     }
   }
 
@@ -61,7 +64,7 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
   def render(delta: Float): Unit = {
 
     if(isBackgroundSet){
-      //TODO - PENSAR EM COMO RECEBER O VETOR COM AS CORES
+      //TODO - PENSAR EM COMO RECEBER AS CORES DA CONTROLLER
       Gdx.gl.glClearColor(0, 1, 0, 1) //setando a tela com a cor escolhida pela controller
     }
     else{
@@ -70,7 +73,7 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT) //limpando a tela com a cor
 
     isPaused
-    game.batch.begin() //comecar a desenhar a
+    game.batch.begin() //comecar a desenhar na tela
     if(paused)
       {
         game.pauseHud.stage.draw()
@@ -78,7 +81,7 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
     else {
       Controller.nextInteraction()
     }
-    game.batch.end() //terminou de desenhar a textura
+    game.batch.end() //termina de desenhar na tela
   }
 
   /**
