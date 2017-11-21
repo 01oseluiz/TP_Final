@@ -54,7 +54,7 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
   def isPaused: Unit ={
     if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
       paused = !paused
-      //TODO - FAZER A MOVIMENTACAO PARAR
+      Controller.pauseGame()
     }
   }
 

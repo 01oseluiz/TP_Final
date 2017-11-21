@@ -55,6 +55,11 @@ object Controller {
     GAME_MENU.StartGame
   }
 
+  def pauseGame():Unit = {
+    movePlayer1.pause()
+    movePlayer2.pause()
+  }
+
   def playAgain(): Unit ={
     startGetMove()
     GAME_OVER.PlayAgain

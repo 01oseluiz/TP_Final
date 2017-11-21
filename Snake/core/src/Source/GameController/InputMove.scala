@@ -9,9 +9,11 @@ class InputMove(private val player: Sprite, snakeMoveRules: SnakeMoveRules) exte
   private var timeNowkey:Long = _
   private var timeNowMove:Long = _
   private var STOPED:Boolean = false
+  private var PAUSED:Boolean = false
   private val ENGINE = Controller.getEngine
 
   def close() : Unit = STOPED = true
+  def pause() : Unit = PAUSED = !PAUSED
 
   override def run(): Unit = {
 
@@ -23,32 +25,34 @@ class InputMove(private val player: Sprite, snakeMoveRules: SnakeMoveRules) exte
 
     while(!STOPED) {
       Thread.sleep(1)
-      delay = 110 - player.speed
+      if(!PAUSED) {
+        delay = 110 - player.speed
 
-      key_AUX = inputs.getMovement(player.Keys)
-      if (key_AUX != Input.Keys.ANY_KEY){
-        key = key_AUX
-      }
+        key_AUX = inputs.getMovement(player.Keys)
+        if (key_AUX != Input.Keys.ANY_KEY) {
+          key = key_AUX
+        }
 
-      if ((System.currentTimeMillis() - timeNowMove) >= delay) {
-       //Movimenta a cobra
-        ENGINE.movementSnake(player, key, snakeMoveRules)
+        if ((System.currentTimeMillis() - timeNowMove) >= delay) {
+          //Movimenta a cobra
+          ENGINE.movementSnake(player, key, snakeMoveRules)
 
-        //Solicita a verificação de colisão bean X players
-        ENGINE.movementBean(player, key)
+          //Solicita a verificação de colisão bean X players
+          ENGINE.movementBean(player, key)
 
-        //Solicita a verificação de final de jogo
-        ENGINE.isEndGame(player, key)
+          //Solicita a verificação de final de jogo
+          ENGINE.isEndGame(player, key)
 
-        //Solicita a verificação de colisão com objetos bonus
-        ENGINE.movementBonusObjects(player, key)
+          //Solicita a verificação de colisão com objetos bonus
+          ENGINE.movementBonusObjects(player, key)
 
-        //Solicita a verificação de atualização de objetos dinamicos
-        ENGINE.dynamicsUpdate(player, key)
+          //Solicita a verificação de atualização de objetos dinamicos
+          ENGINE.dynamicsUpdate(player, key)
 
 
-        key = Input.Keys.ANY_KEY
-        timeNowMove = System.currentTimeMillis()
+          key = Input.Keys.ANY_KEY
+          timeNowMove = System.currentTimeMillis()
+        }
       }
     }
   }
