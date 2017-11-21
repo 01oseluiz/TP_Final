@@ -1,0 +1,95 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil\fcharset0 Times New Roman;}{\f1\fnil\fcharset2 Symbol;}}
+{\*\generator Riched20 10.0.15063}\viewkind4\uc1 
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\qc\f0\fs30\lang22\par
+\ul\b INICIANDO A CRIA\'c7\'c3O DE UM MOD\ulnone\b0\par
+\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\ul\b\fs22 CONHE\'c7A AS CLASSES QUE PODEM SER IMPLEMENTADAS:\line\ulnone\b0\par
+
+\pard\box\brdrdash\brdrw0 {\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-284\li284\sa200\sl276\slmult1\b\fs24 Engine de Jogo: NameEngine (Classe Obrigat\'f3ria)\b0\fs22\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\qj A classe definida como Engine dever\'e1 herdar todos os traits de movimenta\'e7\'f5es que foram implementadas, dentro desta classe deve conter todos os objetos do jogo, com seus tipos devidamente setados (setado como player, como bonus entre outros).\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1 A classe Engine cont\'e9m somente uma fun\'e7\'e3o que \'e9 chamada no momento do game over, tudo que for inicializado e necessitar finaliza\'e7\'e3o deve ser finalizado por meio da fun\'e7\'e3o \b\i FinishGame():Unit\b0\i0\par
+\i Esta classe pode ter qualquer nome.\par
+Esta classe deve conter todos os objetos do jogos setados, tais como players, beans e etc.\par
+\par
+
+\pard\box\brdrdash\brdrw0 {\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-284\li284\sa200\sl276\slmult1\b\i0\fs24 Regra de Movimenta\'e7\'e3o de Beans (Trait Opcional)\b0\fs22\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1 Esta classe dever\'e1 implementar a fun\'e7\'e3o \b\i BeanPosition:Unit\b0\i0 , que definir\'e1 a movimenta\'e7\'e3o das bean, tendo como parametros:\par
+
+\pard\box\brdrdash\brdrw0 {\pntext\f0 i.\tab}{\*\pn\pnlvlbody\pnf0\pnindent0\pnstart1\pnlcrm{\pntxta.}}
+\fi-360\li720\sa200\sl276\slmult1\b\i player:Sprite\b0\i0\line player atual que requisitou a verifica\'e7\'e3o de movimenta\'e7\'e3o de beans\par
+{\pntext\f0 ii.\tab}\b\i listBeans:ListBuffer[Sprite]\b0\i0\line Lista de beans setadas na Engine de Jogo\par
+{\pntext\f0 iii.\tab}\b\i key:Int\b0\i0\line Ultima tecla pressionada pelo Player\par
+{\pntext\f0 iv.\tab}\b\i isEmpty: (Position) => Boolean\b0\i0\line Fun\'e7\'e3o que recebe uma posi\'e7\'e3o e informa se \'e9 um campo vazio na tela atual\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\i Para definir esta classe crie um trait e herde BeanMoveRules.\par
+Sobreescreva as fun\'e7\'f5es para definir suas proprias regras, segundo os objetos criados na Engine de jogo.\par
+\par
+
+\pard\box\brdrdash\brdrw0 {\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-284\li284\sa200\sl276\slmult1\b\i0\fs24 Regra de Movimenta\'e7\'e3o de Objetos Bonus  (Trait Opcional)\b0\fs22\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1 Esta classe dever\'e1 implementar a fun\'e7\'e3o \b\i movementBonusObjects:Unit\b0\i0 , que definir\'e1 a movimenta\'e7\'e3o dos objetos bonus, tendo como parametros:\par
+
+\pard\box\brdrdash\brdrw0 {\pntext\f0 i.\tab}{\*\pn\pnlvlbody\pnf0\pnindent0\pnstart1\pnlcrm{\pntxta.}}
+\fi-360\li720\sa200\sl276\slmult1\b\i current_Player:Sprite\b0\i0\line player atual que requisitou a verifica\'e7\'e3o de movimenta\'e7\'e3o de objetos dinamicos\par
+{\pntext\f0 ii.\tab}\b\i key:Int\b0\i0\line Ultima tecla pressionada pelo Player\par
+{\pntext\f0 iii.\tab}\b\i listBonusObjects:ListBuffer[Sprite]\b0\i0\line Lista de objetos bonus setadas na Engine de Jogo\par
+{\pntext\f0 iv.\tab}\b\i isEmpty: (Position) => Boolean\b0\i0\line Fun\'e7\'e3o que recebe uma posi\'e7\'e3o e informa se \'e9 um campo vazio na tela atual\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\i Para definir esta classe crie um trait e herde BonusMoveRules.\par
+Sobreescreva as fun\'e7\'f5es para definir suas proprias regras, segundo os objetos criados na Engine de jogo.\par
+\i0\par
+
+\pard\box\brdrdash\brdrw0 {\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-284\li284\sa200\sl276\slmult1\b\fs24 Regra de Movimenta\'e7\'e3o de Objetos que matam  (Trait Opcional)\b0\fs22\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1 Esta classe dever\'e1 implementar a fun\'e7\'e3o \b\i snakeCollisions:Unit\b0\i0 , que definir\'e1 quando um dado player colidiu, com si proprio ou outros players, uma vez colidido o player atual deve ser setado como morto. Esta fun\'e7\'e3o tem como parametros:\par
+
+\pard\box\brdrdash\brdrw0 {\pntext\f0 i.\tab}{\*\pn\pnlvlbody\pnf0\pnindent0\pnstart1\pnlcrm{\pntxta.}}
+\fi-360\li720\sa200\sl276\slmult1\b\i player1:Sprite\b0\i0\line player atual que requisitou a verifica\'e7\'e3o de sua colis\'e3o com outro player ou si proprio.\par
+{\pntext\f0 ii.\tab}\b\i player2:Sprite\b0\i0\line player para verifica\'e7\'e3o de colis\'e3o\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1 Esta classe tamb\'e9m dever\'e1 implementar a fun\'e7\'e3o \b\i killerThingsCollisions:Unit\b0\i0 , que definir\'e1 quando um dado player colidiu com objetos mortais, uma vez colidido o player atual deve ser setado como morto. Esta fun\'e7\'e3o tem como parametros:\par
+
+\pard\box\brdrdash\brdrw0 {\pntext\f0 i.\tab}{\*\pn\pnlvlbody\pnf0\pnindent0\pnstart1\pnlcrm{\pntxta.}}
+\fi-360\li720\sa200\sl276\slmult1\b\i player:Sprite\b0\i0\line player atual que solicitou a verifica\'e7\'e3o de sua colis\'e3o com objetos que podem matar.\par
+{\pntext\f0 ii.\tab}\b\i listKillerThings: ListBuffer[Sprite]\b0\i0\line lista de objetos que podem matar, setados na Engine de jogo.\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\i Para definir esta classe crie um trait e herde DeathRules.\par
+Sobreescreva as fun\'e7\'f5es para definir suas proprias regras, segundo os objetos criados na Engine de jogo.\par
+\i0\par
+
+\pard\box\brdrdash\brdrw0 {\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-284\li284\sa200\sl276\slmult1\b\fs24 Regra de Movimenta\'e7\'e3o de Objetos dinamicos  (Trait Opcional)\b0\fs22\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1 Esta classe dever\'e1 implementar a fun\'e7\'e3o \b\i dynamicUpdate:Unit\b0\i0 , fun\'e7\'e3o esta que \'e9 chamada a cada movimento do player, solicitando uma verifica\'e7\'e3o de movimenta\'e7\'e3o ou atualiza\'e7\'e3o (uptade) de objetos setados como dynamicos, para isto esta fun\'e7\'e3o tem como parametros:\par
+
+\pard\box\brdrdash\brdrw0 {\pntext\f0 i.\tab}{\*\pn\pnlvlbody\pnf0\pnindent0\pnstart1\pnlcrm{\pntxta.}}
+\fi-360\li720\sa200\sl276\slmult1\b\i current_Player: Sprite\line\b0\i0 Player atual que solicitou a verifica\'e7\'e3o de atualiza\'e7\'e3o de objetos dinamicos.\b\i\par
+{\pntext\f0 ii.\tab}key: Int\line\b0\i0 Ultima tecla pressionada pelo player atual.\b\i\par
+{\pntext\f0 iii.\tab}screenObjects: ListBuffer[Sprite]\line\b0\i0 Lista contendo todos os objetos visiveis na tela, possibilitando a cria\'e7\'e3o de regras com muitas dependencias de objetos.\b\i\par
+{\pntext\f0 iv.\tab}listDynamicObjects: ListBuffer[Sprite]\line\b0\i0 Lista de objetos setados como dinamicos na Engine de jogo.\b\i\par
+{\pntext\f0 v.\tab}isEmpty: (Position) => Boolean\line\b0\i0 Fun\'e7\'e3o que recebe uma posi\'e7\'e3o e indica se est\'e1 em um campo vazio da tela.\b\i\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\b0\i0 Esta classe tamb\'e9m dever\'e1 implementar a fun\'e7\'e3o \b\i dynamicRender():Unit\b0\i0 , que ser\'e1 chamada a cada renderiza\'e7\'e3o de tela, esta fun\'e7\'e3o n\'e3o depende da intera\'e7\'e3o do player logo, as regras impostas aqui dever\'e3o acontecer idependente de qualquer fator externo, somente seram dinamicos na tela.\par
+\i Para definir esta classe crie um trait e herde DynamicMoveRules..\par
+Sobreescreva as fun\'e7\'f5es para definir suas proprias regras, segundo os objetos criados na Engine de jogo.\par
+\i0\par
+\b\fs24 OBS: \b0 As classes com implementa\'e7\'e3o opcional possuem presets para o modo de jogo cl\'e1ssico, das quais podem ser aproveitadas, podento n\'e3o ter a necessidade de reescreve-las\par
+\par
+\ul\b COMO CONFIGURAR E INSTALAR O MOD\ulnone\b0\par
+\fs22 Para configurar o mod corretamente deve-se abrir o arquivo \i info.config \i0 e preencher os campos vazios:\par
+\i Vers\'e3o ModPackage \i0 -> Vers\'e3o do Package de mods. (pr\'e9-definido)\par
+\i Main Engine \i0 -> O nome da classe de Engine de jogo criada. (preenchimento obrigat\'f3rio)\par
+\i Author\i0  -> Autor do mod\par
+\i Date\i0  -> Data de cria\'e7\'e3o do mod\par
+\i Title\i0  -> Titulo do mod\par
+\i Description\i0  -> Descri\'e7\'e3o do mod\par
+Com o mod criado e configurado deve-se compila-lo e extrair do artefato .jar a pasta de mesmo nome do package, esta pasta deve conter os arquivos.class e info.config.\par
+Pronto, est\'e1 pasta ja \'e9 um mode, agora basta adiciona-la a pasta mods do jogo.\par
+Aten\'e7\'e3o para o nome da pasta, deve conter o mesmo nome do package.\par
+\par
+\par
+}
+ 

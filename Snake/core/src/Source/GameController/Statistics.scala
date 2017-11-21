@@ -1,4 +1,4 @@
-package GameController
+package Source.GameController
 
 trait Statistics {
 

@@ -3,40 +3,12 @@ package Source.GameController
 import Source.GameEngine._
 import Source.GameView._
 
-/*-----------------------------PROBLEMAS E ANÁLISES----------------------------
-Problema de processamento:
-  *Com a Empty:
-    -Menu: 3% - 6MB
-    -Game: 60%: 70% - 380MB
-    -End:  2% - 380MB
-  *Sem a Empty:
-    -Menu: 3% - 6MB
-    -Game: 60%: 70% - 380MB
-    -End:  2% - 380MB
-
-Problema de memoria:
-  *Programa sem Engines e inputs: 52MB
-  *Com Engine: 55MB
-  *Com Engine + GameEngine (direto): 66MB
-  *Com Engine + GameEngine (pela Engine): 64MB
-  *Com Engine + GameEngine (pela Engine) + inputs (sem start): 64MB
-  *Com Engine + GameEngine (pela Engine) + inputs (com 1 start): 350MB - 30%CPU
-  *Com Engine + GameEngine (pela Engine) + inputs (com 2 start): 355MB - 50%CPU
-  *Com Engine + GameEngine (pela Engine) + 2 inputs (sem funções no while): 65MB - 50%CPU
-
-
-OBS:Apos analise foi identificado que a função Calendar.getInstance().getTimeInMillis  aloca algo com 300MB se executado sem sleep
-
-OBS2: com isKeyJustPressed: 355MB - 50%:60% CPU
-       com isKeyPressed: 115Mb - 40% CPU
-
-OBS3: a render gasta cerca de 17 miliseg. para completar seu ciclo sem engenharia de jogo
-      a engenharia de jogo gasta cerca de 5 miliseg. para completar seu ciclo de computação
-      somando os 2 player e o tempo de render temos 27 miliseg. para cada notify de input
-      contra 5 a 9 miliseg. utilizando multi-Thread, cerca de 60% a 80% a menos que sem utilizar Thread
- */
-
 object Controller {
+  final val GAME_VERSION = "1.0.3"
+
+  private val searchMods = new searchMods
+  private var currentMod = "Default"
+  
   private val ENGINE:Engine = new Engine
   private var GAME_ENGINE:GameEngine = _
   var GAME_VIEW:GameScreen = _
@@ -48,7 +20,7 @@ object Controller {
   def setGameOver(x:GameOverScreen): Unit = GAME_OVER = x
   def setGameMenu(x:GameMenuScreen): Unit = GAME_MENU = x
   def setGameDefault(x:ScreenDefault): Unit = GAME_DEFAULT = x
-  def getGameEngine:GameEngine = GAME_ENGINE
+  def getGameEngine():GameEngine = GAME_ENGINE
   def getEngine:Engine = ENGINE
 
   //Realiza a verificação de entradas de teclado em paralelo
@@ -78,6 +50,7 @@ object Controller {
   }
 
   def startGame(): Unit ={
+    searchForMods()
     startGetMove()
     GAME_MENU.StartGame
   }
@@ -95,9 +68,15 @@ object Controller {
   def backToMenu(): Unit = GAME_OVER.BackToMenu
 
   private def startGetMove(): Unit ={
-    GAME_ENGINE = ENGINE.getNewGameEngine
-    movePlayer1 = new InputMove(GAME_ENGINE.player1, new SnakeMoveRules{})
-    movePlayer2 = new InputMove(GAME_ENGINE.player2, new SnakeMoveRules{})
+    try {
+      GAME_ENGINE = ENGINE.getNewGameEngine(currentMod)
+    }catch{
+      case _:Throwable =>
+        currentMod = "Default"
+        GAME_ENGINE = ENGINE.getNewGameEngine(currentMod)
+    }
+    movePlayer1 = new InputMove(ENGINE.PLAYERS(0), new SnakeMoveRules{})
+    movePlayer2 = new InputMove(ENGINE.PLAYERS(1), new SnakeMoveRules{})
     movePlayer1.start()
     movePlayer2.start()
   }
@@ -110,26 +89,39 @@ object Controller {
   }
 
   def getStatistics(): Unit ={
-    var name = GAME_ENGINE.player1.myName
+    var name = ENGINE.PLAYERS(0).myName
     var player = 1
-    var eatenBeans = GAME_ENGINE.player1.getEatenBeans
-    var pixelRan = GAME_ENGINE.player1.getPixelRan
-    var time = GAME_ENGINE.player1.getTime
-    var winner = GAME_ENGINE.player1.isAlive
+    var eatenBeans = ENGINE.PLAYERS(0).getEatenBeans
+    var pixelRan = ENGINE.PLAYERS(0).getPixelRan
+    var time = ENGINE.PLAYERS(0).getTime
+    var winner = ENGINE.PLAYERS(0).isAlive
 
     //CHAMAR FUNÇÃO DA GAMEOVERHUD
     //Mudar para pegar o vencedor
     GAME_DEFAULT.gameOverHud.playerStatisticsShow(name, pixelRan, eatenBeans, player, winner, time)
 
-    name = GAME_ENGINE.player2.myName
+    name = ENGINE.PLAYERS(1).myName
     player = 2
-    eatenBeans = GAME_ENGINE.player2.getEatenBeans
-    pixelRan = GAME_ENGINE.player2.getPixelRan
-    time = GAME_ENGINE.player2.getTime
-    winner = GAME_ENGINE.player2.isAlive
+    eatenBeans = ENGINE.PLAYERS(1).getEatenBeans
+    pixelRan = ENGINE.PLAYERS(1).getPixelRan
+    time = ENGINE.PLAYERS(1).getTime
+    winner = ENGINE.PLAYERS(1).isAlive
 
     //CHAMAR FUNÇÃO DA GAMEOVERHUD
     //Mudar para pegar o vencedor real
     GAME_DEFAULT.gameOverHud.playerStatisticsShow(name, pixelRan, eatenBeans, player, winner, time)
+  }
+
+  def searchForMods(): Unit ={
+    try {
+      val listmods = searchMods.getModsInfo
+      currentMod = listmods(0)._2
+    }catch{
+      case x:Exception =>
+        currentMod = "Default"
+        println(x.getMessage)
+
+        //TODO-a view deve mostrar o erro recebido aqui
+    }
   }
 }

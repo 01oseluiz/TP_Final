@@ -1,6 +1,6 @@
 package Source.GameEngine
 
-import GameController.Statistics
+import Source.GameController.Statistics
 import Source.GameController.Controller
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.Color

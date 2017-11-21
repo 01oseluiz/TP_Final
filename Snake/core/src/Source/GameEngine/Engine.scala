@@ -1,7 +1,7 @@
 package Source.GameEngine
 
 import Source.GameController.Controller
-
+import ClassicMod.ClassicEngine
 import scala.collection.mutable.ListBuffer
 
 class Engine extends ObjectsVisible{
@@ -31,9 +31,10 @@ class Engine extends ObjectsVisible{
     * Retornar uma nova instancia da GameEngine para novo jogo
     * @return
     */
-  def getNewGameEngine: GameEngine = {
+  def getNewGameEngine(packageGameEngine:String): GameEngine = {
     cleanEngine()
-    GAME_ENGINE = new GameEngine
+    if(packageGameEngine.equals("Default")) GAME_ENGINE = new ClassicEngine
+    else GAME_ENGINE = Class.forName(packageGameEngine).newInstance.asInstanceOf[GameEngine]
     GAME_ENGINE
   }
 
