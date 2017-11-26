@@ -26,9 +26,44 @@ Button.up
   orig: 9, 9
   offset: 0, 0
   index: -1
-selected
+selected2
   rotate: false
   xy: 61, 62
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+selected5
+  rotate: false
+  xy: 23, 9
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+selected3
+  rotate: false
+  xy: 61, 59
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+selected
+  rotate: false
+  xy: 23, 6
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+selected4
+  rotate: false
+  xy: 26, 9
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+selected1
+  rotate: false
+  xy: 61, 56
   size: 1, 1
   orig: 1, 1
   offset: 0, 0

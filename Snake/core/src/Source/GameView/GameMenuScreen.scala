@@ -30,7 +30,7 @@ class GameMenuScreen(private var game: ScreenDefault) extends Screen {
      Controller.setGameMenu(this)
 
     //Permite q os botoes sejam clicados
-    Gdx.input.setInputProcessor(game.gameTitle.stage)
+    Gdx.input.setInputProcessor(game.gameMenuHud.stage)
   }
 
   def render(delta: Float): Unit = {
@@ -41,7 +41,9 @@ class GameMenuScreen(private var game: ScreenDefault) extends Screen {
     game.batch.draw(background, background.getX, background.getY)
     game.batch.end() //terminou de desenhar a textura
 
-    game.gameTitle.stage.draw() //Desesenha a hud
+    game.gameMenuHud.stage.draw() //Desesenha a hud
+    game.gameMenuHud.stage.act()  //Permite interacao do stage com o usuario (ScrollPane e SelectBox)
+
   }
 
   def resize(width: Int, height: Int): Unit = {}
@@ -55,7 +57,7 @@ class GameMenuScreen(private var game: ScreenDefault) extends Screen {
   def dispose(): Unit = {
     game.batch.dispose()
     background.getTexture.dispose()
-    game.gameTitle.stage.dispose()
-    game.gameTitle.font.dispose()
+    game.gameMenuHud.stage.dispose()
+    game.gameMenuHud.skin.dispose()
   }
 }

@@ -59,13 +59,21 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
   }
 
   /**
+    * Funcao que seta a cor de escolhida pela controller
+    */
+  def newBackground (red: Float, green: Float, blue: Float, alpha: Float): Unit = {
+    Gdx.gl.glClearColor(red, green, blue, alpha) //setando a tela com a cor escolhida pela controller
+
+  }
+
+  /**
     * Renderiza constantemente. A mesma coisa que a update
     */
   def render(delta: Float): Unit = {
 
     if(isBackgroundSet){
-      //TODO - PENSAR EM COMO RECEBER AS CORES DA CONTROLLER
-      Gdx.gl.glClearColor(0, 1, 0, 1) //setando a tela com a cor escolhida pela controller
+      //TODO - chamar funcao da controller que chame a newBackground
+
     }
     else{
       Gdx.gl.glClearColor(0, 0, 0, 1) //setando a tela com uma cor default
@@ -103,6 +111,8 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
   def dispose(): Unit = {
     game.batch.dispose()
     game.pauseHud.stage.dispose()
+    game.pauseHud.atlas.dispose()
+    game.pauseHud.skin.dispose()
     shapeRenderer.dispose()
   }
 }

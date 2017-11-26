@@ -9,23 +9,31 @@
   },
 
   "com.badlogic.gdx.graphics.g2d.BitmapFont":{
-    "font":  {"file": "fonts/Fonte.fnt"}
+    "font":  {"file": "fonts/Fonte.fnt"},
+    "arial": {"file": "fonts/Arial15.fnt"},
+    "arialBlack": {"file": "fonts/ArialBlack15.fnt"}
   },
 
-  "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle":{
-    "default": {"up": "Button.up", "down": "Button.down", "font": "font", "pressedOffsetX": 1, "pressedOffsetY": -1}
-  },
 
   "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
     "default": {"up": "PlayButton.up", "down": "PlayButton.up", "checked": "PlayButton.up"}
   },
 
+  "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle":{
+    "a": {"up": "Button.up", "down": "Button.down", "font": "arialBlack", "pressedOffsetX": 1, "pressedOffsetY": -5}
+  },
+
   "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
-    "default":    {"font": "font", "fontColor": "white"},
-    "blackLabel": {"font": "font", "fontColor": "black"},
-    "greenLabel": {"font": "font", "fontColor": "green"},
-    "redLabel":   {"font": "font", "fontColor": "red"},
-    "blueLabel":  {"font": "font", "fontColor": "blue"}
+    "whiteLabel":         {"font": "font", "fontColor": "white"},
+    "whiteSmallLabel":    {"font": "arial", "fontColor": "white"},
+    "blackLabel":         {"font": "font", "fontColor": "black"},
+    "blackSmallLabel":    {"font": "arial", "fontColor": "black"},
+    "greenLabel":         {"font": "font", "fontColor": "green"},
+    "greenSmallLabel":    {"font": "arial", "fontColor": "green"},
+    "redLabel":           {"font": "font", "fontColor": "red"},
+    "redSmallLabel":      {"font": "arial", "fontColor": "red"},
+    "blueLabel":          {"font": "font", "fontColor": "blue"},
+    "blueSmallLabel":     {"font": "arial", "fontColor": "blue"}
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
@@ -33,10 +41,14 @@
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
-    "default": {"font": "font", "fontColorUnselected": "white", "fontColorSelected": "black", "selection": "selected"}
+    "default": {"font": "arial", "fontColorUnselected": "black", "fontColorSelected": "white", "selection": "selected5"}
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle": {
     "default": {"hScrollKnob": "Button.up", "vScrollKnob": "Button.up"}
+  },
+
+  "com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle":{
+    "default": {"font": "arial", "fontColor": "black", "background": "selected4", "scrollStyle": "default", "listStyle": "default"}
   }
 }

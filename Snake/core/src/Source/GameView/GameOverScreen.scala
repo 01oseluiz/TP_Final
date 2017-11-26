@@ -35,7 +35,7 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT) //limpando a tela com a cor
 
     if(!setedOnce){
-      game.gameOverHud.setGameOverScreenHud()
+      game.gameOverHud.setGameOverScreenHUD()
       setedOnce = true
     }
 
@@ -65,6 +65,6 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
   def dispose(): Unit = {
     game.batch.dispose()
     game.gameOverHud.stage.dispose()
-    game.gameOverHud.font.dispose()
+    game.gameOverHud.skin.dispose()
   }
 }

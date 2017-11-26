@@ -5,21 +5,23 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.{InputEvent, Stage}
 import com.badlogic.gdx.scenes.scene2d.ui._
-import com.badlogic.gdx.graphics.g2d.{BitmapFont, TextureAtlas}
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
+import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 
 class GameOverHud (var width: Int, var height: Int){
 
   //Variaveis da HUD
-  var font: BitmapFont =_
-  font = new BitmapFont(Gdx.files.internal("fonts/Fonte.fnt"), false)
   var stage = new Stage
-  var gameOverLabel = new Label("GAME OVER", new Label.LabelStyle(font, Color.RED))
+  private val atlas = new TextureAtlas("ui/atlas.pack")
+  var skin = new Skin(Gdx.files.internal("ui/skin.json"), atlas)
+  var gameOverLabel = new Label("GAME OVER", skin, "redLabel")
+  private var MenuButton, PlayButton: TextButton =_
+
 
   //Variaveis para mostras estatisticas
   var i: Int = 0
   var time : Double =_  //tempo a ser recebido da controller
+  //TODO - controller deve mandar a quantidade de players escolhida no menu
   var totalPlayers:Int = 2 //numero total de players a serem exibidos
 
   /**
@@ -35,53 +37,36 @@ class GameOverHud (var width: Int, var height: Int){
     this.time = playerTime
 
     if (winner) {
-      playerLabel = new Label( name + "\nPlayer " + player + "\nBeans eated: " + eaten + "\nRan: " + ran, new Label.LabelStyle(new BitmapFont(), Color.GOLD))
+      playerLabel = new Label( name + "\nPlayer " + player + "\nBeans eated: " + eaten + "\nRan: " + ran, skin, "arial", Color.GOLD)
     }
     else {
-      playerLabel = new Label( name + "\nPlayer " + player + "\nBeans eated: " + eaten + "\nRan: " + ran, new Label.LabelStyle(new BitmapFont(), Color.GREEN))
+      playerLabel = new Label( name + "\nPlayer " + player + "\nBeans eated: " + eaten + "\nRan: " + ran, skin,"arial","green")
     }
 
     playerLabel.setPosition(width/6 + (player-1)*width/totalPlayers, height/2 )
     stage.addActor(playerLabel)
   }
 
-  //Variaveis para os botoes
-  private var atlas: TextureAtlas =_
-  private var skin: Skin =_
-  private var textButtonStyle: TextButtonStyle =_
-  private var MenuButton, PlayButton: TextButton =_
-
-  //Criando os botoes
-  atlas = new TextureAtlas("ui/atlas.pack")
-  skin = new Skin(atlas)
-  textButtonStyle = new TextButtonStyle()
-
-  //Imagens a serem desenhadas quando o botao eh ou nao apertado
-  textButtonStyle.up = skin.getDrawable("Button.up")
-  textButtonStyle.down = skin.getDrawable("Button.down")
-
-  //Posicao do texto no botao ao ser pressionado
-  textButtonStyle.pressedOffsetX = 1
-  textButtonStyle.pressedOffsetY = -1
-
-  //Fonte do texto no botao
-  textButtonStyle.font = new BitmapFont()
-  textButtonStyle.fontColor = Color.BLACK
 
   //Criacao dos botoes em si
-  MenuButton = new TextButton("BACK TO MENU", textButtonStyle)
+  MenuButton = new TextButton("BACK TO MENU", skin, "a")
   MenuButton.setSize(126,50)
+  MenuButton.getStyle.pressedOffsetX = 1
+  MenuButton.getStyle.pressedOffsetY = -1
   MenuButton.addListener(new ClickListener(){
     override def clicked(event: InputEvent, x: Float, y: Float): Unit = Controller.backToMenu() /*Gdx.app.exit()*/
   })
 
-  PlayButton = new TextButton("PLAY AGAIN", textButtonStyle)
+  PlayButton = new TextButton("PLAY AGAIN", skin, "a")
   PlayButton.setSize(100,50)
   PlayButton.addListener(new ClickListener(){
     override def clicked(event: InputEvent, x: Float, y: Float): Unit = Controller.playAgain()
   })
 
-  def setGameOverScreenHud(): Unit ={
+  /**
+    * funcao que arruma reseta e arruma a gameOverHUD
+    */
+  def setGameOverScreenHUD(): Unit ={
     this.stage.clear()
 
     Controller.getStatistics()
