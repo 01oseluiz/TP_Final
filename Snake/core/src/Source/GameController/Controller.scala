@@ -53,6 +53,8 @@ object Controller {
     searchForMods()
     startGetMove()
     GAME_MENU.StartGame
+    //Chamar a setBackground
+    GAME_VIEW.setBackground(1, 1, 0, 1)
   }
 
   def pauseGame():Unit = {
@@ -63,6 +65,8 @@ object Controller {
   def playAgain(): Unit ={
     startGetMove()
     GAME_OVER.PlayAgain
+    //Chamar a setBackground de novo aqui
+    GAME_VIEW.setBackground(0, 1, 1, 1)
   }
 
   def gameOver(): Unit ={

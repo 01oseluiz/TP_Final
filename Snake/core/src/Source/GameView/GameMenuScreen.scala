@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.{Gdx, Screen}
 import com.badlogic.gdx.graphics.{GL20, OrthographicCamera, Texture}
 
-class GameMenuScreen(private var game: ScreenDefault) extends Screen {
+class GameMenuScreen(var game: ScreenDefault) extends Screen {
 
   //Variaveis para a camera
   var width:Int = Gdx.graphics.getWidth
@@ -43,7 +43,6 @@ class GameMenuScreen(private var game: ScreenDefault) extends Screen {
 
     game.gameMenuHud.stage.draw() //Desesenha a hud
     game.gameMenuHud.stage.act()  //Permite interacao do stage com o usuario (ScrollPane e SelectBox)
-
   }
 
   def resize(width: Int, height: Int): Unit = {}

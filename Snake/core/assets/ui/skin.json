@@ -20,7 +20,7 @@
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle":{
-    "a": {"up": "Button.up", "down": "Button.down", "font": "arialBlack", "pressedOffsetX": 1, "pressedOffsetY": -5}
+    "default": {"up": "Button.up", "down": "Button.down", "font": "arialBlack", "pressedOffsetX": 1, "pressedOffsetY": -1}
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
@@ -37,11 +37,12 @@
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
-    "default": {"titleFont": "font", "titleFontColor": "dark_gray", "background": "Button.up" }
+    "default":  {"titleFont": "font", "titleFontColor": "dark_gray", "background": "Button.up" },
+    "mods":     {"titleFont": "font", "titleFontColor": "black", "background": "GrayTransparent"/*, "stageBackground": "lightGrayTransparent"*/}
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
-    "default": {"font": "arial", "fontColorUnselected": "black", "fontColorSelected": "white", "selection": "selected5"}
+    "default": {"font": "arial", "fontColorUnselected": "black", "fontColorSelected": "white", "selection": "green"}
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle": {
@@ -49,6 +50,6 @@
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle":{
-    "default": {"font": "arial", "fontColor": "black", "background": "selected4", "scrollStyle": "default", "listStyle": "default"}
+    "default": {"font": "arial", "fontColor": "black", "background": "lightGray", "scrollStyle": "default", "listStyle": "default"}
   }
 }

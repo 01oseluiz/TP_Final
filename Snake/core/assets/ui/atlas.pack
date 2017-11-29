@@ -26,44 +26,72 @@ Button.up
   orig: 9, 9
   offset: 0, 0
   index: -1
-selected2
+darkestGrayTransparent
   rotate: false
   xy: 61, 62
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
-selected5
+darkerGrayTransparent
   rotate: false
   xy: 23, 9
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
-selected3
+GrayTransparent
   rotate: false
   xy: 61, 59
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
-selected
+lightGrayTransparent
   rotate: false
   xy: 23, 6
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
-selected4
+lightGray
   rotate: false
   xy: 26, 9
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
-selected1
+darkerGray
   rotate: false
   xy: 61, 56
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+darkestGray
+  rotate: false
+  xy: 23, 3
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+Gray
+  rotate: false
+  xy: 26, 6
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+green
+  rotate: false
+  xy: 29, 9
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+blue
+  rotate: false
+  xy: 61, 53
   size: 1, 1
   orig: 1, 1
   offset: 0, 0

@@ -23,7 +23,8 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
 
   //Variaveis para UI
   var paused: Boolean = false
-  var isBackgroundSet: Boolean = false
+  var red, green, blue : Float = 0
+  var alpha : Float = 1
 
   /**
     * Desenha um quadrado, de tamanho, posições e cor quaisquer
@@ -59,11 +60,17 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
   }
 
   /**
-    * Funcao que seta a cor de escolhida pela controller
+    * Funcao que seta a cor do background de escolhida pela controller
+    * @param RED    parametro para cor em rgb
+    * @param GREEN  parametro para cor em rgb
+    * @param BLUE   parametro para cor em rgb
+    * @param ALPHA  parametro para opacidade
     */
-  def newBackground (red: Float, green: Float, blue: Float, alpha: Float): Unit = {
-    Gdx.gl.glClearColor(red, green, blue, alpha) //setando a tela com a cor escolhida pela controller
-
+  def setBackground (RED: Float, GREEN: Float, BLUE: Float, ALPHA: Float): Unit = {
+      red = RED;
+      green = GREEN;
+      blue = BLUE;
+      alpha = ALPHA;
   }
 
   /**
@@ -71,13 +78,7 @@ class GameScreen(private var game: ScreenDefault) extends Screen {
     */
   def render(delta: Float): Unit = {
 
-    if(isBackgroundSet){
-      //TODO - chamar funcao da controller que chame a newBackground
-
-    }
-    else{
-      Gdx.gl.glClearColor(0, 0, 0, 1) //setando a tela com uma cor default
-    }
+    Gdx.gl.glClearColor(red, green, blue, alpha) //setando a tela com uma cor default
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT) //limpando a tela com a cor
 
     isPaused

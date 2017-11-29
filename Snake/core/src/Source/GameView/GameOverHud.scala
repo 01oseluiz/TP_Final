@@ -49,7 +49,7 @@ class GameOverHud (var width: Int, var height: Int){
 
 
   //Criacao dos botoes em si
-  MenuButton = new TextButton("BACK TO MENU", skin, "a")
+  MenuButton = new TextButton("BACK TO MENU", skin)
   MenuButton.setSize(126,50)
   MenuButton.getStyle.pressedOffsetX = 1
   MenuButton.getStyle.pressedOffsetY = -1
@@ -57,7 +57,7 @@ class GameOverHud (var width: Int, var height: Int){
     override def clicked(event: InputEvent, x: Float, y: Float): Unit = Controller.backToMenu() /*Gdx.app.exit()*/
   })
 
-  PlayButton = new TextButton("PLAY AGAIN", skin, "a")
+  PlayButton = new TextButton("PLAY AGAIN", skin)
   PlayButton.setSize(100,50)
   PlayButton.addListener(new ClickListener(){
     override def clicked(event: InputEvent, x: Float, y: Float): Unit = Controller.playAgain()
