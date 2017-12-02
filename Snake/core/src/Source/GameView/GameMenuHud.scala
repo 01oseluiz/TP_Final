@@ -13,34 +13,42 @@ class GameMenuHud(var width: Int, var height: Int) {
   var stage = new Stage
   private val atlas = new TextureAtlas("ui/atlas.pack")
   var skin = new Skin(Gdx.files.internal("ui/skin.json"), atlas)
-  var playersLabel = new Label("Players number:", skin, "blackSmallLabel")
-  private var ExitButton, ModsButton, BackButton: TextButton =_
-  private var PlayButton: Button =_
+  private var BackButton: TextButton =_
+  private var PlayButton, ExitButton, ModsButton, PlayersButton: Button =_
   var ModsMenu = new Window("MODS", skin, "mods")
+  var lista = new List[String](skin)
 
-  //Criacao da lista, ScrollPane e SelectBox
-  var list = new List[String](skin)
-  list.setItems(  "mod 1", "mod 2", "mod 3", "mod 4", "mod 5", "mod 6", "mod 7", "mod 8", "mod 9",
-    "mod 10", "mod 11", "mod 12", "mod 13", "mod 14", "mod 15", "mod 16", "mod 17",
-    "mod 18", "mod 19", "mod 20", "mod 21", "mod 22", "mod 23", "mod 24", "mod 25",
-    "mod 26", "mod 27", "mod 28", "mod 29", "mod 30", "mod 31", "mod 32", "mod 33",
-    "mod 34", "mod 35", "mod 36", "mod 37", "mod 38", "mod 39", "mod 40")
 
-  var scrollPane = new ScrollPane(list, skin)
+  def test (listagem : Array[Array[String]]): Unit = {
+    val mods = new Array[String](listagem.length)
+
+    listagem.foreach(listou => println(listou.mkString(" ")))
+
+    for(i <- 0 to listagem.length-1){
+      mods(i) = "VERSION: " + listagem(i)(0) + "   |   ENGINE: " + listagem(i)(1) + "   |   AUTHOR: " + listagem(i)(2) +
+                "   |   DATE: " + listagem(i)(3) + "   |   TITLE: " + listagem(i)(4) + "   |   DESCRIPTION: " + listagem(i)(5)
+    }
+    //TODO - dar um jeito de fazer sem ter q passar cada elemento
+    lista.setItems(mods(0), mods(1))
+//    lista.setItems(mods) precisa mudar para List[Array[String](skin)]
+  }
+
+
+  //ScrollPane e SelectBox
+  var scrollPane = new ScrollPane(lista, skin)
   //  scrollPane.setScrollingDisabled(true, false)
 
   var selectBox = new SelectBox[String](skin)
-  selectBox.setItems("2 players", "3 players", "4 players")
+  selectBox.setItems("            2 players            ", "            3 players", "            4 players")
 
 
   //Criacao dos botoes
-  ExitButton = new TextButton("Exit", skin)
-  //  ExitButton.padTop(20).padBottom(20).padLeft(5).padRight(5)
+  ExitButton = new Button(skin, "exit")
   ExitButton.addListener(new ClickListener(){
     override def clicked(event: InputEvent, x: Float, y: Float): Unit = Gdx.app.exit()
   })
 
-  ModsButton = new TextButton("Mods", skin)
+  ModsButton = new Button(skin, "mods")
   ModsButton.addListener(new ClickListener(){
     override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
       ModsMenu.setVisible(true)
@@ -48,6 +56,14 @@ class GameMenuHud(var width: Int, var height: Int) {
       scrollPane.setVisible(true)
     }
   })
+
+  PlayersButton = new Button(skin, "players")
+  PlayersButton.addListener(new ClickListener(){
+    override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
+      selectBox.showList()
+    }
+  })
+
 
   BackButton = new TextButton("BACK", skin)
   BackButton.addListener(new ClickListener(){
@@ -58,11 +74,11 @@ class GameMenuHud(var width: Int, var height: Int) {
     }
   })
 
-  PlayButton = new Button(skin)
+  PlayButton = new Button(skin, "play")
   PlayButton.addListener(new ClickListener(){
     override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
-      //TODO - chamar funcao da controller que realmente aplica a selecao dos players
-      println(selectBox.getSelected + " mod escolhido: " + (list.getSelectedIndex+1))
+      println((selectBox.getSelectedIndex+2) + " players e o mod escolhido: " + (lista.getSelectedIndex+1))
+      Controller.PLAYER_NUMBER = selectBox.getSelectedIndex+2
       Controller.startGame()
     }
   })
@@ -79,21 +95,23 @@ class GameMenuHud(var width: Int, var height: Int) {
   ModsMenu.setVisible(false)
   ModsMenu.setPosition(width/2 - ModsMenu.getWidth/2, height/2 - ModsMenu.getHeight/2)
 
-  //  selectBox.setPosition(560, 258)
-  selectBox.setPosition(600, 258)
-  playersLabel.setPosition(selectBox.getX-116, selectBox.getY)
-  //  scrollPane.setPosition(50, 154)
-  scrollPane.setPosition(ModsMenu.getX + 50, ModsMenu.getY + 60)
-  scrollPane.setSize(400, 200)
+  scrollPane.setPosition(ModsMenu.getX + 50, ModsMenu.getY + 35)
+  scrollPane.setSize(400, 235)
   scrollPane.setVisible(false)
 
   BackButton.setVisible(false)
   BackButton.setPosition(width/2 - BackButton.getWidth/2 , ModsMenu.getY + 10)
-  PlayButton.setPosition(300,254)
-  ExitButton.setSize(100,50)
-  ExitButton.setPosition((width - ExitButton.getWidth)/2, PlayButton.getY - 100)
-  ModsButton.setSize(100, 50)
-  ModsButton.setPosition(100, 210)
+
+  ExitButton.setPosition(372, 108)
+  ExitButton.setSize(40,30)
+  ModsButton.setPosition(82, 256)
+  ModsButton.setSize(170,44)
+  PlayButton.setPosition(280, 250)
+  PlayButton.setSize(86,56)
+  PlayersButton.setPosition(397, 260)
+  PlayersButton.setSize(170,44)
+
+  selectBox.setPosition(PlayersButton.getX + 2, PlayersButton.getY + 4)
 
 
 
@@ -101,7 +119,7 @@ class GameMenuHud(var width: Int, var height: Int) {
   stage.addActor(ExitButton)
   stage.addActor(ModsButton)
   stage.addActor(selectBox)
-  stage.addActor(playersLabel)
+  stage.addActor(PlayersButton)
   stage.addActor(ModsMenu)
   stage.addActor(scrollPane)
   stage. addActor(BackButton)

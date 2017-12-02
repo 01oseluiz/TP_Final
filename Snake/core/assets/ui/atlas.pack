@@ -3,16 +3,109 @@ atlas.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-PlayButton.up
+Square_winner
   rotate: false
-  xy: 1, 12
-  size: 58, 51
-  orig: 58, 51
+  xy: 1, 608
+  size: 285, 414
+  orig: 285, 414
+  offset: 0, 0
+  index: -1
+Square_loser
+  rotate: false
+  xy: 1, 192
+  size: 278, 414
+  orig: 278, 414
+  offset: 0, 0
+  index: -1
+PlayAgain
+  rotate: false
+  xy: 288, 932
+  size: 429, 90
+  split: 0, 0, 0, 0
+  orig: 429, 90
+  offset: 0, 0
+  index: -1
+PlayAgain_hover
+  rotate: false
+  xy: 288, 840
+  size: 429, 90
+  split: 0, 0, 0, 0
+  orig: 429, 90
+  offset: 0, 0
+  index: -1
+Mods_hover
+  rotate: false
+  xy: 288, 720
+  size: 350, 118
+  orig: 350, 118
+  offset: 0, 0
+  index: -1
+Mods
+  rotate: false
+  xy: 288, 600
+  size: 350, 118
+  orig: 350, 118
+  offset: 0, 0
+  index: -1
+Players_hover
+  rotate: false
+  xy: 281, 480
+  size: 344, 118
+  orig: 344, 118
+  offset: 0, 0
+  index: -1
+Players
+  rotate: false
+  xy: 281, 360
+  size: 344, 118
+  orig: 344, 118
+  offset: 0, 0
+  index: -1
+Menu
+  rotate: false
+  xy: 1, 80
+  size: 277, 110
+  orig: 277, 110
+  offset: 0, 0
+  index: -1
+Menu_hover
+  rotate: false
+  xy: 719, 912
+  size: 277, 110
+  orig: 277, 110
+  offset: 0, 0
+  index: -1
+Play
+  rotate: false
+  xy: 281, 204
+  size: 175, 154
+  orig: 175, 154
+  offset: 0, 0
+  index: -1
+Play_hover
+  rotate: false
+  xy: 458, 204
+  size: 175, 154
+  orig: 175, 154
+  offset: 0, 0
+  index: -1
+Exit
+  rotate: false
+  xy: 1, 1
+  size: 99, 77
+  orig: 99, 77
+  offset: 0, 0
+  index: -1
+Exit_hover
+  rotate: false
+  xy: 102, 1
+  size: 99, 77
+  orig: 99, 77
   offset: 0, 0
   index: -1
 Button.down
   rotate: false
-  xy: 1, 1
+  xy: 640, 829
   size: 9, 9
   split: 2, 2, 2, 2
   orig: 9, 9
@@ -20,7 +113,7 @@ Button.down
   index: -1
 Button.up
   rotate: false
-  xy: 12, 1
+  xy: 719, 901
   size: 9, 9
   split: 1, 2, 1, 2
   orig: 9, 9
@@ -28,70 +121,70 @@ Button.up
   index: -1
 darkestGrayTransparent
   rotate: false
-  xy: 61, 62
+  xy: 281, 605
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 darkerGrayTransparent
   rotate: false
-  xy: 23, 9
+  xy: 998, 1021
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 GrayTransparent
   rotate: false
-  xy: 61, 59
+  xy: 281, 201
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 lightGrayTransparent
   rotate: false
-  xy: 23, 6
+  xy: 627, 597
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 lightGray
   rotate: false
-  xy: 26, 9
+  xy: 203, 77
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 darkerGray
   rotate: false
-  xy: 61, 56
+  xy: 640, 826
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 darkestGray
   rotate: false
-  xy: 23, 3
+  xy: 651, 837
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 Gray
   rotate: false
-  xy: 26, 6
+  xy: 719, 898
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 green
   rotate: false
-  xy: 29, 9
+  xy: 730, 909
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 blue
   rotate: false
-  xy: 61, 53
+  xy: 281, 602
   size: 1, 1
   orig: 1, 1
   offset: 0, 0

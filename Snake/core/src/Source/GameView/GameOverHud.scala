@@ -2,10 +2,10 @@ package Source.GameView
 
 import Source.GameController.Controller
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.scenes.scene2d.{InputEvent, Stage}
 import com.badlogic.gdx.scenes.scene2d.ui._
-import com.badlogic.gdx.graphics.g2d.TextureAtlas
+import com.badlogic.gdx.graphics.g2d.{Sprite, TextureAtlas}
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 
 class GameOverHud (var width: Int, var height: Int){
@@ -14,15 +14,15 @@ class GameOverHud (var width: Int, var height: Int){
   var stage = new Stage
   private val atlas = new TextureAtlas("ui/atlas.pack")
   var skin = new Skin(Gdx.files.internal("ui/skin.json"), atlas)
-  var gameOverLabel = new Label("GAME OVER", skin, "redLabel")
-  private var MenuButton, PlayButton: TextButton =_
-
-
-  //Variaveis para mostras estatisticas
-  var i: Int = 0
+  private val gameOverLabel = new Label("GAME OVER", skin, "redLabel")
+  private val playAgainLabel = new Label("Play Again", skin, "white32Label")
+  private val menuLabel = new Label("Menu", skin, "white32Label")
+  private val timeLabel = new Label("Game Time", skin, "white15Label")
   var time : Double =_  //tempo a ser recebido da controller
-  //TODO - controller deve mandar a quantidade de players escolhida no menu
-  var totalPlayers:Int = 2 //numero total de players a serem exibidos
+  private var timerLabel : Label =_
+  private var MenuButton, PlayAgainButton: Button =_
+  var player1Highlight, player2Highlight, player3Highlight, player4Highlight: Sprite =_
+
 
   /**
     * Mostra cada player e seu desempenho na gameOverHud
@@ -34,32 +34,58 @@ class GameOverHud (var width: Int, var height: Int){
     */
   def playerStatisticsShow (name: String, ran: Int, eaten: Int, player: Int, winner: Boolean, playerTime: Double): Unit = {
     var playerLabel:Label = null
+    val totalPlayers = Controller.PLAYER_NUMBER //numero total de players a serem exibidos
+    var playerHighlight: Sprite = null
     this.time = playerTime
 
+
     if (winner) {
-      playerLabel = new Label( name + "\nPlayer " + player + "\nBeans eated: " + eaten + "\nRan: " + ran, skin, "arial", Color.GOLD)
+      playerLabel = new Label( name + "\nPlayer " + player + "\nBeans eated: " + eaten + "\nRan: " + ran, skin, "arial15", "gold")
+      playerHighlight = new Sprite(new Texture("ui/texturepacker/Square_winner.9.png"))
     }
     else {
-      playerLabel = new Label( name + "\nPlayer " + player + "\nBeans eated: " + eaten + "\nRan: " + ran, skin,"arial","green")
+      playerLabel = new Label( name + "\nPlayer " + player + "\nBeans eated: " + eaten + "\nRan: " + ran, skin,"arial15","green")
+      playerHighlight = new Sprite(new Texture("ui/texturepacker/Square_loser.9.png"))
     }
 
-    playerLabel.setPosition(width/6 + (player-1)*width/totalPlayers, height/2 )
+    if(totalPlayers == 2){
+      playerLabel.setPosition(width/6 + (player-1)*width/totalPlayers, height/2)
+      playerHighlight.setSize(200, 280)
+    } else if(totalPlayers == 3) {
+      playerLabel.setPosition(width/10 + (player-1)*width/totalPlayers, height/2)
+      playerHighlight.setSize(200, 280)
+    } else if(totalPlayers == 4){
+      playerLabel.setPosition(width/14 + (player-1)*width/totalPlayers, height/2)
+      playerHighlight.setSize(165, 250)
+    }
+
+    playerHighlight.setPosition(playerLabel.getX - playerHighlight.getWidth/3 + 10, playerLabel.getY - playerHighlight.getHeight/2)
+
+    if (player == 1) {
+      player1Highlight = playerHighlight
+    }
+    else if (player == 2) {
+      player2Highlight = playerHighlight
+    }
+    else if (player == 3) {
+      player3Highlight = playerHighlight
+    }
+    else if (player == 4) {
+      player4Highlight = playerHighlight
+    }
+
     stage.addActor(playerLabel)
   }
 
 
   //Criacao dos botoes em si
-  MenuButton = new TextButton("BACK TO MENU", skin)
-  MenuButton.setSize(126,50)
-  MenuButton.getStyle.pressedOffsetX = 1
-  MenuButton.getStyle.pressedOffsetY = -1
+  MenuButton = new Button(skin, "menu")
   MenuButton.addListener(new ClickListener(){
     override def clicked(event: InputEvent, x: Float, y: Float): Unit = Controller.backToMenu() /*Gdx.app.exit()*/
   })
 
-  PlayButton = new TextButton("PLAY AGAIN", skin)
-  PlayButton.setSize(100,50)
-  PlayButton.addListener(new ClickListener(){
+  PlayAgainButton = new Button(skin, "playAgain")
+  PlayAgainButton.addListener(new ClickListener(){
     override def clicked(event: InputEvent, x: Float, y: Float): Unit = Controller.playAgain()
   })
 
@@ -70,14 +96,27 @@ class GameOverHud (var width: Int, var height: Int){
     this.stage.clear()
 
     Controller.getStatistics()
+    //TODO - corrigir numero do tempo
+    timerLabel = new Label(time.toString, skin, "yellow15Label")
 
     //Posicionando a HUD e os botoes
     gameOverLabel.setPosition(width/2 - gameOverLabel.getWidth/2, height - gameOverLabel.getHeight)
-    PlayButton.setPosition(PlayButton.getWidth/4, height/10)
-    MenuButton.setPosition(width - MenuButton.getWidth*5/4, height/10)
+    timerLabel.setPosition(width/2 - timerLabel.getWidth/2, gameOverLabel.getY - 18)
+    timeLabel.setPosition(width/2 - timeLabel.getWidth/2, gameOverLabel.getY - 30)
+    PlayAgainButton.setSize(200,40)
+    PlayAgainButton.setPosition(PlayAgainButton.getWidth/4, height/10)
+    playAgainLabel.setPosition(PlayAgainButton.getX+60, PlayAgainButton.getY)
+    MenuButton.setSize(130,50)
+    MenuButton.setPosition(width - MenuButton.getWidth*7/5, height/10)
+//    MenuButton.setPosition(PlayAgainButton.getX-68, height/10)
+    menuLabel.setPosition(MenuButton.getX-15, MenuButton.getY)
 
     stage.addActor(gameOverLabel)
-    stage.addActor(PlayButton)
+    stage.addActor(timerLabel)
+    stage.addActor(timeLabel)
+    stage.addActor(playAgainLabel)
+    stage.addActor(PlayAgainButton)
+    stage.addActor(menuLabel)
     stage.addActor(MenuButton)
   }
 }

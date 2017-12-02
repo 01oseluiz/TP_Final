@@ -17,7 +17,7 @@ object Controller {
   var GAME_OVER:GameOverScreen = _
   var GAME_MENU:GameMenuScreen=_
   var GAME_DEFAULT:ScreenDefault=_
-  var PLAYER_NUMBER:Int = 4
+  var PLAYER_NUMBER:Int =_
 
   def setGameView(x:GameScreen): Unit = GAME_VIEW = x
   def setGameOver(x:GameOverScreen): Unit = GAME_OVER = x
@@ -59,7 +59,7 @@ object Controller {
     startGetMove()
     GAME_MENU.StartGame
     //Chamar a setBackground
-    GAME_VIEW.setBackground(1, 1, 0, 1)
+    GAME_VIEW.setBackground(1, 0.9f, 0, 1)
   }
 
   def pauseGame():Unit = {

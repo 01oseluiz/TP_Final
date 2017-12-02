@@ -1,8 +1,9 @@
 package Source.GameView
 
 import Source.GameController.Controller
+import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.{Gdx, Screen}
-import com.badlogic.gdx.graphics.{GL20, OrthographicCamera}
+import com.badlogic.gdx.graphics.{GL20, OrthographicCamera, Texture}
 
 class GameOverScreen(private var game: ScreenDefault) extends Screen {
 
@@ -12,6 +13,10 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
   val camera = new OrthographicCamera(width, height)
   camera.position.set(width/2, height/2, 0)
   camera.update()
+
+  //Variaveis para o background
+  //TODO - retirar comentaario para ver o erro
+  var background = new Sprite(new Texture("imgs/Game Over/Background.png"))
 
   private var setedOnce = false
 
@@ -41,10 +46,16 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
 
     //    game.batch.setProjectionMatrix(game.gameOverHud.stage.getCamera.combined)
     game.batch.begin() //comecar a desenhar a textura
-
+    game.gameOverHud.player2Highlight.draw(game.batch)
+    if(Controller.PLAYER_NUMBER == 3) game.gameOverHud.player3Highlight.draw(game.batch)
+    if(Controller.PLAYER_NUMBER == 4) {
+      game.gameOverHud.player3Highlight.draw(game.batch)
+      game.gameOverHud.player4Highlight.draw(game.batch)
+    }
     game.batch.end() //terminou de desenhar a textura
 
     game.gameOverHud.stage.draw() //Desesenha a HUD
+    game.gameOverHud.stage.act()  //Permite interacao do player com a HUD (botoes)
   }
 
   /**

@@ -5,35 +5,54 @@
     "red":        {"r": 1, "g": 0, "b": 0, "a": 1},
     "green":      {"r": 0, "g": 1, "b": 0, "a": 1},
     "blue":       {"r": 0, "g": 0, "b": 1, "a": 1},
-    "dark_gray":  {"r": 0.4, "g": 0.4, "b": 0.4, "a": 1}
+    "yellow":     {"r": 1, "g": 0.9, "b": 0, "a": 1},
+    "dark_gray":  {"r": 0.4, "g": 0.4, "b": 0.4, "a": 1},
+    "gold":       {"r": 0.9, "g":0.7 , "b": 0, "a": 1}
   },
 
   "com.badlogic.gdx.graphics.g2d.BitmapFont":{
-    "font":  {"file": "fonts/Fonte.fnt"},
-    "arial": {"file": "fonts/Arial15.fnt"},
-    "arialBlack": {"file": "fonts/ArialBlack15.fnt"}
+    "font":       {"file": "fonts/Fonte.fnt"},
+    "arial15":      {"file": "fonts/Arial15.fnt"},
+    "arialBlack15": {"file": "fonts/ArialBlack15.fnt"},
+    "arial32":    {"file": "fonts/Arial32.fnt"}
   },
 
 
   "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
-    "default": {"up": "PlayButton.up", "down": "PlayButton.up", "checked": "PlayButton.up"}
+    "play":         {"up": "Play", "down": "Play", "over": "Play_hover"},
+    "mods":         {"up": "Mods", "down": "Mods", "over": "Mods_hover"},
+    "players":      {"up": "Players", "down": "Players", "over": "Players_hover"},
+    "exit":         {"up": "Exit", "down": "Exit", "over": "Exit_hover"},
+    "menu":         {"up": "Menu", "down": "Menu", "over": "Menu_hover"},
+    "playAgain":    {"up": "PlayAgain", "down": "PlayAgain", "over": "PlayAgain_hover"}
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle":{
-    "default": {"up": "Button.up", "down": "Button.down", "font": "arialBlack", "pressedOffsetX": 1, "pressedOffsetY": -1}
+    "default": {"up": "Button.up", "down": "Button.down", "font": "arialBlack15", "pressedOffsetX": 1, "pressedOffsetY": -1}
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
     "whiteLabel":         {"font": "font", "fontColor": "white"},
-    "whiteSmallLabel":    {"font": "arial", "fontColor": "white"},
+    "white15Label":       {"font": "arial15", "fontColor": "white"},
+    "white32Label":       {"font": "arial32", "fontColor": "white"},
     "blackLabel":         {"font": "font", "fontColor": "black"},
-    "blackSmallLabel":    {"font": "arial", "fontColor": "black"},
+    "black15Label":       {"font": "arial15", "fontColor": "black"},
+    "black32Label":       {"font": "arial32", "fontColor": "black"},
     "greenLabel":         {"font": "font", "fontColor": "green"},
-    "greenSmallLabel":    {"font": "arial", "fontColor": "green"},
+    "green15Label":       {"font": "arial15", "fontColor": "green"},
+    "green32Label":       {"font": "arial32", "fontColor": "green"},
     "redLabel":           {"font": "font", "fontColor": "red"},
-    "redSmallLabel":      {"font": "arial", "fontColor": "red"},
+    "red15Label":         {"font": "arial15", "fontColor": "red"},
+    "red32Label":         {"font": "arial32", "fontColor": "red"},
     "blueLabel":          {"font": "font", "fontColor": "blue"},
-    "blueSmallLabel":     {"font": "arial", "fontColor": "blue"}
+    "blue15Label":        {"font": "arial15", "fontColor": "blue"},
+    "blue32Label":        {"font": "arial32", "fontColor": "blue"},
+    "yellowLabel":        {"font": "font", "fontColor": "yellow"},
+    "yellow15Label":      {"font": "arial15", "fontColor": "yellow"},
+    "yellow32Label":      {"font": "arial32", "fontColor": "yellow"},
+    "goldLabel":          {"font": "font", "fontColor": "gold"},
+    "gold15Label":        {"font": "arial15", "fontColor": "gold"},
+    "gold32Label":        {"font": "arial32", "fontColor": "gold"}
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
@@ -42,7 +61,7 @@
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
-    "default": {"font": "arial", "fontColorUnselected": "black", "fontColorSelected": "white", "selection": "green"}
+    "default": {"font": "arial15", "fontColorUnselected": "black", "fontColorSelected": "white", "selection": "green"}
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle": {
@@ -50,6 +69,6 @@
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle":{
-    "default": {"font": "arial", "fontColor": "black", "background": "lightGray", "scrollStyle": "default", "listStyle": "default"}
+    "default": {"font": "arial15", "fontColor": "black", /*"background": "Players", "backgroundOver": "Players_hover",*/ "scrollStyle": "default", "listStyle": "default"}
   }
 }

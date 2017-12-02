@@ -15,8 +15,7 @@ class GameMenuScreen(var game: ScreenDefault) extends Screen {
   camera.update()
 
   //Variaveis para o background
-  var img = new Texture("ui/SnakeTitleScreen.png")
-  var background = new Sprite(img)
+  var background = new Sprite(new Texture("imgs/Pagina Inicial/Background.9.png"))
 
   /**
     * Muda a tela para a tela de jogo
@@ -27,6 +26,10 @@ class GameMenuScreen(var game: ScreenDefault) extends Screen {
   }
 
   def show(): Unit = {
+    //TODO - fazer a controller mandar os mods
+    game.gameMenuHud.test(Array(Array("1.0", "Engine 1", "Autor 1", "Data 1", "Titulo 1", "Descricao 1"),
+                          Array("2.0", "Engine 2", "Autor 2", "Data 2", "Titulo 2", "Descricao 2")))
+
      Controller.setGameMenu(this)
 
     //Permite q os botoes sejam clicados
@@ -34,7 +37,7 @@ class GameMenuScreen(var game: ScreenDefault) extends Screen {
   }
 
   def render(delta: Float): Unit = {
-    Gdx.gl.glClearColor(0, 0, 0, 1) //setando a tela com uma cor
+    Gdx.gl.glClearColor(0, 0, 0, 0) //setando a tela com uma cor
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT) //limpando a tela com a cor
 
     game.batch.begin() //comecar a desenhar a textura
