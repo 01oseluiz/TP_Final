@@ -53,7 +53,6 @@ object Controller {
   }
 
   def startGame(): Unit ={
-    searchForMods()
     startGetMove()
     GAME_MENU.StartGame
   }
@@ -107,16 +106,20 @@ object Controller {
     }
   }
 
-  def searchForMods(): Unit ={
+  def searchForMods(): Array[(String,String,String,String,String,String)] ={
     try {
       val listmods = searchMods.getModsInfo
-      currentMod = listmods(0)._2
+      listmods
     }catch{
       case x:Exception =>
         currentMod = "Default"
-        println(x.getMessage)
+        throw x
 
         //TODO-a view deve mostrar o erro recebido aqui
     }
+  }
+
+  def setMod(mod_Engine:String) : Unit = {
+    currentMod = mod_Engine
   }
 }

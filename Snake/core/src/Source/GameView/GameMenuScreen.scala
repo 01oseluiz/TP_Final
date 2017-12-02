@@ -26,11 +26,15 @@ class GameMenuScreen(var game: ScreenDefault) extends Screen {
   }
 
   def show(): Unit = {
-    //TODO - fazer a controller mandar os mods
-    game.gameMenuHud.test(Array(Array("1.0", "Engine 1", "Autor 1", "Data 1", "Titulo 1", "Descricao 1"),
-                          Array("2.0", "Engine 2", "Autor 2", "Data 2", "Titulo 2", "Descricao 2")))
-
      Controller.setGameMenu(this)
+
+    //TODO - fazer a controller mandar os mods - Array[(String,String,String,String,String,String)]
+    //Não exibir o nome da Engine, somente passar para função setMod, na Controller caso clicado
+    //Lembrar que pode ocorrer erro ao chamar a função searchForMods() da controller, logo deve-se exibir
+    //somente o erro caso a função retorner um throw
+    //try{game.gameMenuHud.test(Controller.searchForMods())} ....
+    game.gameMenuHud.test(Array(("1.0", "Engine 1", "Autor 1", "Data 1", "Titulo 1", "Descricao 1"),
+                                ("2.0", "Engine 2", "Autor 2", "Data 2", "Titulo 2", "Descricao 2")))
 
     //Permite q os botoes sejam clicados
     Gdx.input.setInputProcessor(game.gameMenuHud.stage)

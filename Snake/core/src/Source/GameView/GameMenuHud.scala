@@ -19,18 +19,15 @@ class GameMenuHud(var width: Int, var height: Int) {
   var lista = new List[String](skin)
 
 
-  def test (listagem : Array[Array[String]]): Unit = {
-    val mods = new Array[String](listagem.length)
+  def test (listagem : Array[(String,String,String,String,String,String)]): Unit = {
+    val mods = new com.badlogic.gdx.utils.Array[String]
 
-    listagem.foreach(listou => println(listou.mkString(" ")))
-
-    for(i <- 0 to listagem.length-1){
-      mods(i) = "VERSION: " + listagem(i)(0) + "   |   ENGINE: " + listagem(i)(1) + "   |   AUTHOR: " + listagem(i)(2) +
-                "   |   DATE: " + listagem(i)(3) + "   |   TITLE: " + listagem(i)(4) + "   |   DESCRIPTION: " + listagem(i)(5)
+    listagem.foreach{mod=>
+      mods.add("VERSION: " + mod._1 + "    |   AUTHOR: " + mod._3 + "    |   DATE: " + mod._4 +
+                    "     | TITLE: " + mod._5 + "     |DESCRIPTION: " + mod._6)
     }
-    //TODO - dar um jeito de fazer sem ter q passar cada elemento
-    lista.setItems(mods(0), mods(1))
-//    lista.setItems(mods) precisa mudar para List[Array[String](skin)]
+
+    lista.setItems(mods)
   }
 
 
