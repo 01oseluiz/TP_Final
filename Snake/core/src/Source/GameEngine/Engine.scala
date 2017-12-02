@@ -79,23 +79,27 @@ class Engine extends ObjectsVisible{
     * @param key tecla pressionada
     */
   def isEndGame(player: Sprite, key:Int):Unit ={
-    if(player == PLAYERS(0)){
-      GAME_ENGINE.snakeCollisions(PLAYERS(0), PLAYERS(1))
-      GAME_ENGINE.killerThingsCollisions(PLAYERS(0), KILLER_THINGS)
-    }else if(player == PLAYERS(1)){
-      GAME_ENGINE.snakeCollisions(PLAYERS(1), PLAYERS(0))
-      GAME_ENGINE.killerThingsCollisions(PLAYERS(1), KILLER_THINGS)
-    }
+//    if(player == PLAYERS(0)){
+//      GAME_ENGINE.snakeCollisions(PLAYERS(0), PLAYERS(1))
+//      GAME_ENGINE.killerThingsCollisions(PLAYERS(0), KILLER_THINGS)
+//    }else if(player == PLAYERS(1)){
+//      GAME_ENGINE.snakeCollisions(PLAYERS(1), PLAYERS(0))
+//      GAME_ENGINE.killerThingsCollisions(PLAYERS(1), KILLER_THINGS)
+//    }
+    PLAYERS.foreach(x => if(player == x){PLAYERS.foreach(y => if(x != y){GAME_ENGINE.snakeCollisions(x, y)})})
+    PLAYERS.foreach(x => if(player == x){GAME_ENGINE.killerThingsCollisions(x, KILLER_THINGS)})
+    PLAYERS.foreach(x => if(!x.isAlive){GAME_ENGINE.FinishGame();Controller.gameOver()})
 
-    if(!PLAYERS(0).isAlive && !PLAYERS(1).isAlive){
-      Controller.gameOver()
-      GAME_ENGINE.FinishGame()
-    }else if(!PLAYERS(0).isAlive && player == PLAYERS(0)){
-      Controller.gameOver()
-      GAME_ENGINE.FinishGame()
-    }else if(!PLAYERS(1).isAlive && player == PLAYERS(1)){
-      Controller.gameOver()
-      GAME_ENGINE.FinishGame()
-    }
+
+//    if(!PLAYERS(0).isAlive && !PLAYERS(1).isAlive){
+//      Controller.gameOver()
+//      GAME_ENGINE.FinishGame()
+//    }else if(!PLAYERS(0).isAlive && player == PLAYERS(0)){
+//      Controller.gameOver()
+//      GAME_ENGINE.FinishGame()
+//    }else if(!PLAYERS(1).isAlive && player == PLAYERS(1)){
+//      Controller.gameOver()
+//      GAME_ENGINE.FinishGame()
+//    }
   }
 }
