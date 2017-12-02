@@ -15,8 +15,8 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
   camera.update()
 
   //Variaveis para o background
-  //TODO - retirar comentaario para ver o erro
-  var background = new Sprite(new Texture("imgs/Game Over/Background.png"))
+  //TODO - retirar comentario para ver o erro
+//  var background = new Sprite(new Texture("imgs/Game Over/Background.png"))
 
   private var setedOnce = false
 
