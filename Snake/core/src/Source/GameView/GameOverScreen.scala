@@ -15,9 +15,9 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
   camera.update()
 
   //Variaveis para o background
-  //TODO - retirar comentario para ver o erro
-//  var background = new Sprite(new Texture("imgs/Game Over/Background.png"))
+  var background:Sprite = _
 
+  //Variavel para controle de repeticoes na render
   private var setedOnce = false
 
   /**
@@ -40,12 +40,14 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT) //limpando a tela com a cor
 
     if(!setedOnce){
+      background = new Sprite(new Texture("imgs/Game Over/Background.png"))
       game.gameOverHud.setGameOverScreenHUD()
       setedOnce = true
     }
 
     //    game.batch.setProjectionMatrix(game.gameOverHud.stage.getCamera.combined)
     game.batch.begin() //comecar a desenhar a textura
+    game.batch.draw(background, background.getX, background.getY)
     game.gameOverHud.player2Highlight.draw(game.batch)
     if(Controller.PLAYER_NUMBER == 3) game.gameOverHud.player3Highlight.draw(game.batch)
     if(Controller.PLAYER_NUMBER == 4) {
@@ -75,6 +77,7 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
 
   def dispose(): Unit = {
     game.batch.dispose()
+    background.getTexture.dispose()
     game.gameOverHud.stage.dispose()
     game.gameOverHud.skin.dispose()
   }

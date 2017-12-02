@@ -29,8 +29,6 @@ object Controller {
 
   //Realiza a verificação de entradas de teclado em paralelo
   private var movePlayer:ListBuffer[InputMove] = ListBuffer.empty
-  //  private var movePlayer1:InputMove = _
-//  private var movePlayer2:InputMove = _
 
   /**
     * Calcula a proxima interação do jogo:
@@ -58,21 +56,15 @@ object Controller {
     searchForMods()
     startGetMove()
     GAME_MENU.StartGame
-    //Chamar a setBackground
-    GAME_VIEW.setBackground(1, 0.9f, 0, 1)
   }
 
   def pauseGame():Unit = {
     movePlayer.foreach(x => x.pause())
-//    movePlayer1.pause()
-//    movePlayer2.pause()
   }
 
   def playAgain(): Unit ={
     startGetMove()
     GAME_OVER.PlayAgain
-    //Chamar a setBackground de novo aqui
-    GAME_VIEW.setBackground(0, 1, 1, 1)
   }
 
   def gameOver(): Unit ={
@@ -94,53 +86,25 @@ object Controller {
     for (i <- 0 until PLAYER_NUMBER) {
       movePlayer += new InputMove(ENGINE.PLAYERS(i), new SnakeMoveRules {})
     }
-    //    movePlayer1 = new InputMove(ENGINE.PLAYERS(0), new SnakeMoveRules{})
-    //    movePlayer2 = new InputMove(ENGINE.PLAYERS(1), new SnakeMoveRules{})
     movePlayer.foreach(x => x.start())
-    //    movePlayer1.start()
-    //    movePlayer2.start()
   }
 
   def stopGetMove(): Unit ={
     Thread.sleep(80) // Garante que as Threads teram terminado de fazer as verificações
-    // Possibilitando computar um possível empate
+                     // Possibilitando computar um possível empate
     movePlayer.foreach(x => x.close())
-//    movePlayer1.close()
-//    movePlayer2.close()
   }
 
   def getStatistics(): Unit ={
-    var name = ENGINE.PLAYERS(0).myName
-    var player = 1
-    var eatenBeans = ENGINE.PLAYERS(0).getEatenBeans
-    var pixelRan = ENGINE.PLAYERS(0).getPixelRan
-    var time = ENGINE.PLAYERS(0).getTime
-    var winner = ENGINE.PLAYERS(0).isAlive
-
     for (i <- 0 until PLAYER_NUMBER) {
-      name = ENGINE.PLAYERS(i).myName
-      player = i + 1
-      eatenBeans = ENGINE.PLAYERS(i).getEatenBeans
-      pixelRan = ENGINE.PLAYERS(i).getPixelRan
-      time = ENGINE.PLAYERS(i).getTime
-      winner = ENGINE.PLAYERS(i).isAlive
+      val name = ENGINE.PLAYERS(i).myName
+      val player = i + 1
+      val eatenBeans = ENGINE.PLAYERS(i).getEatenBeans
+      val pixelRan = ENGINE.PLAYERS(i).getPixelRan
+      val time = ENGINE.PLAYERS(i).getTime
+      val winner = ENGINE.PLAYERS(i).isAlive
       GAME_DEFAULT.gameOverHud.playerStatisticsShow(name, pixelRan, eatenBeans, player, winner, time)
     }
-
-//    //CHAMAR FUNÇÃO DA GAMEOVERHUD
-//    //Mudar para pegar o vencedor
-//    GAME_DEFAULT.gameOverHud.playerStatisticsShow(name, pixelRan, eatenBeans, player, winner, time)
-//
-//    name = ENGINE.PLAYERS(1).myName
-//    player = 2
-//    eatenBeans = ENGINE.PLAYERS(1).getEatenBeans
-//    pixelRan = ENGINE.PLAYERS(1).getPixelRan
-//    time = ENGINE.PLAYERS(1).getTime
-//    winner = ENGINE.PLAYERS(1).isAlive
-//
-//    //CHAMAR FUNÇÃO DA GAMEOVERHUD
-//    //Mudar para pegar o vencedor real
-//    GAME_DEFAULT.gameOverHud.playerStatisticsShow(name, pixelRan, eatenBeans, player, winner, time)
   }
 
   def searchForMods(): Unit ={

@@ -18,7 +18,7 @@ class GameOverHud (var width: Int, var height: Int){
   private val playAgainLabel = new Label("Play Again", skin, "white32Label")
   private val menuLabel = new Label("Menu", skin, "white32Label")
   private val timeLabel = new Label("Game Time", skin, "white15Label")
-  var time : Double =_  //tempo a ser recebido da controller
+  var time : String =_  //tempo a ser recebido da controller
   private var timerLabel : Label =_
   private var MenuButton, PlayAgainButton: Button =_
   var player1Highlight, player2Highlight, player3Highlight, player4Highlight: Sprite =_
@@ -32,7 +32,7 @@ class GameOverHud (var width: Int, var height: Int){
     * @param player numero do player recebido da controller
     * @param winner venceu ou nao
     */
-  def playerStatisticsShow (name: String, ran: Int, eaten: Int, player: Int, winner: Boolean, playerTime: Double): Unit = {
+  def playerStatisticsShow (name: String, ran: Int, eaten: Int, player: Int, winner: Boolean, playerTime: String): Unit = {
     var playerLabel:Label = null
     val totalPlayers = Controller.PLAYER_NUMBER //numero total de players a serem exibidos
     var playerHighlight: Sprite = null
@@ -96,7 +96,6 @@ class GameOverHud (var width: Int, var height: Int){
     this.stage.clear()
 
     Controller.getStatistics()
-    //TODO - corrigir numero do tempo
     timerLabel = new Label(time.toString, skin, "yellow15Label")
 
     //Posicionando a HUD e os botoes
