@@ -15,7 +15,7 @@ class GameMenuScreen(var game: ScreenDefault) extends Screen {
   camera.update()
 
   //Variaveis para o background
-  var background = new Sprite(new Texture("imgs/Pagina Inicial/Background.9.png"))
+  var background = new Sprite(new Texture("ui/BackgroundInicial.9.png"))
 
   /**
     * Muda a tela para a tela de jogo

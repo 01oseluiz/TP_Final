@@ -40,14 +40,15 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT) //limpando a tela com a cor
 
     if(!setedOnce){
-      background = new Sprite(new Texture("imgs/Game Over/Background.png"))
+      background = new Sprite(new Texture("ui/BackgroundOver.png"))
       game.gameOverHud.setGameOverScreenHUD()
       setedOnce = true
     }
 
     //    game.batch.setProjectionMatrix(game.gameOverHud.stage.getCamera.combined)
     game.batch.begin() //comecar a desenhar a textura
-    game.batch.draw(background, background.getX, background.getY)
+    game.batch.draw(background, 0, 0, width, height)
+    game.gameOverHud.player1Highlight.draw(game.batch)
     game.gameOverHud.player2Highlight.draw(game.batch)
     if(Controller.PLAYER_NUMBER == 3) game.gameOverHud.player3Highlight.draw(game.batch)
     if(Controller.PLAYER_NUMBER == 4) {

@@ -3,23 +3,9 @@ atlas.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-Square_winner
-  rotate: false
-  xy: 1, 608
-  size: 285, 414
-  orig: 285, 414
-  offset: 0, 0
-  index: -1
-Square_loser
-  rotate: false
-  xy: 1, 192
-  size: 278, 414
-  orig: 278, 414
-  offset: 0, 0
-  index: -1
 PlayAgain
   rotate: false
-  xy: 288, 932
+  xy: 1, 415
   size: 429, 90
   split: 0, 0, 0, 0
   orig: 429, 90
@@ -27,7 +13,7 @@ PlayAgain
   index: -1
 PlayAgain_hover
   rotate: false
-  xy: 288, 840
+  xy: 1, 323
   size: 429, 90
   split: 0, 0, 0, 0
   orig: 429, 90
@@ -35,77 +21,77 @@ PlayAgain_hover
   index: -1
 Mods_hover
   rotate: false
-  xy: 288, 720
+  xy: 432, 387
   size: 350, 118
   orig: 350, 118
   offset: 0, 0
   index: -1
 Mods
   rotate: false
-  xy: 288, 600
+  xy: 1, 203
   size: 350, 118
   orig: 350, 118
   offset: 0, 0
   index: -1
 Players_hover
   rotate: false
-  xy: 281, 480
+  xy: 1, 83
   size: 344, 118
   orig: 344, 118
   offset: 0, 0
   index: -1
 Players
   rotate: false
-  xy: 281, 360
+  xy: 432, 267
   size: 344, 118
   orig: 344, 118
   offset: 0, 0
   index: -1
+Play
+  rotate: false
+  xy: 784, 351
+  size: 175, 154
+  orig: 175, 154
+  offset: 0, 0
+  index: -1
 Menu
   rotate: false
-  xy: 1, 80
+  xy: 353, 155
   size: 277, 110
   orig: 277, 110
   offset: 0, 0
   index: -1
 Menu_hover
   rotate: false
-  xy: 719, 912
+  xy: 347, 43
   size: 277, 110
   orig: 277, 110
   offset: 0, 0
   index: -1
-Play
-  rotate: false
-  xy: 281, 204
-  size: 175, 154
-  orig: 175, 154
-  offset: 0, 0
-  index: -1
 Play_hover
   rotate: false
-  xy: 458, 204
+  xy: 632, 111
   size: 175, 154
   orig: 175, 154
   offset: 0, 0
   index: -1
 Exit
   rotate: false
-  xy: 1, 1
+  xy: 1, 4
   size: 99, 77
   orig: 99, 77
   offset: 0, 0
   index: -1
 Exit_hover
   rotate: false
-  xy: 102, 1
+  xy: 102, 4
   size: 99, 77
   orig: 99, 77
   offset: 0, 0
   index: -1
 Button.down
   rotate: false
-  xy: 640, 829
+  xy: 961, 496
   size: 9, 9
   split: 2, 2, 2, 2
   orig: 9, 9
@@ -113,7 +99,7 @@ Button.down
   index: -1
 Button.up
   rotate: false
-  xy: 719, 901
+  xy: 353, 312
   size: 9, 9
   split: 1, 2, 1, 2
   orig: 9, 9
@@ -121,70 +107,70 @@ Button.up
   index: -1
 darkestGrayTransparent
   rotate: false
-  xy: 281, 605
+  xy: 347, 200
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 darkerGrayTransparent
   rotate: false
-  xy: 998, 1021
+  xy: 350, 200
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 GrayTransparent
   rotate: false
-  xy: 281, 201
+  xy: 778, 384
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 lightGrayTransparent
   rotate: false
-  xy: 627, 597
+  xy: 781, 384
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 lightGray
   rotate: false
-  xy: 203, 77
+  xy: 626, 152
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 darkerGray
   rotate: false
-  xy: 640, 826
+  xy: 629, 152
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 darkestGray
   rotate: false
-  xy: 651, 837
+  xy: 1, 1
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 Gray
   rotate: false
-  xy: 719, 898
+  xy: 203, 80
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 green
   rotate: false
-  xy: 730, 909
+  xy: 961, 493
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 blue
   rotate: false
-  xy: 281, 602
+  xy: 972, 504
   size: 1, 1
   orig: 1, 1
   offset: 0, 0

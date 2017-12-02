@@ -41,11 +41,11 @@ class GameOverHud (var width: Int, var height: Int){
 
     if (winner) {
       playerLabel = new Label( name + "\nPlayer " + player + "\nBeans eated: " + eaten + "\nRan: " + ran, skin, "arial15", "gold")
-      playerHighlight = new Sprite(new Texture("ui/texturepacker/Square_winner.9.png"))
+      playerHighlight = new Sprite(new Texture("ui/Square_winner.9.png"))
     }
     else {
       playerLabel = new Label( name + "\nPlayer " + player + "\nBeans eated: " + eaten + "\nRan: " + ran, skin,"arial15","green")
-      playerHighlight = new Sprite(new Texture("ui/texturepacker/Square_loser.9.png"))
+      playerHighlight = new Sprite(new Texture("ui/Square_loser.9.png"))
     }
 
     if(totalPlayers == 2){
@@ -100,7 +100,7 @@ class GameOverHud (var width: Int, var height: Int){
 
     //Posicionando a HUD e os botoes
     gameOverLabel.setPosition(width/2 - gameOverLabel.getWidth/2, height - gameOverLabel.getHeight)
-    timerLabel.setPosition(width/2 - timerLabel.getWidth/2, gameOverLabel.getY - 18)
+    timerLabel.setPosition(width/2 - timerLabel.getWidth/2, gameOverLabel.getY - 15)
     timeLabel.setPosition(width/2 - timeLabel.getWidth/2, gameOverLabel.getY - 30)
     PlayAgainButton.setSize(200,40)
     PlayAgainButton.setPosition(PlayAgainButton.getWidth/4, height/10)
