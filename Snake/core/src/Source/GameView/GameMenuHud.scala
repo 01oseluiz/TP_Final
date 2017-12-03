@@ -36,7 +36,7 @@ class GameMenuHud(var width: Int, var height: Int) {
   //  scrollPane.setScrollingDisabled(true, false)
 
   var selectBox = new SelectBox[String](skin)
-  selectBox.setItems("            2 players            ", "            3 players", "            4 players")
+  selectBox.setItems("            1 players            ","            2 players            ", "            3 players", "            4 players")
 
 
   //Criacao dos botoes
@@ -74,8 +74,8 @@ class GameMenuHud(var width: Int, var height: Int) {
   PlayButton = new Button(skin, "play")
   PlayButton.addListener(new ClickListener(){
     override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
-      println((selectBox.getSelectedIndex+2) + " players e o mod escolhido: " + (lista.getSelectedIndex+1))
-      Controller.PLAYER_NUMBER = selectBox.getSelectedIndex+2
+      println((selectBox.getSelectedIndex+1) + " players e o mod escolhido: " + (lista.getSelectedIndex+1))
+      Controller.PLAYER_NUMBER = selectBox.getSelectedIndex+1
       Controller.startGame()
     }
   })

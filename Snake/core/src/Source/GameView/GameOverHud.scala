@@ -48,7 +48,10 @@ class GameOverHud (var width: Int, var height: Int){
       playerHighlight = new Sprite(new Texture("ui/Square_loser.9.png"))
     }
 
-    if(totalPlayers == 2){
+    if(totalPlayers == 1){
+      playerLabel.setPosition(width*3/7, height/2)
+      playerHighlight.setSize(200, 280)
+    }else if(totalPlayers == 2){
       playerLabel.setPosition(width/6 + (player-1)*width/totalPlayers, height/2)
       playerHighlight.setSize(200, 280)
     } else if(totalPlayers == 3) {

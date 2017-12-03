@@ -80,6 +80,14 @@ class Engine extends ObjectsVisible{
     */
   def isEndGame(player: Sprite, key:Int):Unit ={
     //TODO-possibilitar definição de fim de jogo para mods
+
+    //Possibilita o modo single player
+    if(Controller.PLAYER_NUMBER == 1 ){
+      val pseudoPlayer = new Sprite(-1,-1)
+      pseudoPlayer.setAsInvisible()
+      GAME_ENGINE.snakeCollisions(player, pseudoPlayer)
+    }
+
     PLAYERS.foreach(x => if(player == x){PLAYERS.foreach(y => if(x != y){GAME_ENGINE.snakeCollisions(x, y)})})
     PLAYERS.foreach(x => if(player == x){GAME_ENGINE.killerThingsCollisions(x, KILLER_THINGS)})
     PLAYERS.foreach(x => if(!x.isAlive){GAME_ENGINE.FinishGame();Controller.gameOver()})
