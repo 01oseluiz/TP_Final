@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Color
 
 import scala.collection.mutable.ListBuffer
 
-trait GameEngine extends BeanMoveRules with DeathRules with DynamicMoveRules with BonusMoveRules {
+trait GameEngine extends BeanMoveRules with DeathRules with DynamicMoveRules with BonusMoveRules with GameOverRules{
   /**
     * função para se finalizar algo da engine ou suas patern classes, se necessário
     */

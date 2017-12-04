@@ -11,11 +11,8 @@ class ClassicEngine extends GameEngine with
   ClassicBeansMoveRules with
   ClassicBonusMoveRules with
   ClassicDynamicMoveRules with
-  ClassicDeathRules {
-
-  private final val SIZE_INITIAL = 7
-
-
+  ClassicDeathRules with
+  ClassicGameOverRules {
 
 
   //Variaveis dos players e beans

@@ -40,11 +40,11 @@ class GameOverHud (var width: Int, var height: Int){
 
 
     if (winner) {
-      playerLabel = new Label( name + "\nPlayer " + player + "\nBeans eated: " + eaten + "\nRan: " + ran, skin, "arial15", "gold")
+      playerLabel = new Label( name + "\nPlayer " + player + "\nBeans eaten: " + eaten + "\nRan: " + ran, skin, "arial15", "gold")
       playerHighlight = new Sprite(new Texture("ui/Square_winner.9.png"))
     }
     else {
-      playerLabel = new Label( name + "\nPlayer " + player + "\nBeans eated: " + eaten + "\nRan: " + ran, skin,"arial15","green")
+      playerLabel = new Label( name + "\nPlayer " + player + "\nBeans eaten: " + eaten + "\nRan: " + ran, skin,"arial15","green")
       playerHighlight = new Sprite(new Texture("ui/Square_loser.9.png"))
     }
 
