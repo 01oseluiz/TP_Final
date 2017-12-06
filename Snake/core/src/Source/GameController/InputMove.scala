@@ -34,6 +34,11 @@ class InputMove(private val player: Sprite, snakeMoveRules: SnakeMoveRules) exte
         }
 
         if ((System.currentTimeMillis() - timeNowMove) >= delay) {
+
+          if(ENGINE.isSnakeDead(player, key)){
+            close()
+          }
+
           //Movimenta a cobra
           ENGINE.movementSnake(player, key, snakeMoveRules)
 
@@ -52,6 +57,7 @@ class InputMove(private val player: Sprite, snakeMoveRules: SnakeMoveRules) exte
 
           key = Input.Keys.ANY_KEY
           timeNowMove = System.currentTimeMillis()
+
         }
       }
     }

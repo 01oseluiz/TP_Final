@@ -12,6 +12,7 @@ class Engine extends ObjectsVisible{
   var KILLER_THINGS :ListBuffer[Sprite] = ListBuffer.empty
   var DYNAMIC_THINGS :ListBuffer[Sprite] = ListBuffer.empty
   var BONUS_OBJECT :ListBuffer[Sprite] = ListBuffer.empty
+  var DEAD_SNAKES :ListBuffer[Sprite] = ListBuffer.empty
 
   // Adiciona um sprite a lista de objetos
   def addPlayer(player:Sprite):Unit = PLAYERS += player
@@ -19,6 +20,7 @@ class Engine extends ObjectsVisible{
   def addKillerThing(killerThing:Sprite):Unit = KILLER_THINGS += killerThing
   def addDynamicThing(dynamic:Sprite):Unit = DYNAMIC_THINGS += dynamic
   def addBonus(bonus:Sprite):Unit = BONUS_OBJECT += bonus
+  def addDead(player:Sprite):Unit = DEAD_SNAKES += player
 
   // Retira um sprite da lista de objetos
   def remPlayer(player:Sprite):Unit = PLAYERS -= player
@@ -79,7 +81,21 @@ class Engine extends ObjectsVisible{
     * @param key tecla pressionada
     */
   def isEndGame(player: Sprite, key:Int):Unit ={
-    if(GAME_ENGINE.isEndGame(player, key, GAME_ENGINE, PLAYERS, KILLER_THINGS)) Controller.gameOver()
+    if(GAME_ENGINE.isEndGame(player, key, GAME_ENGINE, PLAYERS, KILLER_THINGS)) {
+      Controller.gameOver()
+      GAME_ENGINE.FinishGame()
+    }
+
+  }
+
+  def isSnakeDead (player: Sprite, key:Int): Boolean = {
+    if (!player.isAlive) {
+      player.setAsInvisible()
+      addDead(player)
+      remPlayer(player)
+      return true
+    }
+    false
   }
 //    //TODO-possibilitar definição de fim de jogo para mods
 //

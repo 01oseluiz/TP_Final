@@ -22,7 +22,9 @@ trait ClassicGameOverRules extends GameOverRules{
 
     PLAYERS.foreach(x => if(player == x){PLAYERS.foreach(y => if(x != y){GAME_ENGINE.snakeCollisions(x, y)})})
     PLAYERS.foreach(x => if(player == x){GAME_ENGINE.killerThingsCollisions(x, KILLER_THINGS)})
-    PLAYERS.foreach(x => if(!x.isAlive){GAME_ENGINE.FinishGame();return true})
+    PLAYERS.foreach(x => deadCount += 1)
+
+    if (deadCount <= 1 && deadCount < GAME_ENGINE.playerCount){return true}
     false
   }
 }

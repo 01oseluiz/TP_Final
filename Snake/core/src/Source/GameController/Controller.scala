@@ -95,6 +95,9 @@ object Controller {
   }
 
   def getStatistics(): Unit ={
+
+    ENGINE.DEAD_SNAKES.foreach(x => ENGINE.addPlayer(x))
+
     for (i <- 0 until PLAYER_NUMBER) {
       val name = ENGINE.PLAYERS(i).myName
       val player = i + 1
