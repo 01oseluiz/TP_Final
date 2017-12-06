@@ -26,7 +26,7 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
   def PlayAgain: Unit ={
     game.setScreen(new GameScreen(game))
     Gdx.input.setInputProcessor(null)
-    }
+  }
 
   def show(): Unit = {
     Controller.setGameOver(this)

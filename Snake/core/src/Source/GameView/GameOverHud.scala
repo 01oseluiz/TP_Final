@@ -50,16 +50,16 @@ class GameOverHud (var width: Int, var height: Int){
 
     if(totalPlayers == 1){
       playerLabel.setPosition(width*3/7, height/2)
-      playerHighlight.setSize(200, 280)
+      playerHighlight.setSize(width/3.2f /*200*/, height/1.71f /*280*/)
     }else if(totalPlayers == 2){
       playerLabel.setPosition(width/6 + (player-1)*width/totalPlayers, height/2)
-      playerHighlight.setSize(200, 280)
+      playerHighlight.setSize(width/3.2f /*200*/, height/1.71f /*280*/)
     } else if(totalPlayers == 3) {
       playerLabel.setPosition(width/10 + (player-1)*width/totalPlayers, height/2)
-      playerHighlight.setSize(200, 280)
+      playerHighlight.setSize(width/3.2f /*200*/, height/1.71f /*280*/)
     } else if(totalPlayers == 4){
       playerLabel.setPosition(width/14 + (player-1)*width/totalPlayers, height/2)
-      playerHighlight.setSize(165, 250)
+      playerHighlight.setSize(width/3.88f /*165*/, height/1.92f /*250*/)
     }
 
     playerHighlight.setPosition(playerLabel.getX - playerHighlight.getWidth/3 + 10, playerLabel.getY - playerHighlight.getHeight/2)
@@ -84,7 +84,7 @@ class GameOverHud (var width: Int, var height: Int){
   //Criacao dos botoes em si
   MenuButton = new Button(skin, "menu")
   MenuButton.addListener(new ClickListener(){
-    override def clicked(event: InputEvent, x: Float, y: Float): Unit = Controller.backToMenu() /*Gdx.app.exit()*/
+    override def clicked(event: InputEvent, x: Float, y: Float): Unit = Controller.backToMenu()
   })
 
   PlayAgainButton = new Button(skin, "playAgain")
@@ -103,15 +103,16 @@ class GameOverHud (var width: Int, var height: Int){
 
     //Posicionando a HUD e os botoes
     gameOverLabel.setPosition(width/2 - gameOverLabel.getWidth/2, height - gameOverLabel.getHeight)
-    timerLabel.setPosition(width/2 - timerLabel.getWidth/2, gameOverLabel.getY - 15)
-    timeLabel.setPosition(width/2 - timeLabel.getWidth/2, gameOverLabel.getY - 30)
-    PlayAgainButton.setSize(200,40)
+    timerLabel.setPosition(width/2 - timerLabel.getWidth/2, gameOverLabel.getY - height/32)
+    timeLabel.setPosition(width/2 - timeLabel.getWidth/2, gameOverLabel.getY - height/16)
+    PlayAgainButton.setSize(width/3.2f /*200*/, height/12/*40*/)
     PlayAgainButton.setPosition(PlayAgainButton.getWidth/4, height/10)
-    playAgainLabel.setPosition(PlayAgainButton.getX+60, PlayAgainButton.getY)
-    MenuButton.setSize(130,50)
+    playAgainLabel.setPosition(PlayAgainButton.getX + width/10.67f/*60*/, PlayAgainButton.getY)
+    MenuButton.setSize(width/4.92f /*130*/,height/9.6f /*50*/)
     MenuButton.setPosition(width - MenuButton.getWidth*7/5, height/10)
-//    MenuButton.setPosition(PlayAgainButton.getX-68, height/10)
-    menuLabel.setPosition(MenuButton.getX-15, MenuButton.getY)
+    //    MenuButton.setPosition(PlayAgainButton.getX-68, height/10)
+    //TODO - arrumar a posicao X ao reescalar
+    menuLabel.setPosition(MenuButton.getX - width/42.67f /*15*/, MenuButton.getY)
 
     stage.addActor(gameOverLabel)
     stage.addActor(timerLabel)

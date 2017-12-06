@@ -11,8 +11,8 @@ object Launcher {
     val config = new LwjglApplicationConfiguration
     new LwjglApplication(new ScreenDefault, config)
 
-    config.width = 640
-    config.height = 480
+    config.width = 840
+    config.height = 680
     config.title = "Snake"
     config.vSyncEnabled = true
   }

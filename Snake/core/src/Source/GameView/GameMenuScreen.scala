@@ -15,7 +15,7 @@ class GameMenuScreen(var game: ScreenDefault) extends Screen {
   camera.update()
 
   //Variaveis para o background
-  var background = new Sprite(new Texture("ui/BackgroundInicial.9.png"))
+  var background = new Sprite(new Texture("ui/BackgroundInicial.png"))
 
   /**
     * Muda a tela para a tela de jogo
@@ -26,15 +26,14 @@ class GameMenuScreen(var game: ScreenDefault) extends Screen {
   }
 
   def show(): Unit = {
-     Controller.setGameMenu(this)
+    Controller.setGameMenu(this)
 
     //TODO - fazer a controller mandar os mods - Array[(String,String,String,String,String,String)]
-    //Não exibir o nome da Engine, somente passar para função setMod, na Controller caso clicado
     //Lembrar que pode ocorrer erro ao chamar a função searchForMods() da controller, logo deve-se exibir
     //somente o erro caso a função retorner um throw
     //try{game.gameMenuHud.test(Controller.searchForMods())} ....
     game.gameMenuHud.test(Array(("1.0", "Engine 1", "Autor 1", "Data 1", "Titulo 1", "Descricao 1"),
-                                ("2.0", "Engine 2", "Autor 2", "Data 2", "Titulo 2", "Descricao 2")))
+      ("2.0", "Engine 2", "Autor 2", "Data 2", "Titulo 2", "Descricao 2")))
 
     //Permite q os botoes sejam clicados
     Gdx.input.setInputProcessor(game.gameMenuHud.stage)
@@ -45,7 +44,8 @@ class GameMenuScreen(var game: ScreenDefault) extends Screen {
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT) //limpando a tela com a cor
 
     game.batch.begin() //comecar a desenhar a textura
-    game.batch.draw(background, background.getX, background.getY)
+    game.batch.draw(background, 0, 0, width, height)
+    //    game.batch.draw(background, background.getX, background.getY)
     game.batch.end() //terminou de desenhar a textura
 
     game.gameMenuHud.stage.draw() //Desesenha a hud
