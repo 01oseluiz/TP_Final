@@ -43,7 +43,7 @@ trait GameEngine extends BeanMoveRules with DeathRules with DynamicMoveRules wit
   //Posiciona jogadores
   var players:ListBuffer[Sprite] = ListBuffer.empty
   for (i <- 0 until playerCount) {
-    players += new Sprite(100, height/(playerCount + 1) * (i + 1), "PLAYER-" + (i + 1))
+    players += new Sprite(100, height/(playerCount + 1) * (i + 1), "PLAYER-" + (i + 1), i+1)
   }
 
   //Criaçao das cobras iniciais

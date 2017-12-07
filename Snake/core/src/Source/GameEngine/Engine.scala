@@ -20,7 +20,7 @@ class Engine extends ObjectsVisible{
   def addKillerThing(killerThing:Sprite):Unit = KILLER_THINGS += killerThing
   def addDynamicThing(dynamic:Sprite):Unit = DYNAMIC_THINGS += dynamic
   def addBonus(bonus:Sprite):Unit = BONUS_OBJECT += bonus
-  def addDead(player:Sprite):Unit = DEAD_SNAKES += player
+  private def addDead(player:Sprite):Unit = DEAD_SNAKES += player
 
   // Retira um sprite da lista de objetos
   def remPlayer(player:Sprite):Unit = PLAYERS -= player
@@ -35,7 +35,7 @@ class Engine extends ObjectsVisible{
     */
   def getNewGameEngine(packageGameEngine:String): GameEngine = {
     cleanEngine()
-    if(packageGameEngine.equals("Default")) GAME_ENGINE = new ClassicEngine
+    if(packageGameEngine.equals("Default")) GAME_ENGINE = new Teleport.GameSource
     else GAME_ENGINE = Class.forName(packageGameEngine).newInstance.asInstanceOf[GameEngine]
     GAME_ENGINE
   }
@@ -51,6 +51,7 @@ class Engine extends ObjectsVisible{
     BONUS_OBJECT.clear()
     KILLER_THINGS.clear()
     DYNAMIC_THINGS.clear()
+    DEAD_SNAKES.clear()
   }
   
   /**
@@ -76,38 +77,31 @@ class Engine extends ObjectsVisible{
   }
   
   /**
-    * Verifica se houve algum tipo de colisao e se é o fim de jogo
+    * Verifica se e se é o fim de jogo
     * @param player player atual
     * @param key tecla pressionada
     */
   def isEndGame(player: Sprite, key:Int):Unit ={
     if(GAME_ENGINE.isEndGame(player, key, GAME_ENGINE, PLAYERS, KILLER_THINGS)) {
-      Controller.gameOver()
       GAME_ENGINE.FinishGame()
+      Controller.gameOver()
     }
 
   }
 
   def isSnakeDead (player: Sprite, key:Int): Boolean = {
     if (!player.isAlive) {
-      player.setAsInvisible()
+
+      //des-sincroniza os threads
+      //Garante que a memoria compartilhada não seja modificada ao mesmo tempo
+      Thread.sleep(10*player.ID)
+
       addDead(player)
       remPlayer(player)
+
+      player.setAsInvisible()
       return true
     }
     false
   }
-//    //TODO-possibilitar definição de fim de jogo para mods
-//
-//    //Possibilita o modo single player
-//    if(Controller.PLAYER_NUMBER == 1 ){
-//      val pseudoPlayer = new Sprite(-1,-1)
-//      pseudoPlayer.setAsInvisible()
-//      GAME_ENGINE.snakeCollisions(player, pseudoPlayer)
-//    }
-//
-//    PLAYERS.foreach(x => if(player == x){PLAYERS.foreach(y => if(x != y){GAME_ENGINE.snakeCollisions(x, y)})})
-//    PLAYERS.foreach(x => if(player == x){GAME_ENGINE.killerThingsCollisions(x, KILLER_THINGS)})
-//    PLAYERS.foreach(x => if(!x.isAlive){GAME_ENGINE.FinishGame();Controller.gameOver()})
-//  }
 }

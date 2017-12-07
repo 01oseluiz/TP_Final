@@ -100,7 +100,7 @@ object Controller {
 
     for (i <- 0 until PLAYER_NUMBER) {
       val name = ENGINE.PLAYERS(i).myName
-      val player = i + 1
+      val player = ENGINE.PLAYERS(i).ID
       val eatenBeans = ENGINE.PLAYERS(i).getEatenBeans
       val pixelRan = ENGINE.PLAYERS(i).getPixelRan
       val time = ENGINE.PLAYERS(i).getTime

@@ -7,8 +7,9 @@ import com.badlogic.gdx.graphics.Color
 
 import scala.collection.mutable.ListBuffer
 
-class Sprite (x: Int, y: Int, name:String = "") extends Statistics{
+class Sprite (x: Int, y: Int, name:String = "", id:Int = 0) extends Statistics{
   private val ENGINE = Controller.getEngine
+  var ID:Int = id
   var myName:String = name
   var myColor:Color = _
   var myLifes:Int = 1
@@ -22,10 +23,12 @@ class Sprite (x: Int, y: Int, name:String = "") extends Statistics{
   var movementSense:Int = Input.Keys.ANY_KEY
 
   //Seta como objeto visivel por default
-  Controller.getEngine.setAsVisible(this)
+  this.setAsVisible()
 
   //Imposibilida sua visão na screen
   def setAsInvisible():Unit = Controller.getEngine.setAsInvisible(this)
+
+  def setAsVisible():Unit = Controller.getEngine.setAsVisible(this)
 
   //seta o tipo do sprite
   def setAsPlayer():Unit = ENGINE.addPlayer(this)

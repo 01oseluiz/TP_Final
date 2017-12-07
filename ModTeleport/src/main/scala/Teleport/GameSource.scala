@@ -10,7 +10,6 @@ class GameSource extends ClassicEngine with BeanSpeedBonus with DeathRules with 
   //var height: Int = Gdx.graphics.getHeight
 
   //Variaveis dos players e beans
-  private final val SIZE_INITIAL = 7
   //var player1 = new Sprite(100, 40, "PLAYER-1")
   //var player2 = new Sprite(100, height - 40, "PLAYER-2")
   //var bean = new Sprite(width / 2, height / 2)
@@ -23,18 +22,6 @@ class GameSource extends ClassicEngine with BeanSpeedBonus with DeathRules with 
   var parallelBarLeft = new Sprite((width-150)/2, height/2)
   var parallelBarRight = new Sprite((width+150)/2, height/2)
 
-  /*//Criaçao das cobras iniciais
-  for (i <- 1 until SIZE_INITIAL) {
-    player1.addPosition(100 - i * player1.mySize, 40)
-    player2.addPosition(100 - i * player2.mySize, height - 40)
-  }*/
-
-  /*//Adiciona cores aos jogadores e beans
-  player1.myColor = new Color(0, 0.26f, 0, 1)
-  player1.myPositions.head.P_color = new Color(0,0.64f,0,1)
-  player2.myColor = new Color(0, 0, 0.27f, 1)
-  player2.myPositions.head.P_color = new Color(0,0,0.53f,1)
-  bean.myColor = new Color(1, 0, 0, 1)*/
   speedBean.myColor = new Color(0,1,1,1)
 
   //Cria as Barras parallelas

@@ -76,8 +76,30 @@ Sobreescreva as fun\'e7\'f5es para definir suas proprias regras, segundo os obje
 \i Para definir esta classe crie um trait e herde DynamicMoveRules..\par
 Sobreescreva as fun\'e7\'f5es para definir suas proprias regras, segundo os objetos criados na Engine de jogo.\par
 \i0\par
-\b\fs24 OBS: \b0 As classes com implementa\'e7\'e3o opcional possuem presets para o modo de jogo cl\'e1ssico, das quais podem ser aproveitadas, podento n\'e3o ter a necessidade de reescreve-las\par
-\par
+
+\pard\box\brdrdash\brdrw0 {\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-284\li284\sa200\sl276\slmult1\b\fs24 Regra de Fim de Jogo  (Trait Opcional)\b0\fs22\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1 Esta classe dever\'e1 implementar a fun\'e7\'e3o \b\i isEndGame:Boolean\b0\i0 , fun\'e7\'e3o esta que \'e9 chamada a cada movimento do player, solicitando uma verifica\'e7\'e3o de fim de jogo, para isto esta fun\'e7\'e3o tem como parametros:\par
+
+\pard\box\brdrdash\brdrw0 {\pntext\f0 i.\tab}{\*\pn\pnlvlbody\pnf0\pnindent0\pnstart1\pnlcrm{\pntxta.}}
+\fi-360\li720\sa200\sl276\slmult1\b\i player: Sprite\line\b0\i0 Player atual que solicitou a verifica\'e7\'e3o de atualiza\'e7\'e3o de objetos dinamicos.\b\i\par
+{\pntext\f0 ii.\tab}key: Int\line\b0\i0 Ultima tecla pressionada pelo player atual.\b\i\par
+{\pntext\f0 iii.\tab}GAME_ENGINE: GameEngine\line\b0\i0 regra de jogo sendo execultada no momento, no caso a criada pelo usuario\b\i\par
+{\pntext\f0 iv.\tab}PLAYERS: ListBuffer[Sprite]\line\b0\i0 Lista de objetos setados como players no trait herdado para cria\'e7\'e3o da engine de jogo 'GameEngine'.\b\i\par
+{\pntext\f0 v.\tab}KILLER_THINGS: ListBuffer[Sprite]\line\b0\i0 Lista de objetos que matam, setados na engine de jogo\par
+
+\pard\box\brdrdash\brdrw0 \sa200\sl276\slmult1\i Para definir esta classe crie um trait e herde GameOverRules..\par
+Sobreescreva as fun\'e7\'f5es para definir suas proprias regras, segundo os objetos criados na Engine de jogo.\par
+\i0\par
+\b\fs24 OBS: \b0 As classes com implementa\'e7\'e3o opcional possuem presets para o modo de jogo cl\'e1ssico, das quais podem ser aproveitadas, podento n\'e3o ter a necessidade de reescreve-las.\par
+Para aproveitar os presets j\'e1 realizados basta herdar as classes do modo de jogo classico, ao inv\'e9s dos traits default estas classes s\'e3o:\par
+\tab\i\fs22 ClassicEngine\i0\fs20  (engine de jogo classica, com paredes e beans)\par
+\tab\i\fs22 ClassicBeansMoveRules\i0\fs20  (regra de movimenta\'e7\'e3o de beans classica)\par
+\tab\i\fs22 ClassicBonusMoveRules \i0\fs20 (na jogatina classica n\'e3o h\'e1 implementa\'e7\'f5es nesta classe)\par
+\tab\i\fs22 ClassicDeathRules\i0\fs20  (regras de morte, colis\'e3o com parede e cobras)\par
+\tab\i\fs22 ClassicDynamicMoveRules \i0\fs20 (na jogatina classica n\'e3o h\'e1 implementa\'e7\'f5es nesta classe)\par
+\tab\i\fs22 ClassicGameOverRules \i0\fs20 (regras de fim de jogo, finalizado ao restar somente 1 cobra viva)\par
+\fs24\par
 \ul\b COMO CONFIGURAR E INSTALAR O MOD\ulnone\b0\par
 \fs22 Para configurar o mod corretamente deve-se abrir o arquivo \i info.config \i0 e preencher os campos vazios:\par
 \i Vers\'e3o ModPackage \i0 -> Vers\'e3o do Package de mods. (pr\'e9-definido)\par

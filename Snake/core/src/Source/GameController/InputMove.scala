@@ -35,15 +35,16 @@ class InputMove(private val player: Sprite, snakeMoveRules: SnakeMoveRules) exte
 
         if ((System.currentTimeMillis() - timeNowMove) >= delay) {
 
-          if(ENGINE.isSnakeDead(player, key)){
-            close()
-          }
-
           //Movimenta a cobra
           ENGINE.movementSnake(player, key, snakeMoveRules)
 
           //Solicita a verificação de colisão bean X players
           ENGINE.movementBean(player, key)
+
+          //Verifica se a cobra esta morta
+          if(ENGINE.isSnakeDead(player, key)){
+            this.close()
+          }
 
           //Solicita a verificação de final de jogo
           ENGINE.isEndGame(player, key)
