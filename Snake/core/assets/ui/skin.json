@@ -56,8 +56,9 @@
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
-    "default":  {"titleFont": "font", "titleFontColor": "dark_gray", "background": "Button.up" },
-    "mods":     {"titleFont": "font", "titleFontColor": "black", "background": "GrayTransparent"/*, "stageBackground": "lightGrayTransparent"*/}
+    "default":      {"titleFont": "font", "titleFontColor": "dark_gray", "background": "Button.up" },
+    "mods":         {"titleFont": "font", "titleFontColor": "black", "background": "GrayTransparent"/*, "stageBackground": "lightGrayTransparent"*/},
+    "description":  {"titleFont": "arial15", "titleFontColor": "white", "background": "darkerGrayTransparent"}
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {

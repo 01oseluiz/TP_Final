@@ -35,7 +35,7 @@ class Engine extends ObjectsVisible{
     */
   def getNewGameEngine(packageGameEngine:String): GameEngine = {
     cleanEngine()
-    if(packageGameEngine.equals("Default")) GAME_ENGINE = new Teleport.GameSource
+    if(packageGameEngine.equals("Default")) GAME_ENGINE = new ClassicEngine
     else GAME_ENGINE = Class.forName(packageGameEngine).newInstance.asInstanceOf[GameEngine]
     GAME_ENGINE
   }

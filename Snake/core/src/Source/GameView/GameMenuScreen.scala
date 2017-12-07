@@ -31,9 +31,14 @@ class GameMenuScreen(var game: ScreenDefault) extends Screen {
     //TODO - fazer a controller mandar os mods - Array[(String,String,String,String,String,String)]
     //Lembrar que pode ocorrer erro ao chamar a função searchForMods() da controller, logo deve-se exibir
     //somente o erro caso a função retorner um throw
-    //try{game.gameMenuHud.test(Controller.searchForMods())} ....
-    game.gameMenuHud.test(Array(("1.0", "Engine 1", "Autor 1", "Data 1", "Titulo 1", "Descricao 1"),
-      ("2.0", "Engine 2", "Autor 2", "Data 2", "Titulo 2", "Descricao 2")))
+    //try{game.gameMenuHud.ListaMods(Controller.searchForMods())} ....
+    try{game.gameMenuHud.ListaMods(Controller.searchForMods())}
+    catch{
+          case er:Exception=> "No mods found"
+          throw er
+    }
+//    game.gameMenuHud.ListaMods(Array(("1.0", "Engine 1", "Autor 1", "Data 1", "Titulo 1", "Descricao 1"),
+//      ("2.0", "Engine 2", "Autor 2", "Data 2", "Titulo 2", "Descricao 2Descricao 2Descricao 2Descricao 2Descricao 2Descricao 2Descricao 2Descricao 2Descricao 2Descricao 2Descricao 2")))
 
     //Permite q os botoes sejam clicados
     Gdx.input.setInputProcessor(game.gameMenuHud.stage)
@@ -50,6 +55,10 @@ class GameMenuScreen(var game: ScreenDefault) extends Screen {
 
     game.gameMenuHud.stage.draw() //Desesenha a hud
     game.gameMenuHud.stage.act()  //Permite interacao do stage com o usuario (ScrollPane e SelectBox)
+//    game.gameMenuHud.modInfoLabel.setText("    " + game.gameMenuHud.descriptions.get(game.gameMenuHud.lista.getSelectedIndex).toString)
+    game.gameMenuHud.modInfoLabel.setText("    Version: " + game.gameMenuHud.versions.get(game.gameMenuHud.lista.getSelectedIndex).toString +
+      "\n\n    Author: " + game.gameMenuHud.authors.get(game.gameMenuHud.lista.getSelectedIndex).toString +
+      "\n\n    Date: " + game.gameMenuHud.dates.get(game.gameMenuHud.lista.getSelectedIndex).toString)
   }
 
   def resize(width: Int, height: Int): Unit = {}
