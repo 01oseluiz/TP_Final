@@ -1,11 +1,7 @@
 package ClassicMod
 
-import Source.GameController.Controller
 import Source.GameEngine.{GameEngine, Sprite}
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.{Gdx, Input}
-
-import scala.collection.mutable.ListBuffer
 
 class ClassicEngine extends GameEngine with
   ClassicBeansMoveRules with

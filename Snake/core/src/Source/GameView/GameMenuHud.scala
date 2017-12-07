@@ -87,7 +87,7 @@ class GameMenuHud(var width: Int, var height: Int) {
   })
 
 
-  BackButton = new TextButton("BACK", skin)
+  BackButton = new TextButton("Back", skin)
   BackButton.addListener(new ClickListener(){
     override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
       ModsMenu.setVisible(false)
@@ -101,7 +101,7 @@ class GameMenuHud(var width: Int, var height: Int) {
   })
 
 
-  AplyButton = new TextButton("APLY", skin)
+  AplyButton = new TextButton("Apply", skin)
   AplyButton.addListener(new ClickListener(){
     override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
       Controller.setMod(engines.get(lista.getSelectedIndex).toString)
@@ -134,7 +134,7 @@ class GameMenuHud(var width: Int, var height: Int) {
   PlayButton = new Button(skin, "play")
   PlayButton.addListener(new ClickListener(){
     override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
-      Controller.PLAYER_NUMBER = selectBox.getSelectedIndex+1
+      Controller.playerNumber = selectBox.getSelectedIndex+1
       mods.clear()
       Controller.startGame()
     }
@@ -173,8 +173,11 @@ class GameMenuHud(var width: Int, var height: Int) {
 
 
   BackButton.setPosition(width/2 - 2*BackButton.getWidth, ModsMenu.getY + height/48)
-  AplyButton.setPosition(width/2 - AplyButton.getWidth/3, ModsMenu.getY + height/48)
+  BackButton.setSize(60,30)
+  AplyButton.setPosition(width/2 - AplyButton.getWidth/3 + 3, ModsMenu.getY + height/48)
+  AplyButton.setSize(60,30)
   DefaultButton.setPosition(width/2 + DefaultButton.getWidth, ModsMenu.getY + height/48)
+  DefaultButton.setSize(60,30)
 
 
   ExitButton.setPosition(width*0.58f /*372*/, height/4.44f /*108*/)
@@ -189,7 +192,6 @@ class GameMenuHud(var width: Int, var height: Int) {
 
 
   selectBox.setPosition(PlayersButton.getX + PlayersButton.getWidth/20, PlayersButton.getY + 4)
-  //TODO - arrumar largura ao reescalar
   selectBox.setSize(PlayersButton.getWidth*9/10, PlayersButton.getHeight)
   //  selectBox.set
   //  selectBox.getList.setPosition(selectBox.getWidth/2, selectBox.getHeight/2)

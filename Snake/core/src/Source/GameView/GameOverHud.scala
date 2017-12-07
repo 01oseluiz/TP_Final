@@ -34,7 +34,7 @@ class GameOverHud (var width: Int, var height: Int){
     */
   def playerStatisticsShow (name: String, ran: Int, eaten: Int, player: Int, winner: Boolean, playerTime: String): Unit = {
     var playerLabel:Label = null
-    val totalPlayers = Controller.PLAYER_NUMBER //numero total de players a serem exibidos
+    val totalPlayers = Controller.playerNumber //numero total de players a serem exibidos
     var playerHighlight: Sprite = null
     this.time = playerTime
 
@@ -110,8 +110,6 @@ class GameOverHud (var width: Int, var height: Int){
     playAgainLabel.setPosition(PlayAgainButton.getX + width/10.67f/*60*/, PlayAgainButton.getY)
     MenuButton.setSize(width/4.92f /*130*/,height/9.6f /*50*/)
     MenuButton.setPosition(width - MenuButton.getWidth*7/5, height/10)
-    //    MenuButton.setPosition(PlayAgainButton.getX-68, height/10)
-    //TODO - arrumar a posicao X ao reescalar
     menuLabel.setPosition(MenuButton.getX - width/42.67f /*15*/, MenuButton.getY)
 
     stage.addActor(gameOverLabel)

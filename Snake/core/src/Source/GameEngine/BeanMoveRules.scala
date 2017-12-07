@@ -10,6 +10,5 @@ trait BeanMoveRules {
     * @param listBeans
     * @param isEmpty (função que verifica se o espaço escolhido esta vazio)
     */
-  def BeanPosition(player: Sprite, listBeans: ListBuffer[Sprite], key: Int, isEmpty: (Position) => Boolean): Unit = {
-  }
+  def BeanPositionChange(player: Sprite, listBeans: ListBuffer[Sprite], key: Int, isEmpty: (Position) => Boolean): Unit
 }

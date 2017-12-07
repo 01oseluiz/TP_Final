@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Color
 import scala.collection.mutable.ListBuffer
 
 class Sprite (x: Int, y: Int, name:String = "", id:Int = 0) extends Statistics{
-  private val ENGINE = Controller.getEngine
+  private val engine = Controller.getEngine
   var ID:Int = id
   var myName:String = name
   var myColor:Color = _
@@ -28,21 +28,22 @@ class Sprite (x: Int, y: Int, name:String = "", id:Int = 0) extends Statistics{
   //Imposibilida sua visão na screen
   def setAsInvisible():Unit = Controller.getEngine.setAsInvisible(this)
 
+  //Possibilita sua visão na screen
   def setAsVisible():Unit = Controller.getEngine.setAsVisible(this)
 
   //seta o tipo do sprite
-  def setAsPlayer():Unit = ENGINE.addPlayer(this)
-  def setAsBean():Unit = ENGINE.addBean(this)
-  def setAsKillerThing():Unit = ENGINE.addKillerThing(this)
-  def setAsDynamic():Unit = ENGINE.addDynamicThing(this)
-  def setAsBonus():Unit = ENGINE.addBonus(this)
+  def setAsPlayer():Unit = engine.addPlayer(this)
+  def setAsBean():Unit = engine.addBean(this)
+  def setAsKillerThing():Unit = engine.addKillerThing(this)
+  def setAsDynamic():Unit = engine.addDynamicThing(this)
+  def setAsBonus():Unit = engine.addBonus(this)
 
   //remove as definições de tipo setadas
-  def remAsPlayer():Unit = ENGINE.remPlayer(this)
-  def remAsBean():Unit = ENGINE.remBean(this)
-  def remAsKillerThing():Unit = ENGINE.remKillerThing(this)
-  def remAsDynamic():Unit = ENGINE.remDynamicThing(this)
-  def remAsBonus():Unit = ENGINE.remBonus(this)
+  def remAsPlayer():Unit = engine.remPlayer(this)
+  def remAsBean():Unit = engine.remBean(this)
+  def remAsKillerThing():Unit = engine.remKillerThing(this)
+  def remAsDynamic():Unit = engine.remDynamicThing(this)
+  def remAsBonus():Unit = engine.remBonus(this)
 
   def setSizeObject(size:Int): Unit ={
     myPositions.foreach(x=> x.size = size)

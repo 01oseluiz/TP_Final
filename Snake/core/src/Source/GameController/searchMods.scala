@@ -81,7 +81,7 @@ class searchMods {
     val infos = Tuple6(version, mainEngine, author, date, title, description)
 
     //Verificação de versao e existencia da engine
-    if (version != Controller.GAME_VERSION) throw new Exception(Errors.IncompatibleVersion)
+    if (version != Controller.gameVersion) throw new Exception(Errors.IncompatibleVersion)
     else if(mainEngine.length < 2) throw new Exception(Errors.NoExistEngineFile)
 
     infos

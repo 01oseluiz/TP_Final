@@ -10,10 +10,9 @@ trait GameEngine extends BeanMoveRules with DeathRules with DynamicMoveRules wit
   /**
     * função para se finalizar algo da engine ou suas patern classes, se necessário
     */
-  def FinishGame(): Unit ={
-  }
+  def FinishGame(): Unit
 
-  private final val SIZE_INITIAL = 7
+  private final val sizeInitial = 7
 
   //Dimensões do jogo
   var width: Int = Gdx.graphics.getWidth
@@ -38,7 +37,7 @@ trait GameEngine extends BeanMoveRules with DeathRules with DynamicMoveRules wit
   controllerPool += List(Input.Keys.T, Input.Keys.G, Input.Keys.F, Input.Keys.H)
 
   //Numero de jogadores
-  var playerCount:Int = Controller.PLAYER_NUMBER
+  var playerCount:Int = Controller.playerNumber
 
   //Posiciona jogadores
   var players:ListBuffer[Sprite] = ListBuffer.empty
@@ -48,7 +47,7 @@ trait GameEngine extends BeanMoveRules with DeathRules with DynamicMoveRules wit
 
   //Criaçao das cobras iniciais
   for (i <- 0 until playerCount) {
-    for(j <- 1 until SIZE_INITIAL) {
+    for(j <- 1 until sizeInitial) {
       players(i).addPosition(100 - j * players(i).mySize, height/(playerCount + 1) * (i + 1))
     }
   }

@@ -6,26 +6,26 @@ import Source.GameView._
 import scala.collection.mutable.ListBuffer
 
 object Controller {
-  final val GAME_VERSION = "1.0.3"
+  final val gameVersion = "1.0.3"
 
   private val searchMods = new searchMods
   private var currentMod = "Default"
   
-  private val ENGINE:Engine = new Engine
-  private var GAME_ENGINE:GameEngine = _
-  var GAME_VIEW:GameScreen = _
-  var GAME_OVER:GameOverScreen = _
-  var GAME_MENU:GameMenuScreen=_
-  var GAME_DEFAULT:ScreenDefault=_
-  var PLAYER_NUMBER:Int =_
+  private val engine:Engine = new Engine
+  private var gameEngine:GameEngine = _
+  var gameView:GameScreen = _
+  var gameOver:GameOverScreen = _
+  var gameMenu:GameMenuScreen=_
+  var gameDefault:ScreenDefault=_
+  var playerNumber:Int =_
 
-  def setGameView(x:GameScreen): Unit = GAME_VIEW = x
-  def setGameOver(x:GameOverScreen): Unit = GAME_OVER = x
-  def setGameMenu(x:GameMenuScreen): Unit = GAME_MENU = x
-  def setGameDefault(x:ScreenDefault): Unit = GAME_DEFAULT = x
-  def setPlayerNumber(x:Int): Unit = PLAYER_NUMBER = x
-  def getGameEngine():GameEngine = GAME_ENGINE
-  def getEngine:Engine = ENGINE
+  def setGameView(x:GameScreen): Unit = gameView = x
+  def setGameOver(x:GameOverScreen): Unit = gameOver = x
+  def setGameMenu(x:GameMenuScreen): Unit = gameMenu = x
+  def setGameDefault(x:ScreenDefault): Unit = gameDefault = x
+  def setPlayerNumber(x:Int): Unit = playerNumber = x
+  def getGameEngine:GameEngine = gameEngine
+  def getEngine:Engine = engine
 
   //Realiza a verificação de entradas de teclado em paralelo
   private var movePlayer:ListBuffer[InputMove] = ListBuffer.empty
@@ -42,19 +42,19 @@ object Controller {
     //Entrada de teclado sendo verificada em paralelo pela classe InputMove
 
     //Calcula a movimentação de objetos dinamicos
-    GAME_ENGINE.dynamicsRender()
+    gameEngine.dynamicsRender()
 
     //Desenha por completo todos os objetos (player1, player2, wall, bean)
-    ENGINE.objects.foreach{objs=>
+    engine.objects.foreach{objs=>
       objs.myPositions.foreach{x=>
-        GAME_VIEW.drawSquare(x, objs.myColor)
+        gameView.drawSquare(x, objs.myColor)
       }
     }
   }
 
   def startGame(): Unit ={
     startGetMove()
-    GAME_MENU.StartGame
+    gameMenu.StartGame
   }
 
   def pauseGame():Unit = {
@@ -63,27 +63,27 @@ object Controller {
 
   def playAgain(): Unit ={
     startGetMove()
-    GAME_OVER.PlayAgain
+    gameOver.PlayAgain
   }
 
-  def gameOver(): Unit ={
+  def finishGame(): Unit ={
     stopGetMove()
-    GAME_VIEW.GameOver
+    gameView.GameOver
   }
 
-  def backToMenu(): Unit = GAME_OVER.BackToMenu
+  def backToMenu(): Unit = gameOver.BackToMenu
 
   private def startGetMove(): Unit ={
     try {
-      GAME_ENGINE = ENGINE.getNewGameEngine(currentMod)
+      gameEngine = engine.getNewGameEngine(currentMod)
     }catch{
       case _:Throwable =>
         currentMod = "Default"
-        GAME_ENGINE = ENGINE.getNewGameEngine(currentMod)
+        gameEngine = engine.getNewGameEngine(currentMod)
     }
     movePlayer = ListBuffer.empty
-    for (i <- 0 until PLAYER_NUMBER) {
-      movePlayer += new InputMove(ENGINE.PLAYERS(i), new SnakeMoveRules {})
+    for (i <- 0 until playerNumber) {
+      movePlayer += new InputMove(engine.players(i), new SnakeMoveRules {})
     }
     movePlayer.foreach(x => x.start())
   }
@@ -96,16 +96,16 @@ object Controller {
 
   def getStatistics(): Unit ={
 
-    ENGINE.DEAD_SNAKES.foreach(x => ENGINE.addPlayer(x))
+    engine.deadSnakes.foreach(x => engine.addPlayer(x))
 
-    for (i <- 0 until PLAYER_NUMBER) {
-      val name = ENGINE.PLAYERS(i).myName
-      val player = ENGINE.PLAYERS(i).ID
-      val eatenBeans = ENGINE.PLAYERS(i).getEatenBeans
-      val pixelRan = ENGINE.PLAYERS(i).getPixelRan
-      val time = ENGINE.PLAYERS(i).getTime
-      val winner = ENGINE.PLAYERS(i).isAlive
-      GAME_DEFAULT.gameOverHud.playerStatisticsShow(name, pixelRan, eatenBeans, player, winner, time)
+    for (i <- 0 until playerNumber) {
+      val name = engine.players(i).myName
+      val player = engine.players(i).ID
+      val eatenBeans = engine.players(i).getEatenBeans
+      val pixelRan = engine.players(i).getPixelRan
+      val time = engine.players(i).getTime
+      val winner = engine.players(i).isAlive
+      gameDefault.gameOverHud.playerStatisticsShow(name, pixelRan, eatenBeans, player, winner, time)
     }
   }
 
@@ -117,7 +117,6 @@ object Controller {
       case x:Exception =>
         currentMod = "Default"
         throw x
-        //TODO-a view deve mostrar o erro recebido aqui
     }
   }
 

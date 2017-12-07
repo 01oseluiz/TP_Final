@@ -6,14 +6,13 @@ import com.badlogic.gdx.Input
 
 class InputMove(private val player: Sprite, snakeMoveRules: SnakeMoveRules) extends Thread{
   private var delay:Long = _
-  private var timeNowkey:Long = _
   private var timeNowMove:Long = _
-  private var STOPED:Boolean = false
-  private var PAUSED:Boolean = false
-  private val ENGINE = Controller.getEngine
+  private var stopped:Boolean = false
+  private var paused:Boolean = false
+  private val engine = Controller.getEngine
 
-  def close() : Unit = STOPED = true
-  def pause() : Unit = PAUSED = !PAUSED
+  def close() : Unit = stopped = true
+  def pause() : Unit = paused = !paused
 
   override def run(): Unit = {
 
@@ -23,9 +22,9 @@ class InputMove(private val player: Sprite, snakeMoveRules: SnakeMoveRules) exte
 
     timeNowMove = System.currentTimeMillis()
 
-    while(!STOPED) {
+    while(!stopped) {
       Thread.sleep(1)
-      if(!PAUSED) {
+      if(!paused) {
         delay = 110 - player.speed
 
         key_AUX = inputs.getMovement(player.Keys)
@@ -36,24 +35,24 @@ class InputMove(private val player: Sprite, snakeMoveRules: SnakeMoveRules) exte
         if ((System.currentTimeMillis() - timeNowMove) >= delay) {
 
           //Movimenta a cobra
-          ENGINE.movementSnake(player, key, snakeMoveRules)
+          engine.movementSnake(player, key, snakeMoveRules)
 
           //Solicita a verificação de colisão bean X players
-          ENGINE.movementBean(player, key)
+          engine.movementBean(player, key)
 
           //Solicita a verificação de colisão com objetos bonus
-          ENGINE.movementBonusObjects(player, key)
+          engine.movementBonusObjects(player, key)
 
           //Solicita a verificação de atualização de objetos dinamicos
-          ENGINE.dynamicsUpdate(player, key)
+          engine.dynamicsUpdate(player, key)
 
           //Verifica se a cobra esta morta
-          if(ENGINE.isSnakeDead(player, key)){
+          if(engine.isSnakeDead(player, key)){
             this.close()
           }
 
           //Solicita a verificação de final de jogo
-          ENGINE.isEndGame(player, key)
+          engine.isEndGame(player, key)
 
           key = Input.Keys.ANY_KEY
           timeNowMove = System.currentTimeMillis()

@@ -50,9 +50,9 @@ class GameOverScreen(private var game: ScreenDefault) extends Screen {
     game.batch.draw(background, 0, 0, width, height)
 
     game.gameOverHud.player1Highlight.draw(game.batch)
-    if(Controller.PLAYER_NUMBER >= 2) game.gameOverHud.player2Highlight.draw(game.batch)
-    if(Controller.PLAYER_NUMBER >= 3) game.gameOverHud.player3Highlight.draw(game.batch)
-    if(Controller.PLAYER_NUMBER >= 4) game.gameOverHud.player4Highlight.draw(game.batch)
+    if(Controller.playerNumber >= 2) game.gameOverHud.player2Highlight.draw(game.batch)
+    if(Controller.playerNumber >= 3) game.gameOverHud.player3Highlight.draw(game.batch)
+    if(Controller.playerNumber >= 4) game.gameOverHud.player4Highlight.draw(game.batch)
     game.batch.end() //terminou de desenhar a textura
 
     game.gameOverHud.stage.draw() //Desesenha a HUD

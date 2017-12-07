@@ -10,8 +10,7 @@ trait DeathRules {
     * @param player2
     * @return
     */
-  def snakeCollisions(player1: Sprite, player2: Sprite): Unit = {
-  }
+  def snakeCollisions(player1: Sprite, player2: Sprite): Unit
 
   /**
     * Verifica se o player colidiu com a parede
@@ -20,6 +19,5 @@ trait DeathRules {
     * @param listKillerThings
     * @return
     */
-  def killerThingsCollisions(player: Sprite, listKillerThings: ListBuffer[Sprite]): Unit = {
-  }
+  def killerThingsCollisions(player: Sprite, listKillerThings: ListBuffer[Sprite]): Unit
 }

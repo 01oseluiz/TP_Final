@@ -13,7 +13,7 @@ trait ClassicBeansMoveRules extends BeanMoveRules {
     * @param listBeans
     * @param isEmpty (função que verifica se o espaço escolhido esta vazio)
     */
-  override def BeanPosition(player: Sprite, listBeans: ListBuffer[Sprite], key: Int, isEmpty: (Position) => Boolean): Unit = {
+  override def BeanPositionChange(player: Sprite, listBeans: ListBuffer[Sprite], key: Int, isEmpty: (Position) => Boolean): Unit = {
     val width: Int = Gdx.graphics.getWidth
     val height: Int = Gdx.graphics.getHeight
     val x = new scala.util.Random
