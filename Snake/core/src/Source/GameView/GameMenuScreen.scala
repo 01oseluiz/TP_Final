@@ -34,8 +34,7 @@ class GameMenuScreen(var game: ScreenDefault) extends Screen {
     //try{game.gameMenuHud.ListaMods(Controller.searchForMods())} ....
     try{game.gameMenuHud.ListaMods(Controller.searchForMods())}
     catch{
-          case er:Exception=> "No mods found"
-          throw er
+          case er:Exception=> er.getMessage
     }
 //    game.gameMenuHud.ListaMods(Array(("1.0", "Engine 1", "Autor 1", "Data 1", "Titulo 1", "Descricao 1"),
 //      ("2.0", "Engine 2", "Autor 2", "Data 2", "Titulo 2", "Descricao 2Descricao 2Descricao 2Descricao 2Descricao 2Descricao 2Descricao 2Descricao 2Descricao 2Descricao 2Descricao 2")))
