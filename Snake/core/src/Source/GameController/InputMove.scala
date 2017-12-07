@@ -41,6 +41,12 @@ class InputMove(private val player: Sprite, snakeMoveRules: SnakeMoveRules) exte
           //Solicita a verificação de colisão bean X players
           ENGINE.movementBean(player, key)
 
+          //Solicita a verificação de colisão com objetos bonus
+          ENGINE.movementBonusObjects(player, key)
+
+          //Solicita a verificação de atualização de objetos dinamicos
+          ENGINE.dynamicsUpdate(player, key)
+
           //Verifica se a cobra esta morta
           if(ENGINE.isSnakeDead(player, key)){
             this.close()
@@ -48,13 +54,6 @@ class InputMove(private val player: Sprite, snakeMoveRules: SnakeMoveRules) exte
 
           //Solicita a verificação de final de jogo
           ENGINE.isEndGame(player, key)
-
-          //Solicita a verificação de colisão com objetos bonus
-          ENGINE.movementBonusObjects(player, key)
-
-          //Solicita a verificação de atualização de objetos dinamicos
-          ENGINE.dynamicsUpdate(player, key)
-
 
           key = Input.Keys.ANY_KEY
           timeNowMove = System.currentTimeMillis()
