@@ -48,7 +48,7 @@ class searchMods {
       try {
         listModsInfo +:= readConfig(bufferRead, mod)
       }catch{
-        case x:Exception => listModsInfo +:= ("ERROR:" + x.getMessage + " in mod->" + mod ,"","","","","")
+        case x:Exception => listModsInfo +:= ("","","","","ERROR",x.getMessage + " in mod->" + mod )
       }
 
       configFile.close()

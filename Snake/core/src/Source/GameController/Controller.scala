@@ -117,7 +117,6 @@ object Controller {
       case x:Exception =>
         currentMod = "Default"
         throw x
-
         //TODO-a view deve mostrar o erro recebido aqui
     }
   }

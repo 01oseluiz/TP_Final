@@ -22,12 +22,23 @@ class GameMenuHud(var width: Int, var height: Int) {
   val mods, engines, descriptions, versions, authors, dates = new com.badlogic.gdx.utils.Array[String]
 
 
-  def ListaMods(listagem : Array[(String,String,String,String,String,String)]): Unit = {
+  def ListaMods(): Unit = {
+    var listagem: Array[(String,String,String,String,String,String)] = Array.empty
+    mods.clear()
+    dates.clear()
+    authors.clear()
+    versions.clear()
+    engines.clear()
+    descriptions.clear()
+
+    try{
+      listagem = Controller.searchForMods()
+    }catch{
+      case er:Exception=> listagem = Array(("","","","","ERROR",er.getMessage))
+    }
 
     listagem.foreach{mod=>
-//      mods.add("VERSION: " + mod._1 + "    |   AUTHOR: " + mod._3 + "    |   DATE: " + mod._4 +
-//        "    |   TITLE: " + mod._5 + "    |   DESCRIPTION: " + mod._6)
-      mods.add("TITLE: " + mod._5 + "    |   DESCRIPTION: " + mod._6)
+      mods.add(mod._5 + "    |    " + mod._6)
 
       dates.add(mod._4)
       authors.add(mod._3)
@@ -57,6 +68,7 @@ class GameMenuHud(var width: Int, var height: Int) {
   ModsButton = new Button(skin, "mods")
   ModsButton.addListener(new ClickListener(){
     override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
+      ListaMods()
       ModsMenu.setVisible(true)
       BackButton.setVisible(true)
       AplyButton.setVisible(true)
@@ -92,8 +104,14 @@ class GameMenuHud(var width: Int, var height: Int) {
   AplyButton = new TextButton("APLY", skin)
   AplyButton.addListener(new ClickListener(){
     override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
-      println(engines.get(lista.getSelectedIndex).toString)
       Controller.setMod(engines.get(lista.getSelectedIndex).toString)
+      ModsMenu.setVisible(false)
+      BackButton.setVisible(false)
+      AplyButton.setVisible(false)
+      DefaultButton.setVisible(false)
+      scrollPane.setVisible(false)
+      descriptionWindow.setVisible(false)
+      modInfoLabel.setVisible(false)
     }
   })
 
@@ -102,6 +120,13 @@ class GameMenuHud(var width: Int, var height: Int) {
   DefaultButton.addListener(new ClickListener(){
     override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
       Controller.setMod("Default")
+      ModsMenu.setVisible(false)
+      BackButton.setVisible(false)
+      AplyButton.setVisible(false)
+      DefaultButton.setVisible(false)
+      scrollPane.setVisible(false)
+      descriptionWindow.setVisible(false)
+      modInfoLabel.setVisible(false)
     }
   })
 
